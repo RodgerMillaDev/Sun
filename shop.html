@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./CSS/style.css">
+    <link rel="stylesheet" href="./CSS/resp.css">
+    <script src="https://kit.fontawesome.com/df64ffd27a.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./Media/icofont/icofont.min.css">
+    <link rel="stylesheet" href="./Media/icofont/icofont.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js" integrity="sha512-jEnuDt6jfecCjthQAJ+ed0MTVA++5ZKmlUcmDGBv2vUI/REn6FuIdixLNnQT+vKusE2hhTk2is3cFvv5wA+Sgg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="shortcut icon" href="./Media/lightBgFav.png" type="image/x-icon">
+    <title>SunUp Collections</title>
+</head>
+<body>
+    <div id="preloaderWrap">
+    <div id="preloader">
+
+    </div>
+    </div>
+    <section id="Shop">
+         
+        <div class="shopMainMenu">
+           <div class="mainMenuPlacer">
+             <div class="mainLogo">
+                <img src="./Media/fullLogo.png" alt="">
+                <div class="menuSeparator"></div>
+             </div>
+             
+             <div class="menuLinks">
+                <div class="menuLink" onclick="toHome()">
+                    <i class="icofont-home"></i>
+                    <p>Home</p>
+
+                </div>
+                <div class="menuLink" onclick="toProducts()">
+                    <i class="icofont-tags"></i>
+                    <p>All Products</p>
+
+                </div>
+                <div class="menuLink" onclick="toOffers()">
+                    <i class="icofont-sale-discount"></i>
+                    <p>On Offer</p>
+
+                </div>
+                <div class="menuLink">
+                    <i class="icofont-cart-alt"></i>
+                    <p>My Cart</p>
+
+                </div>
+                <div class="menuLink">
+                    <i class="icofont-ui-user"></i>
+                    <p>Profile Settings</p>
+
+                </div>
+             </div>
+             <div class="mainMneuAuth">
+                <div class="menuLink">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>                    <p>Sign Out</p>
+
+                </div>
+             </div>
+
+           </div>
+        </div>
+        <div class="vsep">
+
+        </div>
+
+        <div class="shopDrawer">
+            <div class="drawerCont">
+
+               <div class="drawerLabel" id="drawerLabel">
+                <h2 id="drawerTitle">Home</h2>
+                <div class="switchPortal">
+                    <p class="activePort">Shop</p>
+                    <p>Website</p>
+                </div>
+                <div class="drawerAuthsWrap">
+                <div class="drawerAuths">
+                    <div class="notIcon">
+                        <i class="fa-solid fa-bell"></i>
+                    </div>
+                    <div class="userDrawer">
+                         <img width="10px" src="./Media/userTest.jpg" alt="">
+                         <p>Rodger</p>
+                    </div>
+                </div>
+                </div>
+               </div>
+
+               <div class="actDrawer">
+                <div class="actDrawerShop">
+
+                <div class="fidiShopOffer" id="fidiShopOffer">
+                    <div class=" offerCont offerCont1">
+                        <div class="offerWrapper">
+                         <div class="offerWrapperPlacer">
+ 
+                         <p class="offerPeriod">Limited Offer</p>
+                         <h4>Get Special Offer</h4>
+                         <h4>Up to</h4>
+                         <h2>40%</h2>
+                         <div class="offerBtnandCont">
+                             <p>All kitchen products on offer</p>
+                             <button>Claim Now</button>
+                         </div>
+                        </div>
+                        </div>
+                 
+                 </div>
+                 <div class="offerCont offerCont2">
+                        <div class="offerWrapper">
+                         <div class="offerWrapperPlacer">
+ 
+                         <p class="offerPeriod">Limited Offer</p>
+                         <h4>Kitchen Utensils Offer</h4>
+                         <h4>Up to</h4>
+                         <h2>10%</h2>
+                         <div class="offerBtnandCont">
+                             <p>All kitchen products on offer</p>
+                             <button>Claim Now</button>
+                         </div>
+                        </div>
+                        </div>
+                 
+                 </div>
+                </div>
+
+                
+                <div class="catnSearchCont" id="catnSearchCont">
+                    <div class="shopSearch">
+                        <input type="text" placeholder="Search">
+                        <div class="shpSearchBtn">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                    </div>
+                    <div class="vsep2">
+
+                    </div>
+
+                    <div class="categoriesShop">
+                        <div class="catShopWrapper">
+                            <div class="catDiv">
+                                <i class="icofont-cubes"></i>
+                                <p>All</p>
+                            </div>
+                            <div class="catDiv">
+                                <i class="icofont-culinary"></i>
+                                <p>Kitchen</p>
+                            </div>
+                            <div class="catDiv catDivActive">
+                                <i class="icofont-duotone icofont-plugins"></i>
+                                <p>Appliances</p>
+                            </div>
+                            <div class="catDiv">
+                                <i class="icofont-gift"></i>
+                                <p>Gifts</p>
+                            </div>
+                            <div class="catDiv">
+                                <i class="icofont-travelling"></i>
+                                <p>Travel</p>
+                            </div>
+                            <div class="catDiv">
+                                <i class="icofont-washing-machine"></i>
+                                <p>Laundry</p>
+                            </div>
+                            <div class="catDiv">
+                                <i class="icofont-brand-gnome"></i>
+                                <p>Shoe Racks</p>
+                            </div>
+                            <div class="catDiv">
+                                <i class="icofont-bed"></i>
+                                <p>Bedroom</p>
+                            </div>
+                            <div class="catDiv">
+                                <i class="icofont-layers"></i>
+                                <p>Organizers & Storage</p>
+                            </div>
+                            <div class="catDiv">
+                                <i class="icofont-baby"></i>
+                                <p>Kids Store</p>
+                            </div>
+                            <div class="catDiv">
+                                <i class="icofont-mop"></i>
+                                <p>Carpets and Rugs</p>
+                            </div>
+                      
+                        </div>
+                    </div>
+                
+                
+                
+                </div>
+
+
+                <div class="shopProducts" id="shopProducts">
+                    <div class="shopProductsWrapper">
+                        <div class="shopProduct">
+                            <div class="spTop">
+                                <img width="10px" src="./Media/pImge (23).jpeg" alt="">
+                            </div>
+                            <div class="spBottom">
+                                <h4>Wall Stand</h4>
+                                <p>Ksh. 2,300</p>
+                              <div class="buyandCart">
+                                <button class="buyshopBtn">Buy</button>
+                                <button class="tocartShopBtn"><i class="icofont-cart-alt"></i></button>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="shopProduct">
+                            <div class="spTop">
+                                <img width="10px" src="./Media/pImge (22).jpeg" alt="">
+                            </div>
+                            <div class="spBottom">
+                                <h4>Wall Stand</h4>
+                                <p>Ksh. 2,300</p>
+                              <div class="buyandCart">
+                                <button class="buyshopBtn">Buy</button>
+                                <button class="tocartShopBtn"><i class="icofont-cart-alt"></i></button>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="shopProduct">
+                            <div class="spTop">
+                                <img width="10px" src="./Media/pImge (4).jpeg" alt="">
+                            </div>
+                            <div class="spBottom">
+                                <h4>Wall Stand</h4>
+                                <p>Ksh. 2,300</p>
+                              <div class="buyandCart">
+                                <button class="buyshopBtn">Buy</button>
+                                <button class="tocartShopBtn"><i class="icofont-cart-alt"></i></button>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="shopProduct">
+                            <div class="spTop">
+                                <img width="10px" src="./Media/pImge (5).jpeg" alt="">
+                            </div>
+                            <div class="spBottom">
+                                <h4>Wall Stand</h4>
+                                <p>Ksh. 2,300</p>
+                              <div class="buyandCart">
+                                <button class="buyshopBtn">Buy</button>
+                                <button class="tocartShopBtn"><i class="icofont-cart-alt"></i></button>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="shopProduct">
+                            <div class="spTop">
+                                <img width="10px" src="./Media/pImge (6).jpeg" alt="">
+                            </div>
+                            <div class="spBottom">
+                                <h4>Wall Stand</h4>
+                                <p>Ksh. 2,300</p>
+                              <div class="buyandCart">
+                                <button class="buyshopBtn">Buy</button>
+                                <button class="tocartShopBtn"><i class="icofont-cart-alt"></i></button>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="shopProduct">
+                            <div class="spTop">
+                                <img width="10px" src="./Media/pImge (8).jpeg" alt="">
+                            </div>
+                            <div class="spBottom">
+                                <h4>Wall Stand</h4>
+                                <p>Ksh. 2,300</p>
+                              <div class="buyandCart">
+                                <button class="buyshopBtn">Buy</button>
+                                <button class="tocartShopBtn"><i class="icofont-cart-alt"></i></button>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="shopProduct">
+                            <div class="spTop">
+                                <img width="10px" src="./Media/pImge (9).jpeg" alt="">
+                            </div>
+                            <div class="spBottom">
+                                <h4>Wall Stand</h4>
+                                <p>Ksh. 2,300</p>
+                              <div class="buyandCart">
+                                <button class="buyshopBtn">Buy</button>
+                                <button class="tocartShopBtn"><i class="icofont-cart-alt"></i></button>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="shopProduct">
+                            <div class="spTop">
+                                <img width="10px" src="./Media/pImge (10).jpeg" alt="">
+                            </div>
+                            <div class="spBottom">
+                                <h4>Wall Stand</h4>
+                                <p>Ksh. 2,300</p>
+                              <div class="buyandCart">
+                                <button class="buyshopBtn">Buy</button>
+                                <button class="tocartShopBtn"><i class="icofont-cart-alt"></i></button>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="shopProduct">
+                            <div class="spTop">
+                                <img width="10px" src="./Media/pImge (2).jpeg" alt="">
+                            </div>
+                            <div class="spBottom">
+                                <h4>Wall Stand</h4>
+                                <p>Ksh. 2,300</p>
+                              <div class="buyandCart">
+                                <button class="buyshopBtn">Buy</button>
+                                <button class="tocartShopBtn"><i class="icofont-cart-alt"></i></button>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="shopProduct">
+                            <div class="spTop">
+                                <img width="10px" src="./Media/pImge (2).jpeg" alt="">
+                            </div>
+                            <div class="spBottom">
+                                <h4>Wall Stand</h4>
+                                <p>Ksh. 2,300</p>
+                              <div class="buyandCart">
+                                <button class="buyshopBtn">Buy</button>
+                                <button class="tocartShopBtn"><i class="icofont-cart-alt"></i></button>
+                              </div>
+                            </div>
+                        </div>
+                </div>
+
+                </div>
+
+                </div>
+
+
+
+
+
+               </div>
+               </div>
+        </div>
+
+        
+    </section>
+
+<script src="./JS/index.js"></script>
+
+<script>
+       const animationPath ='./Media/logoLoader.json';
+              const animation = lottie.loadAnimation({
+          container: document.getElementById('preloader'), // the dom element that will contain the animation
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: animationPath // path to the animation json
+        });
+    window.addEventListener("load",()=>{
+        document.getElementById("preloaderWrap").style.display="none"
+    })
+</script>
+
+</body>
+</html>
