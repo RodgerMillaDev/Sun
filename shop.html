@@ -40,21 +40,23 @@
                     <p>All Products</p>
 
                 </div>
+                
+                <div class="menuLink" onclick="toCart()">
+                    <i class="icofont-cart-alt"></i>
+                    <p>My Cart</p>
+
+                </div>
                 <div class="menuLink" onclick="toOffers()">
                     <i class="icofont-sale-discount"></i>
                     <p>On Offer</p>
 
                 </div>
-                <div class="menuLink">
-                    <i class="icofont-cart-alt"></i>
-                    <p>My Cart</p>
-
-                </div>
-                <div class="menuLink">
+                <div class="menuLink" onclick="toProfile()">
                     <i class="icofont-ui-user"></i>
                     <p>Profile Settings</p>
 
                 </div>
+                
              </div>
              <div class="mainMneuAuth">
                 <div class="menuLink">
@@ -91,8 +93,12 @@
                 </div>
                </div>
 
+               <div class="actDrawerWrap">
                <div class="actDrawer">
-                <div class="actDrawerShop">
+
+
+                 <!-- products  -->
+                <div class="actDrawerShop" id="actDrawerShop">
 
                 <div class="fidiShopOffer" id="fidiShopOffer">
                     <div class=" offerCont offerCont1">
@@ -104,7 +110,7 @@
                          <h4>Up to</h4>
                          <h2>40%</h2>
                          <div class="offerBtnandCont">
-                             <p>All kitchen products on offer</p>
+                             <p>All bathroom products on offer</p>
                              <button>Claim Now</button>
                          </div>
                         </div>
@@ -168,7 +174,7 @@
                                 <p>Laundry</p>
                             </div>
                             <div class="catDiv">
-                                <i class="icofont-brand-gnome"></i>
+                                <i class="icofont-foot-print"></i>
                                 <p>Shoe Racks</p>
                             </div>
                             <div class="catDiv">
@@ -334,10 +340,397 @@
 
                 </div>
 
+                <!-- cart  -->
+
+                <div class="actDrawerCart" id="actDrawerCart">
+
+                    <div class="cartItemsWrap">
+         
+         
+         
+         
+         
+         
+                        <div class="cartItem">
+                            <div class="cartItemWrap">
+                                <div class="cartImgNDetail">
+                                    <img width="100px" src="./Media/pImge (14).jpeg" alt="">
+                                    <div class="cartItemDet">
+                                        <h4>Wall Stand</h4>
+                                        <p>Kitchen</p>
+                                        <h4>Ksh. 2,300</h4>
+    
+    
+                                    </div>
+                                </div>
+                              
+                                <div class="quantNRemove">
+                                    <div class="remvCartItem">
+                                          <p>Remove</p>
+                                        <!-- <i class="fa-solid fa-xmark"></i> -->
+                                    </div>
+                                    <div class="quantCart">
+                                        <div class="addItemCart">
+                                           <p>+</p>
+                                        </div>
+                                        <p>2</p>
+                                        <div class="minusItemCart">
+                                            <p>-</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+         
+         
+                        <div class="cartItem">
+                            <div class="cartItemWrap">
+                                <div class="cartImgNDetail">
+                                    <img width="100px" src="./Media/pImge (6).jpeg" alt="">
+                                    <div class="cartItemDet">
+                                        <h4>Wall Stand</h4>
+                                        <p>Kitchen</p>
+                                        <h4>Ksh. 2,300</h4>
+    
+    
+                                    </div>
+                                </div>
+                              
+                                <div class="quantNRemove">
+                                    <div class="remvCartItem">
+                                          <p>Remove</p>
+                                        <!-- <i class="fa-solid fa-xmark"></i> -->
+                                    </div>
+                                    <div class="quantCart">
+                                        <div class="addItemCart">
+                                           <p>+</p>
+                                        </div>
+                                        <p>2</p>
+                                        <div class="minusItemCart">
+                                            <p>-</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+         
+         
+                        <div class="cartItem">
+                            <div class="cartItemWrap">
+                                <div class="cartImgNDetail">
+                                    <img width="100px" src="./Media/pImge (7).jpeg" alt="">
+                                    <div class="cartItemDet">
+                                        <h4>Wall Stand</h4>
+                                        <p>Kitchen</p>
+                                        <h4>Ksh. 2,300</h4>
+    
+    
+                                    </div>
+                                </div>
+                              
+                                <div class="quantNRemove">
+                                    <div class="remvCartItem">
+                                          <p>Remove</p>
+                                        <!-- <i class="fa-solid fa-xmark"></i> -->
+                                    </div>
+                                    <div class="quantCart">
+                                        <div class="addItemCart">
+                                           <p>+</p>
+                                        </div>
+                                        <p>2</p>
+                                        <div class="minusItemCart">
+                                            <p>-</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+         
+         
+                        <div class="cartItem">
+                            <div class="cartItemWrap">
+                                <div class="cartImgNDetail">
+                                    <img width="100px" src="./Media/pImge (4).jpeg" alt="">
+                                    <div class="cartItemDet">
+                                        <h4>Wall Stand</h4>
+                                        <p>Kitchen</p>
+                                        <h4>Ksh. 2,300</h4>
+    
+    
+                                    </div>
+                                </div>
+                              
+                                <div class="quantNRemove">
+                                    <div class="remvCartItem">
+                                          <p>Remove</p>
+                                        <!-- <i class="fa-solid fa-xmark"></i> -->
+                                    </div>
+                                    <div class="quantCart">
+                                        <div class="addItemCart">
+                                           <p>+</p>
+                                        </div>
+                                        <p>2</p>
+                                        <div class="minusItemCart">
+                                            <p>-</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+         
+         
+                        <div class="cartItem">
+                            <div class="cartItemWrap">
+                                <div class="cartImgNDetail">
+                                    <img width="100px" src="./Media/pImge (1).jpeg" alt="">
+                                    <div class="cartItemDet">
+                                        <h4>Wall Stand</h4>
+                                        <p>Kitchen</p>
+                                        <h4>Ksh. 2,300</h4>
+    
+    
+                                    </div>
+                                </div>
+                              
+                                <div class="quantNRemove">
+                                    <div class="remvCartItem">
+                                          <p>Remove</p>
+                                        <!-- <i class="fa-solid fa-xmark"></i> -->
+                                    </div>
+                                    <div class="quantCart">
+                                        <div class="addItemCart">
+                                           <p>+</p>
+                                        </div>
+                                        <p>2</p>
+                                        <div class="minusItemCart">
+                                            <p>-</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+         
+         
+                        <div class="cartItem">
+                            <div class="cartItemWrap">
+                                <div class="cartImgNDetail">
+                                    <img width="100px" src="./Media/pImge (12).jpeg" alt="">
+                                    <div class="cartItemDet">
+                                        <h4>Wall Stand</h4>
+                                        <p>Kitchen</p>
+                                        <h4>Ksh. 2,300</h4>
+    
+    
+                                    </div>
+                                </div>
+                              
+                                <div class="quantNRemove">
+                                    <div class="remvCartItem">
+                                          <p>Remove</p>
+                                        <!-- <i class="fa-solid fa-xmark"></i> -->
+                                    </div>
+                                    <div class="quantCart">
+                                        <div class="addItemCart">
+                                           <p>+</p>
+                                        </div>
+                                        <p>2</p>
+                                        <div class="minusItemCart">
+                                            <p>-</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+         
+         
+                        <div class="cartItem">
+                            <div class="cartItemWrap">
+                                <div class="cartImgNDetail">
+                                    <img width="100px" src="./Media/pImge (11).jpeg" alt="">
+                                    <div class="cartItemDet">
+                                        <h4>Wall Stand</h4>
+                                        <p>Kitchen</p>
+                                        <h4>Ksh. 2,300</h4>
+    
+    
+                                    </div>
+                                </div>
+                              
+                                <div class="quantNRemove">
+                                    <div class="remvCartItem">
+                                          <p>Remove</p>
+                                        <!-- <i class="fa-solid fa-xmark"></i> -->
+                                    </div>
+                                    <div class="quantCart">
+                                        <div class="addItemCart">
+                                           <p>+</p>
+                                        </div>
+                                        <p>2</p>
+                                        <div class="minusItemCart">
+                                            <p>-</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+         
+         
+                        <div class="cartItem">
+                            <div class="cartItemWrap">
+                                <div class="cartImgNDetail">
+                                    <img width="100px" src="./Media/pImge (14).jpeg" alt="">
+                                    <div class="cartItemDet">
+                                        <h4>Wall Stand</h4>
+                                        <p>Kitchen</p>
+                                        <h4>Ksh. 2,300</h4>
+    
+    
+                                    </div>
+                                </div>
+                              
+                                <div class="quantNRemove">
+                                    <div class="remvCartItem">
+                                          <p>Remove</p>
+                                        <!-- <i class="fa-solid fa-xmark"></i> -->
+                                    </div>
+                                    <div class="quantCart">
+                                        <div class="addItemCart">
+                                           <p>+</p>
+                                        </div>
+                                        <p>2</p>
+                                        <div class="minusItemCart">
+                                            <p>-</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+         
+         
+                        <div class="cartItem">
+                            <div class="cartItemWrap">
+                                <div class="cartImgNDetail">
+                                    <img width="100px" src="./Media/pImge (14).jpeg" alt="">
+                                    <div class="cartItemDet">
+                                        <h4>Wall Stand</h4>
+                                        <p>Kitchen</p>
+                                        <h4>Ksh. 2,300</h4>
+    
+    
+                                    </div>
+                                </div>
+                              
+                                <div class="quantNRemove">
+                                    <div class="remvCartItem">
+                                          <p>Remove</p>
+                                        <!-- <i class="fa-solid fa-xmark"></i> -->
+                                    </div>
+                                    <div class="quantCart">
+                                        <div class="addItemCart">
+                                           <p>+</p>
+                                        </div>
+                                        <p>2</p>
+                                        <div class="minusItemCart">
+                                            <p>-</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+         
+         
+                        <div class="cartItem">
+                            <div class="cartItemWrap">
+                                <div class="cartImgNDetail">
+                                    <img width="100px" src="./Media/pImge (14).jpeg" alt="">
+                                    <div class="cartItemDet">
+                                        <h4>Wall Stand</h4>
+                                        <p>Kitchen</p>
+                                        <h4>Ksh. 2,300</h4>
+    
+    
+                                    </div>
+                                </div>
+                              
+                                <div class="quantNRemove">
+                                    <div class="remvCartItem">
+                                          <p>Remove</p>
+                                        <!-- <i class="fa-solid fa-xmark"></i> -->
+                                    </div>
+                                    <div class="quantCart">
+                                        <div class="addItemCart">
+                                           <p>+</p>
+                                        </div>
+                                        <p>2</p>
+                                        <div class="minusItemCart">
+                                            <p>-</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="promoTotalCart">
+                        <div class="promoTotalCartWrap">
+                            <div class="promoWrap">
+                                <input type="number" placeholder="Promo Code">
+                                <div class="promoBtn">
+                                  <p>Apply</p> 
+                                </div>
+                            </div>
+                            <div class="cartCashSummary">
+                                <div class="cartCashSum">
+                                    <p>Sub Total</p>
+                                    <p>Ksh. 13,000</p>
+                                </div>
+                            
+                                <div class="cartCashSum">
+                                    <p>Discount</p>
+                                    <p>5.6%</p>
+                                </div>
+                                <div class="cartCashSum">
+                                    <p>Total Cost</p>
+                                    <p>Ksh. 11,300</p>
+                                </div>
+                            </div>
+                            <button>Checkout</button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- profile  -->
+
+                <div class="actDrawerProfile" id="actDrawerProfile">
+                    <div class="actDrawerProfPlacer">
+                        <div class="editProfileImage">
+                            <img width="10px" src="./Media/pexels-readymade-3847592.jpg" alt="">
+                        </div>
+                        <div class="editProfileInputs">
+                            <div>
+                                <input type="text" name="" id="" placeholder="Name">
+                            </div>
+                            <div>
+                                <input type="text" name="" id="" placeholder="Phone">
+                            </div>
+                            <div>
+                                <input type="text" name="" id="" placeholder="Email">
+                            </div>
+                            <div>
+                                <input type="text" name="" id="" placeholder="Password">
+                            </div>
+                            <button>Save</button>
+                        </div>
+                    </div>
+                    
+                </div>
 
 
 
 
+               </div>
                </div>
                </div>
         </div>
