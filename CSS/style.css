@@ -17,12 +17,14 @@ input:focus{
 
 :root{
     --pri-color:#004E50;
+    --priDark-color:#003335;
     --sec-color:#179487;
     --sec2-color:rgb(35, 224, 205);
     --sec3-color:rgba(35, 224, 205, 0.24);
     --ter-color:#179487;
     --lit-Grey:#e7e7e7;
     --text-color:#555555;
+    --textGreen-color:#4ef596;
     --darktext-color:#222222;
     --dark-white:rgb(221, 235, 236);
     --bright-white:aliceblue;
@@ -132,6 +134,9 @@ h1,h2,h3,h4,h5,h6{
 }
 .menuLink:hover{
         background: var(--sec-color);
+        background: #003335;
+        color: aliceblue;
+        color: rgb(78, 245, 150);
 
 }
 .menuLink:hover i{
@@ -244,6 +249,9 @@ h1,h2,h3,h4,h5,h6{
 .switchPortal .activePort{
     background: var(--sec-color);
     color: aliceblue;
+    background: #003335;
+    color: aliceblue;
+    color: rgb(78, 245, 150);
 }
 .drawerAuthsWrap{
     width: 30%;
@@ -309,9 +317,10 @@ h1,h2,h3,h4,h5,h6{
 .actDrawerShop{
    border-radius: 20px;
    height: 100%;
-   right: 0%;
+   right: -101%;
    transition: .4s ease;
    position: absolute;
+   background: aliceblue;
    width: 100%;
 }
 
@@ -480,6 +489,8 @@ h1,h2,h3,h4,h5,h6{
     border-radius: 30px;
     background: var(--sec-color);
     background: rgb(25, 25, 25);
+    background: var(--priDark-color);
+    color: var(--textGreen-color);
     cursor: pointer;
 
 }
@@ -487,13 +498,14 @@ h1,h2,h3,h4,h5,h6{
     background: var(--sec-color);
 }
 .catDiv i{
-    font-size: 22px;
+    font-size: 17px;
     color: aliceblue;
     margin-right: 6px;
 }
 .catDiv p{
     font-size: .8rem;
     color: aliceblue;
+    
 }
 
 .shopProducts{
@@ -626,6 +638,7 @@ h1,h2,h3,h4,h5,h6{
     transition: .4s ease;
     position: absolute;
     right: -101%;
+    background: aliceblue;
     flex-direction: column;
     border-radius: 10px;
     
@@ -813,6 +826,7 @@ cursor: pointer;
     display: flex;
     transition: .4s ease;
     position: absolute;
+    background: aliceblue;
     right: -101%;
     justify-content: center;
     border-radius: 20px;
@@ -889,4 +903,259 @@ cursor: pointer;
     background: var(--sec-color);
     cursor: pointer;
     color: aliceblue;
+}
+.actDrawerProduct{
+    border-radius: 20px;
+    height: 100%;
+    right: -101%;
+    transition: .4s ease;
+    position: absolute;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.178);
+    display: flex;
+    justify-content: center;
+    background: aliceblue;
+    align-items: center;
+    width: 100%;
+}
+.actDrawerProdPlacer{
+    width: 95%;
+    overflow: hidden;
+    height: 90%;
+    display: flex;
+    border-radius: 20px;
+    background: aliceblue;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.103);
+    align-items: center;
+    justify-content: center;
+}
+.actDrawerProdLeft{
+    width: 50%;
+    height: 100%;
+    background: green;
+    overflow: hidden;
+}
+.actDrawerProdLeft img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  
+}
+.actDrawerProdRight{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+.actDrawerProdRightPlacer{
+    width: 95%;
+    height: 95%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center
+    ;
+    margin:  0 auto;
+}
+.actDrawerProdRightTop{
+    color: var(--text-color);
+} 
+.actDrawerProdRightTop p{
+    color: grey;
+    margin: 10px 0;
+    
+}
+
+.actDrawerProdRightTop h4{
+    font-size: 1.3rem;
+
+}
+.actDrawerProdRightBtm{
+    height: fit-content;
+
+}
+.productDesc{
+    padding: 20px 0;
+    color: var(--text-color);
+}
+.selectColor{
+    display: flex;
+    height: 60px;
+    justify-content: space-between;
+    margin: 10px 0;
+    align-items: center;
+}
+.selectColor div{
+    padding: 5px 15px;
+    border-radius: 6px;
+    background: var(--sec-color);
+    color: aliceblue;
+    font-family:Jost;
+    cursor: pointer;
+}
+.selectQuantityProductP{
+    height: 70px;
+    width: 100%;
+    margin: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.qsprod{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+}
+.minusProduct{
+    font-size: 20px;
+    height: 30px;
+    width: 40px;
+    background: var(--priDark-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--textGreen-color);
+    border-radius: 5px;
+}
+.minusProduct p{
+    font-size: 20px;
+    border-radius: 10px;
+}
+.ProductQuantity{
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+    margin: 10px;
+}
+.addProduct{
+    font-size: 20px;
+    height: 30px;
+    width: 40px;
+    background: var(--sec-color);
+    display: flex;
+    justify-content: center;
+    background: var(--priDark-color);
+    align-items: center;
+    color: var(--textGreen-color);
+    border-radius: 5px;
+}
+.prodtBuyBtn{
+    height: 70px;
+    width: 100%;
+    display: flex;
+    cursor: pointer;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.prodtBuyBtn button{
+    width: 48%;
+    height: 50px;
+    border-radius: 50px;
+    cursor: pointer;
+    border: none;
+    background: var(--priDark-color);
+    color:var(--textGreen-color);
+    font-family: Jost;
+}
+.activePColor{
+    background: var(--priDark-color) !important;
+    color: var(--textGreen-color) !important;
+}
+
+.checkoutPage{
+   border-radius: 20px;
+   height: 100%;
+   /* right: -101%; */
+   transition: .4s ease;
+   position: absolute;
+   background: aliceblue;
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+
+}
+.checkoutPlacer{
+    width: 90%;
+    height: 90%;
+    display: flex;
+    flex-direction: row;
+    border-radius: 10px;
+    background: aliceblue;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    align-items: center;
+}
+.checkoutLeft{
+    width:49%;
+    height: 100%;
+    display: flex;
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+.delTruck{
+    margin: 20px;
+    height: 150px;
+    width: 150px;
+    background: var(--dark-white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+
+
+.delTruck img{
+    width: 120px;
+    filter: drop-shadow(10px 10px 10px rgba(0, 0, 0, 0.222));
+}
+.delivDetWrap{
+    width: 90%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.delDet{
+    width: 100%;
+    margin-top: 10px;
+    height: 50px;
+}
+.delivDetWrap h4{
+    margin: 10px 0;
+}
+
+
+.delDet input{
+    width: 96%;
+    height: 40px;
+    font-family: Jost;
+    border-radius: 40px;
+    background: none;
+    border: none; 
+    padding-left: 20px;
+    box-shadow:  0px 0px 10px rgba(0, 0, 0, 0.148);
+
+}
+
+.delDet select{
+    width: 100%;
+    height: 40px;
+    font-family: Jost;
+    border-radius: 40px;
+    background: none;
+    border: none; 
+    padding-left: 20px;
+    box-shadow:  0px 0px 10px rgba(0, 0, 0, 0.148);
 }

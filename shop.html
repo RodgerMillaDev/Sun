@@ -11,10 +11,15 @@
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js" integrity="sha512-jEnuDt6jfecCjthQAJ+ed0MTVA++5ZKmlUcmDGBv2vUI/REn6FuIdixLNnQT+vKusE2hhTk2is3cFvv5wA+Sgg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/ldrs/dist/auto/jellyTriangle.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js" integrity="sha512-jEnuDt6jfecCjthQAJ+ed0MTVA++5ZKmlUcmDGBv2vUI/REn6FuIdixLNnQT+vKusE2hhTk2is3cFvv5wA+Sgg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="shortcut icon" href="./Media/lightBgFav.png" type="image/x-icon">
     <title>SunUp Collections</title>
 </head>
 <body>
+
     <div id="preloaderWrap">
     <div id="preloader">
 
@@ -212,7 +217,7 @@
                                 <h4>Wall Stand</h4>
                                 <p>Ksh. 2,300</p>
                               <div class="buyandCart">
-                                <button class="buyshopBtn">Buy</button>
+                                <button class="buyshopBtn" onclick="toProduct()">Buy</button>
                                 <button class="tocartShopBtn"><i class="icofont-cart-alt"></i></button>
                               </div>
                             </div>
@@ -727,6 +732,164 @@
                     
                 </div>
 
+
+                <!-- prosuct page  -->
+
+                <div class="actDrawerProduct" id="actDrawerProduct">
+                  <div class="actDrawerProdPlacer">
+                    <div class="actDrawerProdLeft">
+                        <img src="./Media/pImge (17).jpeg" alt="">
+                    </div>
+                    <div class="actDrawerProdRight">
+
+                        <div class="actDrawerProdRightPlacer">
+
+                        <div class="actDrawerProdRightTop">
+                            <h4>Stanely Bottle Cups</h4>
+                            <p>Kitchen Item</p>
+                            <h4>Ksh. 2,300</h4>
+                        </div>
+                        <div class="actDrawerProdRightBtm">
+                            <div class="productDesc">
+                                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Modi provident quibusdam exercitationem perspiciatis deserunt recusandae.</p>
+                            </div>
+                            <p>Select Color :</p>
+                            <div class="selectColor">
+                                
+                                <div>Blue</div>
+                                <div class="activePColor">White</div>
+                                <div>Black</div>
+                                <div>Purple</div>
+                                <div>Green</div>
+                            </div>
+                            <div class="selectQuantityProductP">
+                                <div>
+                                      <p>Quantity:</p>
+                                </div>
+                                <div class="qsprod">
+                                    <div class="minusProduct">
+                                        <p>-</p>
+                                    </div>
+                                    <div class="ProductQuantity">
+                                        <p>3</p>
+                                    </div>
+                                    <div class="addProduct">
+                                        <p>+</p>
+                                    </div>
+                                    
+                                </div>
+                               
+                            </div>
+                            <div class="prodtBuyBtn">
+                                <button>Add to cart</button>
+                                <button>Buy</button>
+                            </div>
+                         
+                        </div>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="checkoutPage" id="checkoutPage">
+                    <div class="checkoutPlacer">
+
+                        <div class="checkoutLeft">
+                            <div class="delTruck">
+                                <img width="100px" src="./Media/van (2).png" alt="">
+                            </div>
+                            <div class="delivDetWrap">
+                                <h4>Delivery Address</h4>
+                                <div class="delDet">
+                                    <input type="text" placeholder="Your Name" value="Rodger Milla">
+                                    
+                                 </div>
+                                 <div class="delDet">
+                                    <input type="text" placeholder="Your Phone" value="0708004700">
+                                    
+                                 </div>
+                                <div class="delDet">
+                                    <select name="" id="">
+                                        <option value="">Select County</option>
+                             
+                                        <option value="Nairobi">Nairobi</option>
+                                  
+                                        <option value="Machakos">Machakos</option>
+                                    </select>
+                                </div>
+                                <div class="delDet">
+                                    <select name="" id="">
+                                        <option value="">Select Location</option>
+                                  
+                                        <option value="Mirema Drive">Mirema Drive</option>
+                                
+                                        <option value="Mirema Drive">Mirema Drive</option>
+                                
+                                        <option value="Mirema Drive">Mirema Drive</option>
+                                    </select>
+                                   
+                                </div>
+                                <div class="delDet">
+                                   <input type="text" placeholder="Builiding e.g Jewel Plaza">
+                                   
+                                </div>
+
+                            </div>
+                          
+
+                        </div>
+                        <div class="checkoutCenter">
+
+
+                        </div>
+                        <div class="checkoutRight">
+                            <div class="checkoutrightPlacer">
+                                <div class="checkRTop">
+                                    <div class="cheoutCard">
+
+                                    </div>
+                                </div>
+                                <div class="checkRBottom">
+                                    <div class="checkRTopDet">
+                                        <p>Total</p>
+                                        <p>Ksh. 2,300</p>
+                                    </div>
+                                    <div class="checkRTopDet">
+                                        <p>Transport Charges</p>
+                                        <p>Ksh. 250</p>
+                                    </div>
+                                    <div class="checkRTopDet">
+                                        <p>Discount</p>
+                                        <p>3%</p>
+                                    </div>
+                                    <div class="checkRTopDet">
+                                        <p>Grand Total</p>
+                                        <p>Ksh. 2100</p>
+                                    </div>
+                                    <div class="checkPay">
+                                   
+
+                                        <div class="checkPayLoader">
+                                          
+                                            <button>Pay Now</button>
+
+                                            <l-jelly-triangle
+                                                size="30"
+                                                speed="1.75" 
+                                                color="#4ef596" 
+                                                ></l-jelly-triangle>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        
+                    </div>
+                </div>
 
 
 
