@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./CSS/style.css">
+    <link rel="stylesheet" href="./CSS/resp.css">
+    <script src="https://kit.fontawesome.com/df64ffd27a.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./Media/icofont/icofont.min.css">
+    <link rel="stylesheet" href="./Media/icofont/icofont.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js" integrity="sha512-jEnuDt6jfecCjthQAJ+ed0MTVA++5ZKmlUcmDGBv2vUI/REn6FuIdixLNnQT+vKusE2hhTk2is3cFvv5wA+Sgg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/ldrs/dist/auto/jellyTriangle.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js" integrity="sha512-jEnuDt6jfecCjthQAJ+ed0MTVA++5ZKmlUcmDGBv2vUI/REn6FuIdixLNnQT+vKusE2hhTk2is3cFvv5wA+Sgg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="shortcut icon" href="./Media/lightBgFav.png" type="image/x-icon">
+    <title>SunUp Collections</title>
+</head>
+<body>
+    
+
+    <div id="preloaderWrap">
+    <div id="preloader">
+
+    </div>
+    </div>
+    <section id="Auth">
+        <div class="authPlacer">
+            <div class="authLeft">
+                <div class="authLeftPlacer">
+                    <div class="authLog">
+                    <h3>Log In</h3>
+                    <p>Log in to proceed</p>
+                    <div class="authInputsWrap">
+                        <input type="email" id="emLog" placeholder="Email">
+                        <input type="email" id="passLog" placeholder="Password">
+                        <button>Log In</button>
+                    </div>
+                    <div class="authOpts">
+                        <p>Don't have an account <span>Sign Up</span></p>
+                        <p>Reset Password</p>
+                    </div>
+                    </div>
+                    <div class="authSign">
+                        <h3>Sign Up</h3>
+                        <p>Hello there, looking for household items</p>
+                        <div class="authInputsWrap">
+                            <input type="email" id="emLog" placeholder="Email">
+                            <input type="email" id="passLog" placeholder="Password">
+                            <button>Sign Up</button>
+                        </div>
+                        <div class="authOpts">
+                            <p>Already have an account <span>Log In</span></p>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="authRight">
+                <div class="authRightPlacer">
+                    <div class="authRightInfo">
+                        <img src="./Media/fullLogo.png" alt="">
+                        <h2>Back to shop for more?</h2>
+                        <p>Fill in your credentials to access your account</p>
+                    </div>
+                    <div class="authRightImg">
+                        <img src="./Media/Ecommerce checkout laptop-amico (1).svg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+    </section>
+
+<script src="./JS/admin.js"></script>
+
+<script>
+       const animationPath ='./Media/logoLoader.json';
+              const animation = lottie.loadAnimation({
+          container: document.getElementById('preloader'), // the dom element that will contain the animation
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: animationPath // path to the animation json
+        });
+    window.addEventListener("load",()=>{
+        document.getElementById("preloaderWrap").style.display="none"
+    })
+</script>
+
+</body>
+</html>
