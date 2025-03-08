@@ -19,6 +19,7 @@
     <title>SunUp Collections</title>
 </head>
 <body>
+    
 
     <div id="preloaderWrap">
     <div id="preloader">
@@ -91,7 +92,7 @@
                         <i class="fa-solid fa-bell"></i>
                     </div>
                     <div class="userDrawer">
-                         <img width="10px" src="./Media/userTest.jpg" alt="">
+                         <img width="10px" src="./Media/newUse.png" alt="">
                          <p>Rodger</p>
                     </div>
                 </div>
@@ -371,7 +372,7 @@
                               
                                 <div class="quantNRemove">
                                     <div class="remvCartItem">
-                                          <p>Remove</p>
+                                          <i class="fa-solid fa-trash"></i>
                                         <!-- <i class="fa-solid fa-xmark"></i> -->
                                     </div>
                                     <div class="quantCart">
@@ -403,7 +404,7 @@
                               
                                 <div class="quantNRemove">
                                     <div class="remvCartItem">
-                                          <p>Remove</p>
+                                          <i class="fa-solid fa-trash"></i>
                                         <!-- <i class="fa-solid fa-xmark"></i> -->
                                     </div>
                                     <div class="quantCart">
@@ -435,7 +436,7 @@
                               
                                 <div class="quantNRemove">
                                     <div class="remvCartItem">
-                                          <p>Remove</p>
+                                          <i class="fa-solid fa-trash"></i>
                                         <!-- <i class="fa-solid fa-xmark"></i> -->
                                     </div>
                                     <div class="quantCart">
@@ -467,7 +468,7 @@
                               
                                 <div class="quantNRemove">
                                     <div class="remvCartItem">
-                                          <p>Remove</p>
+                                          <i class="fa-solid fa-trash"></i>
                                         <!-- <i class="fa-solid fa-xmark"></i> -->
                                     </div>
                                     <div class="quantCart">
@@ -499,7 +500,7 @@
                               
                                 <div class="quantNRemove">
                                     <div class="remvCartItem">
-                                          <p>Remove</p>
+                                          <i class="fa-solid fa-trash"></i>
                                         <!-- <i class="fa-solid fa-xmark"></i> -->
                                     </div>
                                     <div class="quantCart">
@@ -531,7 +532,7 @@
                               
                                 <div class="quantNRemove">
                                     <div class="remvCartItem">
-                                          <p>Remove</p>
+                                          <i class="fa-solid fa-trash"></i>
                                         <!-- <i class="fa-solid fa-xmark"></i> -->
                                     </div>
                                     <div class="quantCart">
@@ -563,7 +564,7 @@
                               
                                 <div class="quantNRemove">
                                     <div class="remvCartItem">
-                                          <p>Remove</p>
+                                          <i class="fa-solid fa-trash"></i>
                                         <!-- <i class="fa-solid fa-xmark"></i> -->
                                     </div>
                                     <div class="quantCart">
@@ -595,7 +596,7 @@
                               
                                 <div class="quantNRemove">
                                     <div class="remvCartItem">
-                                          <p>Remove</p>
+                                          <i class="fa-solid fa-trash"></i>
                                         <!-- <i class="fa-solid fa-xmark"></i> -->
                                     </div>
                                     <div class="quantCart">
@@ -627,7 +628,7 @@
                               
                                 <div class="quantNRemove">
                                     <div class="remvCartItem">
-                                          <p>Remove</p>
+                                          <i class="fa-solid fa-trash"></i>
                                         <!-- <i class="fa-solid fa-xmark"></i> -->
                                     </div>
                                     <div class="quantCart">
@@ -659,7 +660,7 @@
                               
                                 <div class="quantNRemove">
                                     <div class="remvCartItem">
-                                          <p>Remove</p>
+                                          <i class="fa-solid fa-trash"></i>
                                         <!-- <i class="fa-solid fa-xmark"></i> -->
                                     </div>
                                     <div class="quantCart">
@@ -732,6 +733,46 @@
                     
                 </div>
 
+                <!-- success checkout  -->
+
+                <div class="actDrawerSuccessCheck" id="actDrawerSuccessCheck">
+                    <div class="actDrawerProfPlacer">
+                        <div class="successImage">
+                            <img width="10px" src="./Media/success.png" alt="">
+                        </div>
+                        <h4>Purchased successfuly. Your delivery is on the way</h4>
+                        <div class="successInputs">
+                            <div>
+                                <p>Recipient</p>
+                                <p>Rodger Milla</p>
+                            </div>
+                            <div>
+                                <p>Order No.</p>
+                                <p>#323242</p>
+                            </div>
+                            <div>
+                                <p>Paid</p>
+                                <p>Ksh. 2,300</p>
+                            </div>
+                            <div>
+                                <p>Date</p>
+                                <p>3rd June 2025</p>
+                            </div>
+                            <div>
+                                <p>Destination</p>
+                                <p>Kiambu Road</p>
+                            </div>
+                            <div>
+                                <p>Phone</p>
+                                <p>0708004700</p>
+                            </div>
+
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+
 
                 <!-- prosuct page  -->
 
@@ -782,7 +823,7 @@
                             </div>
                             <div class="prodtBuyBtn">
                                 <button>Add to cart</button>
-                                <button>Buy</button>
+                                <button onclick="toCheckout()">Buy</button>
                             </div>
                          
                         </div>
@@ -790,7 +831,8 @@
                     </div>
                   </div>
                 </div>
-
+                
+                <!-- checkout page  -->
 
                 <div class="checkoutPage" id="checkoutPage">
                     <div class="checkoutPlacer">
@@ -846,8 +888,16 @@
                         <div class="checkoutRight">
                             <div class="checkoutrightPlacer">
                                 <div class="checkRTop">
-                                    <div class="cheoutCard">
-
+                                    <div class="checkoutCard">
+                                         <div class="mpesaLogo">
+                                            <img class="cardSim" src="./Media/simcard2-Photoroom.png" alt="">
+                                            <img class="mpesaLogoImg" width="100px" src="./Media/1200x630wa-Photoroom.png" alt="">
+                                         </div>
+                                         <div class="amountPay">
+                                            <p>Amount To Pay</p>
+                                            <p class="cardPrice">Ksh. 5,300</p>
+                                         </div>
+                                    
                                     </div>
                                 </div>
                                 <div class="checkRBottom">
@@ -869,10 +919,10 @@
                                     </div>
                                     <div class="checkPay">
                                    
+                                        <button onclick="toSuccess()">Pay Now</button>
 
                                         <div class="checkPayLoader">
                                           
-                                            <button>Pay Now</button>
 
                                             <l-jelly-triangle
                                                 size="30"
