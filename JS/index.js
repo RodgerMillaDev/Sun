@@ -112,3 +112,17 @@ function toSuccess(){
 
 }
 
+function toSignUp(){
+    document.getElementById("authLog").style.top="-100%"
+    document.getElementById("authSign").style.top="0"
+    document.getElementById("authRightH3").innerText="Everything You Need, All in One Place!"
+
+}
+
+function toLogIn(){
+
+    document.getElementById("authLog").style.top="0%"
+    document.getElementById("authSign").style.top="100%" 
+    document.getElementById("authRightH3").innerText="Can’t get enough? Shop some more!"
+
+}

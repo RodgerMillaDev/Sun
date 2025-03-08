@@ -3,7 +3,8 @@
         display: none;
     }
     .authLeft{
-        width: 90%;
+        width: 95%;
+        
     }
     .authLeftPlacer{
         width: 100%;
@@ -12,5 +13,19 @@
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+    .authData p{
+        margin: 10px 0;
+        color: var(--text-color);
+        font-size: 1.1rem;
+        text-align: center;
+    }
+    
+    .authOpts p{
+        color: var(--text-color);
+        font-size: 1rem;
+    }
+    .authInputWrap{
+        box-shadow:  0 0 10px rgba(0, 0, 0, 0);
     }
 }
