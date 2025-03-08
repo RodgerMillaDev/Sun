@@ -1,0 +1,16 @@
+@media only screen and (max-width:768px) {
+    .authRight{
+        display: none;
+    }
+    .authLeft{
+        width: 90%;
+    }
+    .authLeftPlacer{
+        width: 100%;
+    }
+    .authData{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
