@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./CSS/style.css">
+    <meta name="format-detection" content="telephone=no">
     <link rel="stylesheet" href="./CSS/resp.css">
     <script src="https://kit.fontawesome.com/df64ffd27a.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./Media/icofont/icofont.min.css">
@@ -26,7 +27,7 @@
     </div>
     <section id="AdminPanel">
 
-        <div class="adminLeft">
+        <div class="adminLeft" id="adminMenuNavId">
 
             <div class="adminNav">
                 <div class="adminLogo">
@@ -35,7 +36,7 @@
 
                 </div>
                 <div class="adminLinks">
-                    <div class="adminLink">
+                    <div class="adminLink" onclick="toDashboard()">
                         <div class="admIconLk">
                             <i class="icofont-chair"></i>
                         </div>
@@ -47,7 +48,7 @@
                         </div>
                         <p>Upload Product</p>
                     </div>
-                    <div class="adminLink">
+                    <div class="adminLink" onclick="toOrders()">
                         <div class="admIconLk">
                             <i class="icofont-layers"></i>
                         </div>
@@ -83,7 +84,7 @@
                             <p>Greetings Iddar,</p>
                             <h2>Dashboard</h2>
                         </div>
-                        <div class="mobileNavIconAdmin">
+                        <div class="mobileNavIconAdmin" onclick="openFonNav()">
                             <i class="icofont-align-center"></i>
 
                         </div>
@@ -97,151 +98,154 @@
 
 
                 <div id="adminDashboard">
-                    <div class="adminDashboardTop">
-                        <div class="adminDashboardTopWrap">
-                            <div class="admProf">
-                                <div class="admImg">
-                                    <img src="./Media/3dUser2.png" alt="">
-                                </div>
-                                <div class="admDet">
-                                    <p>Iddar Nyambura</p>
-                                    <p>sunupcollections@gmail.com</p>
-                                    <div class="miniSep"></div>
-                                    <div class="admDetBtns">
-                                        <button>Email</button>
-                                        <button>Log Out</button>
+                    <div class="adminDashWrap">
+                        <div class="adminDashboardTop" id="actDash">
+                            <div class="adminDashboardTopWrap">
+                                <div class="admProf">
+                                    <div class="admImg">
+                                        <img src="./Media/3dUser2.png" alt="">
                                     </div>
-
-                                </div>
-                            </div>
-                            <div class="admWebInfo">
-                                <div class="admWebInfoPlacer">
-                                    <h3>My Operations</h3>
-                                    <div class="vseparator"></div>
-                                    <div class="operationsWrap">
-                                        <div class="operation">
-                                            <div class="opIcon">
-                                                <i class="icofont-bell-alt"></i>
-                                            </div>
-                                            <div class="opInfo">
-                                                <p>SMS</p>
-                                                <p>Check sms balance</p>
-                                            </div>
+                                    <div class="admDet">
+                                        <p>Iddar Nyambura</p>
+                                        <p>sunupcollections@gmail.com</p>
+                                        <div class="miniSep"></div>
+                                        <div class="admDetBtns">
+                                            <button>Email</button>
+                                            <button>Log Out</button>
                                         </div>
-                                        <div class="operation">
-                                            <div class="opIcon">
-                                                <i class="icofont-sale-discount"></i>
-                                            </div>
-                                            <div class="opInfo">
-                                                <p>Discount</p>
-                                                <p>Cuurent discount 0%</p>
-                                            </div>
-                                        </div>
-                                        <div class="operation">
-                                            <div class="opIcon">
-                                                <i class="icofont-tree-alt"></i>
-                                            </div>
-                                            <div class="opInfo">
-                                                <p>Template</p>
-                                                <p>Post email template</p>
-                                            </div>
-                                        </div>
-                                        <div class="operation">
-                                            <div class="opIcon">
-                                                <i class="icofont-star-shape"></i>
-                                            </div>
-                                            <div class="opInfo">
-                                                <p>Edit Reviews</p>
-                                                <p>Edit customer review</p>
-                                            </div>
-                                        </div>
+    
                                     </div>
                                 </div>
-                                
-
-                            </div>
-
-                            <div class="adminSum">
-                                <div class="adminSumTop">
-                                    <p>Orders</p>
-                                    <div class="miniSep"></div>
-                                    <p>Total 0</p>
-                                </div>
-                                <div class="adminSumBtm">
-                                    <p>Total Sale</p>
-                                    <div class="miniSep"></div>
-                                    <p>Ksh 0</p>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
-                    <div class="adminDashboardBottom">
-                        <div class="adminDashboardBottomTitle">
-                            <h3>Pending Orders</h3>
-                            <div class="selectOrdersToview">
-                                <p>All </p>
-                                <p >Completed </p>
-                                <p class="activeOrderList">Pending</p>
-                            </div>
-
-                        </div>
-                        <div class="adminDashRecentOrdersWrap">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Order No.</th>
-                                        <th>Phone</th>
-                                        <th>Date</th>
-                                        <th>Status</th>
-                                    </tr>
+                                <div class="admWebInfo">
+                                    <div class="admWebInfoPlacer">
+                                        <h3>My Operations</h3>
+                                        <div class="vseparator"></div>
+                                        <div class="operationsWrap">
+                                            <div class="operation">
+                                                <div class="opIcon">
+                                                    <i class="icofont-bell-alt"></i>
+                                                </div>
+                                                <div class="opInfo">
+                                                    <p>SMS</p>
+                                                    <p>Check sms balance</p>
+                                                </div>
+                                            </div>
+                                            <div class="operation">
+                                                <div class="opIcon">
+                                                    <i class="icofont-sale-discount"></i>
+                                                </div>
+                                                <div class="opInfo">
+                                                    <p>Discount</p>
+                                                    <p>Current discount 0%</p>
+                                                </div>
+                                            </div>
+                                            <div class="operation">
+                                                <div class="opIcon">
+                                                    <i class="icofont-tree-alt"></i>
+                                                </div>
+                                                <div class="opInfo">
+                                                    <p>Template</p>
+                                                    <p>Post email template</p>
+                                                </div>
+                                            </div>
+                                            <div class="operation">
+                                                <div class="opIcon">
+                                                    <i class="icofont-star-shape"></i>
+                                                </div>
+                                                <div class="opInfo">
+                                                    <p>Edit Reviews</p>
+                                                    <p>Edit customer review</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     
-                                </thead>
-                              
-                                <tbody>
-                                    <tr>
-                                        <td class="orderNoTb"><p>#539593</p> </td>
-                                        <td class="orderPhoneTb"><p>0708004700</p></td>
-                                        <td class="orderDateTb"> <p>3rd May 2025</p></td>
-                                        <td class=" orderDateTb orderPending"><p>Pending</p></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="orderNoTb"><p>#539593</p> </td>
-                                        <td class="orderPhoneTb"><p>0708004700</p></td>
-                                        <td class="orderDateTb"> <p>3rd May 2025</p></td>
-                                        <td class=" orderDateTb orderPending"><p>Pending</p></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="orderNoTb"><p>#539593</p> </td>
-                                        <td class="orderPhoneTb"><p>0708004700</p></td>
-                                        <td class="orderDateTb"> <p>3rd May 2025</p></td>
-                                        <td class=" orderDateTb orderPending"><p>Pending</p></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="orderNoTb"><p>#539593</p> </td>
-                                        <td class="orderPhoneTb"><p>0708004700</p></td>
-                                        <td class="orderDateTb"> <p>3rd May 2025</p></td>
-                                        <td class=" orderDateTb orderPending"><p>Pending</p></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="orderNoTb"><p>#539593</p> </td>
-                                        <td class="orderPhoneTb"><p>0708004700</p></td>
-                                        <td class="orderDateTb"> <p>3rd May 2025</p></td>
-                                        <td class=" orderDateTb orderPending"><p>Pending</p></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="orderNoTb"><p>#539593</p> </td>
-                                        <td class="orderPhoneTb"><p>0708004700</p></td>
-                                        <td class="orderDateTb"> <p>3rd May 2025</p></td>
-                                        <td class=" orderDateTb orderPending"><p>Pending</p></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
+    
+                                </div>
+    
+                                <div class="adminSum">
+                                    <div class="adminSumTop">
+                                        <p>Orders</p>
+                                        <div class="miniSep"></div>
+                                        <p>Total 0</p>
+                                    </div>
+                                    <div class="adminSumBtm">
+                                        <p>Total Sale</p>
+                                        <div class="miniSep"></div>
+                                        <p>Ksh 0</p>
+                                    </div>
+                                </div>
+    
+                            </div>
+    
                         </div>
-
+                        <div class="adminDashboardBottom" id="allOrders">
+                            <div class="adminDashboardBottomTitle">
+                                <h3>Pending Orders</h3>
+                                <div class="selectOrdersToview">
+                                    <p>All </p>
+                                    <p >Completed </p>
+                                    <p class="activeOrderList">Pending</p>
+                                </div>
+    
+                            </div>
+                            <div class="adminDashRecentOrdersWrap">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Order No.</th>
+                                            <th>Phone</th>
+                                            <th>Date</th>
+                                            <th>Status</th>
+                                        </tr>
+                                        
+                                    </thead>
+                                  
+                                    <tbody>
+                                        <tr>
+                                            <td class="orderNoTb"><p>#539593</p> </td>
+                                            <td class="orderPhoneTb"><p>0708004700</p></td>
+                                            <td class="orderDateTb"> <p>3rd May '25</p></td>
+                                            <td class=" orderDateTb orderPending"><p>Pending</p></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="orderNoTb"><p>#539593</p> </td>
+                                            <td class="orderPhoneTb"><p>0708004700</p></td>
+                                            <td class="orderDateTb"> <p>3rd May '25</p></td>
+                                            <td class=" orderDateTb orderPending"><p>Pending</p></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="orderNoTb"><p>#539593</p> </td>
+                                            <td class="orderPhoneTb"><p>0708004700</p></td>
+                                            <td class="orderDateTb"> <p>3rd May '25</p></td>
+                                            <td class=" orderDateTb orderPending"><p>Pending</p></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="orderNoTb"><p>#539593</p> </td>
+                                            <td class="orderPhoneTb"><p>0708004700</p></td>
+                                            <td class="orderDateTb"> <p>3rd May '25</p></td>
+                                            <td class=" orderDateTb orderPending"><p>Pending</p></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="orderNoTb"><p>#539593</p> </td>
+                                            <td class="orderPhoneTb"><p>0708004700</p></td>
+                                            <td class="orderDateTb"> <p>3rd May '25</p></td>
+                                            <td class=" orderDateTb orderPending"><p>Pending</p></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="orderNoTb"><p>#539593</p> </td>
+                                            <td class="orderPhoneTb"><p>0708004700</p></td>
+                                            <td class="orderDateTb"> <p>3rd May '25</p></td>
+                                            <td class=" orderDateTb orderPending"><p>Pending</p></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+    
+                            </div>
+    
+                        </div>
                     </div>
+                   
 
                 </div>
 
@@ -260,6 +264,15 @@
         
     </section>
 
+    
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-storage.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script src="./JS/index.js"></script>
 <script src="./JS/admin.js"></script>
 
 <script>

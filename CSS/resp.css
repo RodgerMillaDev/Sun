@@ -1,4 +1,13 @@
 @media only screen and (max-width:768px) {
+    p{
+        font-size: 16px;
+        font-family: Jost;
+    }
+    h1,h2,h3,h4,h5,h6{
+        font-family: Jost;
+        letter-spacing: -0.5px;
+    
+    }
     ::-webkit-scrollbar {
         width: 0px;
       }
@@ -8,6 +17,7 @@
     ::-webkit-scrollbar-thumb {
         background: var(--sec-color); 
         border-radius: 10px;
+        display: none;
       }
     ::-webkit-scrollbar-thumb:hover {
         background: var(--pri-color); 
@@ -93,15 +103,17 @@
         align-items: center;
         overflow-x: auto;
         scroll-snap-type: x-mandatory;
+        overflow-y: hidden;
+
     }
     .adminDashboardTopWrap{
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: center;
-        width: 260vw !important;
-        height: 100%;
-        margin-left: 100vw;
+        width: 200vw;
+        height:100%;
+        margin-left: 87vw;
         gap: 12px;
     
     }
@@ -131,7 +143,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 80vw !important ;
+        width: 65vw !important ;
         background: rgb(255, 255, 255);
         height: 100%;
     }
@@ -142,7 +154,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;        
-        width: 60vw !important;
+        width: 40vw !important;
         
         
      
@@ -150,6 +162,8 @@
     .adminSumBtm,.adminSumTop{
       height: 48.5%;
       background: rgb(255, 255, 255);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+
 
     }
     .admWebInfo{
@@ -159,11 +173,73 @@
         align-items: center;
         display: flex;
         height: 100%;
-        width: 80vw !important;
+        width: 70vw !important;
         justify-content: center;
         align-items: center;
         background: rgb(255, 255, 255);
     }
 
+    .adminDashboardBottom{
+        height: 40%;
+        width: 100%;
+        overflow: hidden;
+    }
 
+    .selectOrdersToview{
+        display: none;
+    }
+    .adminDashRecentOrdersWrap table tr{
+        height: 40px;
+        text-align: center;
+        font-size: .8rem;
+        width: 90%;
+    }
+    .orderNoTb,
+    .orderPhoneTb,
+    .orderDateTb,
+    .orderDateTb
+    {
+        font-size: .08rem;
+  
+    }
+    .admWebInfoPlacer{
+        width: 90%;
+        height: 90%;
+        
+    }
+    .operationsWrap{
+        height: 90%;
+        width: 100%;
+    }
+    .operation{
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        height: 22%;
+        cursor: pointer;
+        border-radius: 10px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        margin-bottom:2%;
+        width: 100%;
+    
+    }
+    .opIcon{
+        width: 50px;
+        margin: 0 10px;
+        border-radius: 50%;
+        background:var(--pri-color);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: var(--textGreen-color);
+        font-size: 22px;
+        height: 50px;
+    }
+    .opInfo p:nth-child(1){
+        font-weight: 900;
+        font-size: 1.1rem;
+    }
+    .opInfo p:nth-child(2){
+        font-size: .9rem;
+    }
 }

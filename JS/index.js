@@ -126,3 +126,22 @@ function toLogIn(){
     document.getElementById("authRightH3").innerText="Can’t get enough? Shop some more!"
 
 }
+
+function openFonNav(){
+    document.getElementById("adminMenuNavId").style.left="0%"
+}
+function toDashboard(){
+    document.getElementById("adminMenuNavId").style.left="-101%"
+    document.getElementById("allOrders").style.top="60%"
+    document.getElementById("adminDashboard").style.right="0%"
+    document.getElementById("actDash").style.top="0%"
+
+
+}
+ function toOrders(){
+    document.getElementById("adminMenuNavId").style.left="-101%"
+    document.getElementById("actDash").style.top="-100%"
+    document.getElementById("allOrders").style.top="0%"
+
+
+ }

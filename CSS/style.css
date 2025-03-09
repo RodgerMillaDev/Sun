@@ -3,6 +3,12 @@
     margin: 0;
 
 }
+a{
+    font-style: none;
+}
+p{
+    font-style: none;
+}
 .swal2-confirm{
     border-radius: 20px;
     padding: 10px 30px;
@@ -73,6 +79,7 @@ button:hover{
     --dark-white:rgb(221, 235, 236);
     --bright-white:aliceblue;
 }
+
 
 @font-face {
     font-family: FiraBold;
@@ -1702,10 +1709,17 @@ cursor: pointer;
     position: relative;
     
 }
+.adminDashWrap{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
 #adminDashboard{
     height: 100%;
     width: 100%;
     position: absolute;
+    right: 0%;
+    transition: .3s ease;
     background: aliceblue;
     border-radius: 10px;
     /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
@@ -1713,12 +1727,16 @@ cursor: pointer;
 .adminDashboardTop{
     height: 60%;
     width: 100%;
+    position: absolute;
     display: flex;
+    top: 0;
     flex-direction: row;
+    transition: .3s ease;
 }
 .adminDashboardTopWrap{
     display: grid;
     width: 100%;
+    
     height: 100%;
     grid-template-columns: repeat(6,1fr);
     gap: 30px;
@@ -1854,6 +1872,7 @@ cursor: pointer;
     width: 80%;
     height: 90%;
     
+    
 }
 .admWebInfoPlacer h3{
     height: 10%;
@@ -1910,7 +1929,11 @@ cursor: pointer;
 
 .adminDashboardBottom{
     height: 40%;
+    position: absolute;
+    top: 60%;
     overflow: hidden;
+    width: 100%;
+    transition: .3s ease;
 }
 .adminDashboardBottomTitle{
     height: 8vh;
