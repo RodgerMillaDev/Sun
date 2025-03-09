@@ -1956,6 +1956,14 @@ cursor: pointer;
     align-items: center;
 
 }
+.selectTableToview{
+    height: 100%;
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
 .adminDashboardBottomTitle h3{
     font-size: 1.3rem;
     color: var(--priDark-color);
@@ -2030,4 +2038,104 @@ height: 10vh;
  .selectOrdersToview .activeOrderList{
     background: var(--priDark-color);
     color: var(--textGreen-color);
+  }
+  .selectTableToview .activeBtnList{
+    background: var(--priDark-color);
+    color: var(--textGreen-color);
+  }
+  #AllProducts{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    transition: .3s ease;
+
+    right: -105%;
+    background: aliceblue;
+
+}
+.allProductsPlacer{
+    width: 99%;
+    height: 100%;
+    margin: 0 auto;
+}
+.allminiProductTitle{
+    height: 8vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.allminiProductTitle .selectTableToview{
+    height: 100%;
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.selectTableToview p{
+    background: var(--sec-color);
+    color: aliceblue;
+    margin: 0 10px;
+    height: 35px;
+    font-size: .9rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    border-radius: 20px;
+}
+.selectTableToview h3{
+    font-size: 1.3rem;
+    color: var(--priDark-color);
+}
+.allProductsTable{
+    height: 78vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 100%;
+}
+.allProductsTable table{
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 40px;
+    height: 32vh;
+    overflow-y: auto;
+}
+.adminDashRecentOrdersWrap table tr{
+    height: 40px;
+    text-align: center;
+    width: 90%;
+}
+.allProductsTable table thead tr th{
+    color: var(--priDark-color);
+    font-family: Jost;
+    height: 10vh;
+}
+.allProductsTable table tbody tr
+{
+    /* border-bottom: 1px solid rgba(0, 0, 0, 0.209); */
+    cursor: pointer;
+    border-radius: 30px;
+ 
+}
+.allProductsTable table thead tr
+{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.209);
+    border-radius: 30px;
+ 
+}
+
+
+
+  .prodNameTb,
+  .prodPiceTb,
+  .orderDateTb,
+  .prodOfferTb
+  {
+width: 25%;
+margin: 0 auto;
+text-align: center;
+
+height: 10vh;
+
   }
