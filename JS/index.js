@@ -134,6 +134,7 @@ function toDashboard(){
     document.getElementById("adminMenuNavId").style.left="-101%"
     document.getElementById("allOrders").style.top="60%"
     document.getElementById("AllProducts").style.right="-105%"
+    document.getElementById("UploadProduct").style.right="-105%"
     document.querySelector(".adminDashboardBottom").style.height="40%"
     document.querySelector(".adminDashRecentOrdersWrap").style.height="32vh"
     document.getElementById("adminDashboard").style.right="0%"
@@ -147,7 +148,10 @@ function toDashboard(){
     document.getElementById("adminMenuNavId").style.left="-101%"
     document.getElementById("actDash").style.top="-100%"
     document.getElementById("allOrders").style.top="0%"
+    document.getElementById("adminDashboard").style.right="0%"
     document.getElementById("AllProducts").style.right="-105%"
+    document.getElementById("UploadProduct").style.right="-105%"
+
     document.querySelector(".adminDashboardBottom").style.height="100%"
     document.querySelector(".adminDashRecentOrdersWrap").style.height="92vh"
 
@@ -157,7 +161,15 @@ function toDashboard(){
 
 
  function toProducts(){
+    document.getElementById("UploadProduct").style.right="-105%"
     document.getElementById("adminMenuNavId").style.left="-101%"
     document.getElementById("adminDashboard").style.right="-105%"
     document.getElementById("AllProducts").style.right="0%"
+ }
+
+ function toUploadProduct(){
+    document.getElementById("adminMenuNavId").style.left="-101%"
+    document.getElementById("adminDashboard").style.right="-105%"
+    document.getElementById("AllProducts").style.right="-105%"
+    document.getElementById("UploadProduct").style.right="0%"
  }
