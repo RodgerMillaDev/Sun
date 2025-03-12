@@ -357,6 +357,15 @@
                                         <option value="">Product Category</option>
                                         <option value="Kitchen">Kitchen</option>
                                         <option value="Bathroom">Bathroom</option>
+                                        <option value="Appliances">Appliances</option>
+                                        <option value="Laundry">Laundry</option>
+                                        <option value="Bedroom">Bedroom</option>
+                                        <option value="Carpets & Rug">Carpets & Rugs</option>
+                                        <option value="Organizers & Storage">Organizers & Storage</option>
+                                        <option value="Shoe Rack">Shoe Rack</option>
+                                        <option value="Kids Store">Kids Store</option>
+                                        <option value="Office Decor">Office Decor</option>
+                                        <option value="Gifts">Gifts</option>
                                     </select>
                                 </div>
                                 <div class="uploadInputTextArea">
@@ -423,7 +432,11 @@ function handleFileSelect(event) {
             img.src = e.target.result;
         }
         reader.readAsDataURL(file);
+    }else if(!file){
+        var img =document.getElementById("selectedImage")
+        img.src = "";
     }
+
 }
 
 

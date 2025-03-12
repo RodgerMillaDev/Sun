@@ -19,11 +19,17 @@ async function uploadProduct(e){
 
 
     if(ProductImg && ProductName && ProductPrice && ProductCategory && ProductDescription){
-       document.getElementById("uploadProductBtn")
+       document.getElementById("uploadProductBtn").style.display="none"
+       document.getElementById("uploadProLoader").style.display="block"
 
         try {
             const formData = new FormData();
             formData.append("image",ProductImg)
+            formData.append("prodPrice",ProductPrice)
+            formData.append("prodName",ProductName)
+            formData.append("prodCat",ProductCategory)
+            formData.append("prodDesc",ProductDescription)
+            console.log(ProductPrice)
             var backUrl='http://localhost:3333/upload';
             const response = await fetch(backUrl,{
                 method:'POST',
@@ -32,9 +38,24 @@ async function uploadProduct(e){
             })
             const result = await response.json()
             console.log(result)
+            if(result==="Upload Done"){
+                Swal.fire("Product Uploaded")
+                document.getElementById("ProImageFileInput").value=null;
+                document.getElementById("UploadProductName").value="";
+                document.getElementById("UploadProductPrice").value="";
+                document.getElementById("UploadProductCategory").value="";
+                document.getElementById("UploadProductDescription").value="";
+                document.getElementById("selectedImage").src="";
+                document.getElementById("uploadProductBtn").style.display="block"
+                document.getElementById("uploadProLoader").style.display="none"
+            }else{
+
+            }
             
 
         } catch (error) {
+               document.getElementById("uploadProductBtn").style.display="block"
+               document.getElementById("uploadProLoader").style.display="none"
             console.log(error)
             
         }
