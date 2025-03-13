@@ -80,7 +80,8 @@
                         firebase.firestore().collection("Users").doc(user.uid).set({
                             name:fn,
                             em:em,
-                            uid:user.uid
+                            uid:user.uid,
+                            cartItems:[]
                         }).then(()=>{
                             const Toast = Swal.mixin({
                               toast: true,

@@ -1,12 +1,17 @@
 firebase.auth().onAuthStateChanged((user)=>{
-    var uid=user.uid;
-    console.log(uid)
-    if(uid==="VBiIUAdnhVTTB2ihVTBmKrXkK6f1"){
-        document.getElementById("preloaderWrap").style.display="none"
-
+    if(user){
+        var uid=user.uid;
+        console.log(uid)
+        if(uid==="VBiIUAdnhVTTB2ihVTBmKrXkK6f1"){
+            document.getElementById("preloaderWrap").style.display="none"
+    
+        }else{
+            window.location.href="index.html"
+        }
     }else{
-        window.location.href="index.html"
+        window.location.href="indexedDB.html"
     }
+  
 })
 
 async function uploadProduct(e){
@@ -66,3 +71,39 @@ async function uploadProduct(e){
         Swal.fire("Fill in all the data")
     }
 }
+
+function toProducts(){
+    pullAllProducts()
+    document.getElementById("UploadProduct").style.right="-105%"
+    document.getElementById("adminMenuNavId").style.left="-101%"
+    document.getElementById("adminDashboard").style.right="-105%"
+    document.getElementById("AllProducts").style.right="0%"
+ }
+
+
+function pullAllProducts(){
+    firebase.firestore().collection("Products").get().then((Products)=>{
+      
+        var productListDiv=''
+        Products.forEach(product => {
+            
+            var pname=product.data().productName;
+            var pprice=product.data().productPrice;
+            var pdiscount=product.data().productDiscount;
+            productListDiv +=`
+             <tr>
+                <td class="prodNameTb"><p>${pname}</p> </td>
+                <td class="prodPiceTb"><p>${pprice}</p></td>
+                <td class="prodOfferTb"> <p>${pdiscount}% 0FF</p></td>
+            </tr>
+        
+
+            `
+            
+        });
+
+        document.getElementById("allProductsTable").innerHTML=productListDiv;
+
+    })
+}
+

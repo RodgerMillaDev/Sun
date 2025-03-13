@@ -4,6 +4,8 @@ function toHome(){
     document.getElementById("fidiShopOffer").style.top='0vh'
     document.getElementById("catnSearchCont").style.top='35vh'
     document.getElementById("shopProducts").style.top='45vh'
+    document.getElementById("shopProducts").style.height='43vh'
+
     document.getElementById("drawerTitle").innerText='Home'
     document.getElementById("actDrawerCart").style.right='-101%'
     document.getElementById("actDrawerProfile").style.right='-101%'
@@ -116,6 +118,7 @@ function toSignUp(){
     document.getElementById("authLog").style.top="-100%"
     document.getElementById("authSign").style.top="0"
     document.getElementById("authRightH3").innerText="Everything You Need, All in One Place!"
+    document.getElementById("authRightp").innerText="Welcome to Sun Up Collections"
 
 }
 
@@ -124,6 +127,7 @@ function toLogIn(){
     document.getElementById("authLog").style.top="0%"
     document.getElementById("authSign").style.top="100%" 
     document.getElementById("authRightH3").innerText="Can’t get enough? Shop some more!"
+    document.getElementById("authRightp").innerText="Fill in your credentials to access your account"
 
 }
 
@@ -160,12 +164,6 @@ function toDashboard(){
  }
 
 
- function toProducts(){
-    document.getElementById("UploadProduct").style.right="-105%"
-    document.getElementById("adminMenuNavId").style.left="-101%"
-    document.getElementById("adminDashboard").style.right="-105%"
-    document.getElementById("AllProducts").style.right="0%"
- }
 
  function toUploadProduct(){
     document.getElementById("adminMenuNavId").style.left="-101%"

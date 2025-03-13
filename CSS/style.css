@@ -444,6 +444,9 @@ h1,h2,h3,h4,h5,h6{
     color: aliceblue;
     height: 60px;
 }
+.offerBtnandCont p{
+    color: aliceblue;
+}
 .offerBtnandCont button{
     border: none;
     border-radius: 40px;
@@ -451,6 +454,7 @@ h1,h2,h3,h4,h5,h6{
     font-size: 15px;
     font-family: Jost;
     padding: 8px 40px;
+    background: yellow;
 }
 .catnSearchCont{
     width: 100%;
@@ -595,7 +599,7 @@ h1,h2,h3,h4,h5,h6{
     overflow: hidden;
 }
 .spTop{
-    height: 70%;
+    height: 65%;
     position: relative;
     width: 100%;
     overflow: hidden;
@@ -611,8 +615,8 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .spBottom{
-    height: 30%;
-    padding: 1px 0;
+    height: 35%;
+    padding: 10px 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -627,12 +631,12 @@ h1,h2,h3,h4,h5,h6{
 }
 .spBottom p{
     font-size: 1rem;
+    margin: 4px 0;
 }
 .spBottom .buyshopBtn{
     width: 75%;
     cursor: pointer;
     height: 40px;
-    margin: 3px;
     border-radius: 30px;
     border: none;
     background: var(--priDark-color);
@@ -646,23 +650,11 @@ h1,h2,h3,h4,h5,h6{
     transform: scale(.9);
 }
 
-/* .buyshopBtn:hover ~ .tocartShopBtn{
-    transform: scale(.95);
-}
-.tocartShopBtn:hover{
-    width: 70px;
-    border-radius: 30px;
 
-}
-.tocartShopBtn:hover ~ .buyshopBtn{
-    width: 60%;
-
-
-} */
 
 .buyandCart{
     width: 80%;
-    height: 50px;
+    height: 40px;
     justify-content: space-between;
     align-items: center;
     flex-direction: row-reverse;
@@ -1043,9 +1035,14 @@ cursor: pointer;
 }
 .actDrawerProdLeft{
     width: 50%;
+    position: relative;
     height: 100%;
-    background: green;
     overflow: hidden;
+}
+.actDrawerProdLeft p{
+    position: absolute;
+    z-index: -1;
+    transform: scale(0.001);
 }
 .actDrawerProdLeft img{
   width: 100%;
@@ -1132,6 +1129,7 @@ cursor: pointer;
     border-radius: 5px;
 }
 .minusProduct p{
+    color: #003335;
     font-size: 20px;
     border-radius: 10px;
 }
@@ -1153,6 +1151,9 @@ cursor: pointer;
     align-items: center;
     color: aliceblue;
     border-radius: 5px;
+}
+.addProduct p{
+    color: aliceblue;
 }
 .prodtBuyBtn{
     height: 70px;
