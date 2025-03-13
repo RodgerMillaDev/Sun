@@ -48,16 +48,6 @@ function toOffers(){
 
 }
 
-function toCart(){
-
-    document.getElementById("drawerTitle").innerText='My Cart'
-    document.getElementById("actDrawerProfile").style.right='-101%'
-    document.getElementById("actDrawerProduct").style.right='-101%'
-    document.getElementById("actDrawerShop").style.right='-101%'
-    document.getElementById("checkoutPage").style.right='-101%'
-    document.getElementById("actDrawerSuccessCheck").style.right='-101%'
-    document.getElementById("actDrawerCart").style.right='0%'
-}
 
 function toProfile(){
 
