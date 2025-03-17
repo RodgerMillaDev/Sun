@@ -66,7 +66,7 @@ function renderProducts(){
                                 <p>Ksh. ${pprice}</p>
                               <div class="buyandCart">
                                 <button class="buyshopBtn" onclick="toBuy('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}')">Buy</button>
-                                <button class="tocartShopBtn" onclick="addToCartAllPro('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}')"><i class="icofont-cart-alt"></i></button>
+                                <button class="tocartShopBtn" onclick="addtoCartAllPro('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}')"><i class="icofont-cart-alt"></i></button>
                               </div>
                             </div>
                         </div>
@@ -155,7 +155,76 @@ function addtoCartViewPro(){
                               });
                               Toast.fire({
                                 icon: "success",
-                                title: "Sign in to proceed"
+                                title: "Added to cart"
+                              });
+                        })
+
+                    }else{
+                        Swal.fire("Item already in cart")
+                    }
+
+                })
+
+
+
+
+                
+            }else{
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                      toast.onmouseenter = Swal.stopTimer;
+                      toast.onmouseleave = Swal.resumeTimer;
+                    }
+                  });
+                  Toast.fire({
+                    icon: "warning",
+                    title: "Sign in to proceed"
+                  });
+            }
+            
+
+    }
+}
+
+function addtoCartAllPro(pid){
+    if(!pid){
+      return;
+    }else{
+            if(isLoggedIn){
+                dbFirestore.collection("Users").doc(uid).get().then((userDoc)=>{
+                    var userCartItems=userDoc.data().cartItems;
+                    // check if prodcut already exists kwa cart
+
+                    var existingProdIndex=userCartItems.findIndex(item => item.productDocId === pid)
+                
+
+                    if(existingProdIndex === -1){
+                        var newCartitem = JSON.parse(localStorage.getItem("toBuyJSON"))
+                        userCartItems.push(newCartitem)
+
+                        dbFirestore.collection("Users").doc(uid).update({
+                            cartItems:userCartItems
+                        }).then(()=>{
+                            updateCartCount()
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: "top-end",
+                                showConfirmButton: false,
+                                timer: 3000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                  toast.onmouseenter = Swal.stopTimer;
+                                  toast.onmouseleave = Swal.resumeTimer;
+                                }
+                              });
+                              Toast.fire({
+                                icon: "success",
+                                title: "Added to cart"
                               });
                         })
 
@@ -195,18 +264,14 @@ function addtoCartViewPro(){
 function toCart(){
     if(isLoggedIn){
         var cartItemDiv="";
-
-
-    document.getElementById("drawerTitle").innerText='My Cart'
-    document.getElementById("actDrawerProfile").style.right='-101%'
-    document.getElementById("actDrawerProduct").style.right='-101%'
-    document.getElementById("actDrawerShop").style.right='-101%'
-    document.getElementById("checkoutPage").style.right='-101%'
-    document.getElementById("actDrawerSuccessCheck").style.right='-101%'
-    document.getElementById("actDrawerCart").style.right='0%'
-
+        document.getElementById("drawerTitle").innerText='My Cart'
+        document.getElementById("actDrawerProfile").style.right='-101%'
+        document.getElementById("actDrawerProduct").style.right='-101%'
+        document.getElementById("actDrawerShop").style.right='-101%'
+        document.getElementById("checkoutPage").style.right='-101%'
+        document.getElementById("actDrawerSuccessCheck").style.right='-101%'
+        document.getElementById("actDrawerCart").style.right='0%'
       var availableCartItem=allCartItems.filter(item => item !=='')
-      console.log(availableCartItem)
       if(availableCartItem.length!=0){
 
         availableCartItem.forEach((cartItem)=>{
@@ -246,8 +311,8 @@ function toCart(){
                                         <div class="quantCart">
                                             <div class="addItemCart" onclick="addProductQuantityCart('${productDocId}')">
                                                <p>+</p>
-                                            </div>
-                                            <p>${productQuantity}</p>
+                                            </div>  
+                                            <p  id="cartitemnumber${productDocId}">${productQuantity}</p>
                                             <div class="minusItemCart" onclick="minusProductQuantityCart('${productDocId}')">
                                                 <p>-</p>
                                             </div>
@@ -336,4 +401,18 @@ function removeCartItem(productID){
           console.error("Error getting document:", error);
       });
       
+}
+
+
+
+
+
+function addProductQuantityCart(productDocId){
+    var itemEl=document.getElementById("cartitemnumber"+productDocId)
+    var itemNumber=parseInt(itemEl.innerText);
+    console.log(itemNumber)
+
+   if(itemNumber < 50){
+        itemEl.innerText=itemNumber+1
+   }
 }

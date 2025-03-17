@@ -821,6 +821,10 @@ h1,h2,h3,h4,h5,h6{
     background: var(--sec-color);
     color: aliceblue;
 }
+.addItemCart p,
+.minusItemCart p{
+    color: aliceblue;
+}
 .promoTotalCartWrap{
     width: 60%;
     margin: 0 auto;
@@ -841,6 +845,9 @@ h1,h2,h3,h4,h5,h6{
     overflow: hidden;
 
 
+}
+.promoWrap p{
+    color: aliceblue;
 }
 .promoWrap input{
   width: 80%;
@@ -876,6 +883,9 @@ h1,h2,h3,h4,h5,h6{
     height: 30px;
     color: aliceblue;
     width: 100%;
+}
+.cartCashSum p{
+    color:aliceblue;
 }
 .promoTotalCartWrap button{
 width: 100%;
