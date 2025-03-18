@@ -563,6 +563,7 @@ h1,h2,h3,h4,h5,h6{
     padding: 0 20px;
     margin-right: 20px;
     border-radius: 30px;
+    transition: .3s ease;
     background: var(--sec-color);
     background: rgb(25, 25, 25);
     color: var(--textGreen-color);
@@ -2355,4 +2356,23 @@ height: 10vh;
     position: absolute;
     z-index: -2;
     transform: scale(.0001);
+}
+.noSuchProduct{
+    width: 100% !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+
+    height: 100%;
+}
+.noSuchProduct p{
+    width: 20%;
+    text-align: center;
+}
+.noSuchProduct i{
+    color: var(--priDark-color);
+    margin: 20px;
+    font-size: 30px;
 }

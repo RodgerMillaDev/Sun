@@ -484,12 +484,27 @@ function minusProductQuantityCart(productDocId){
 
 function toCategory(e){
     var catName=e.querySelector("p").innerText;
+    var catNameLower=catName.toLowerCase();
+    document.querySelectorAll(".catDiv").forEach(div => div.classList.remove("catDivActive"));
+    e.classList.add("catDivActive")
 
     if(catName=="All"){
         renderProducts()
     }else{
         dbFirestore.collection("Products").where('productCat','>=', catName ).where('productCat', '<=', catName + '~').get().then((shopItems)=>{
             var productCard='';
+            if(shopItems.empty){
+                productCard =`
+                <div class="noSuchProduct">
+                    <i class="fa-brands fa-dropbox"></i>
+                    <p>Sorry  we don't have ${catName.toLowerCase()} items yet</p>
+                </div>
+                `
+
+
+            }else{
+
+            
             shopItems.forEach(shopitem => {
              var pname=shopitem.data().productName;
              var pprice=shopitem.data().productPrice;
@@ -519,10 +534,74 @@ function toCategory(e){
      
              `
         })
+    }
+
         document.getElementById("shopProductsWrapper").innerHTML=productCard
 
         })
 
     }
 
+}
+
+function pullSearched(e){
+    var searchInput=(e.value).toLowerCase();
+    if(searchInput){
+        console.log(searchInput)
+
+    
+    dbFirestore.collection("Products").where('productNameLower','>=', searchInput ).where('productNameLower', '<=', searchInput + '~').get().then((shopItems)=>{
+        var productCard='';
+        if(shopItems.empty){
+            console.log("jakuna")
+            productCard =`
+            <div class="noSuchProduct">
+                <i class="fa-brands fa-dropbox"></i>
+                <p>Oops, we don't have what you are looking for.</p>
+            </div>
+                 
+            `
+
+        }else{
+            shopItems.forEach(shopitem => {
+                var pname=shopitem.data().productName;
+                console.log(shopitem.data().productNameLower)
+                var pprice=shopitem.data().productPrice;
+                var pid=shopitem.data().productDocId;
+                var pimg=shopitem.data().productUrl;
+                var pcat=shopitem.data().productCat;
+                var pdesc=shopitem.data().productDesc;
+                var pdisc=shopitem.data().productDiscount;
+        
+        
+                productCard+=
+                `
+                <div class="shopProduct">
+                                    <div class="spTop">
+                                        <img width="10px" src=${pimg} alt="">
+                                    </div>
+                                    <div class="spBottom">
+                                        <h4>${pname}</h4>
+                                        <p>Ksh. ${pprice}</p>
+                                      <div class="buyandCart">
+                                        <button class="buyshopBtn" onclick="toBuy('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}')">Buy</button>
+                                        <button class="tocartShopBtn" onclick="addtoCartAllPro('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}')"><i class="icofont-cart-alt"></i></button>
+                                      </div>
+                                    </div>
+                                </div>
+                
+        
+                `
+           })
+
+        }
+       
+    document.getElementById("shopProductsWrapper").innerHTML=productCard
+})
+
+
+}else if(searchInput =="" || searchInput == " " ){
+    renderProducts()
+
+}
 }

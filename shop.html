@@ -149,7 +149,7 @@
                 
                 <div class="catnSearchCont" id="catnSearchCont">
                     <div class="shopSearch">
-                        <input type="text" placeholder="Search">
+                        <input type="text" placeholder="Search" onkeyup="pullSearched(this)">
                         <div class="shpSearchBtn">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </div>
@@ -160,7 +160,7 @@
 
                     <div class="categoriesShop">
                         <div class="catShopWrapper">
-                            <div class="catDiv" onclick="toCategory(this)">
+                            <div class="catDiv catDivActive" onclick="toCategory(this)" >
                                 <i class="icofont-cubes"></i>
                                 <p >All</p>
                             </div>
@@ -168,7 +168,7 @@
                                 <i class="icofont-culinary"></i>
                                 <p>Kitchen</p>
                             </div>
-                            <div class="catDiv catDivActive" onclick="toCategory(this)">
+                            <div class="catDiv" onclick="toCategory(this)">
                                 <i class="icofont-duotone icofont-plugins"></i>
                                 <p>Appliances</p>
                             </div>
