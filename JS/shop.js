@@ -191,11 +191,35 @@ function addtoCartViewPro(){
     }
 }
 
-function addtoCartAllPro(pid){
+function addtoCartAllPro(pid,pprice,pdesc,pimg,pname,pcat,pdisc){
+
     if(!pid){
       return;
     }else{
+
+
+
             if(isLoggedIn){
+
+
+
+                var toBuyArray={
+                    productDocId:pid,
+                    productCat:pcat,
+                    productName:pname,
+                    productPrice:pprice,
+                    productUrl:pimg,
+                    productDesc:pdesc,
+                    productQuantity:"1",
+                    productDiscount:pdisc,
+                }
+                localStorage.setItem("toBuyJSON",JSON.stringify(toBuyArray))
+
+
+
+
+
+
                 dbFirestore.collection("Users").doc(uid).get().then((userDoc)=>{
                     var userCartItems=userDoc.data().cartItems;
                     // check if prodcut already exists kwa cart
@@ -210,6 +234,7 @@ function addtoCartAllPro(pid){
                         dbFirestore.collection("Users").doc(uid).update({
                             cartItems:userCartItems
                         }).then(()=>{
+                            console.log(pid)
                             updateCartCount()
                             const Toast = Swal.mixin({
                                 toast: true,
@@ -285,7 +310,8 @@ function toCart(){
             var productDesc=cartItem.productDesc
             var productQuantity=cartItem.productQuantity
             var productDiscount=cartItem.productDiscount
-            
+            var productTotalPrice=productPrice*productQuantity
+
     
     
             cartItemDiv+=`
@@ -294,13 +320,13 @@ function toCart(){
                             <div class="cartItem" id="cartItem${productDocId}">
                                 <div class="cartItemWrap">
                                     <div class="cartImgNDetail">
+                                         <p class="cartProdOrgPrice" id="cartProdOrgPrice${productDocId}">${productPrice}</p>
+                                    
                                         <img width="100px" src="${productUrl}" alt="">
                                         <div class="cartItemDet">
                                             <h4>${productName}</h4>
                                             <p>${productCat}</p>
-                                            <h4>Ksh. ${productPrice}</h4>
-        
-        
+                                            <h4>Ksh. <span id="cartproductTotalPrice${productDocId}">${productTotalPrice}</span> </h4>
                                         </div>
                                     </div>
                                   
@@ -309,13 +335,15 @@ function toCart(){
                                               <i class="fa-solid fa-trash"></i>
                                         </div>
                                         <div class="quantCart">
-                                            <div class="addItemCart" onclick="addProductQuantityCart('${productDocId}')">
-                                               <p>+</p>
-                                            </div>  
-                                            <p  id="cartitemnumber${productDocId}">${productQuantity}</p>
-                                            <div class="minusItemCart" onclick="minusProductQuantityCart('${productDocId}')">
+                                                   <div class="minusItemCart" onclick="minusProductQuantityCart('${productDocId}')">
                                                 <p>-</p>
                                             </div>
+                                            <p  id="cartitemnumber${productDocId}">${productQuantity}</p>
+                                    
+
+                                              <div class="addItemCart" onclick="addProductQuantityCart('${productDocId}')">
+                                               <p>+</p>
+                                            </div> 
                                         </div>
                                     </div>
                                 </div>
@@ -328,7 +356,7 @@ function toCart(){
       }else{
         console.log('no cart item')
         
-        cartItemDiv+=`
+        cartItemDiv=`
             <div id="emptyCart">
                             <img src="./Media/empty cart.png" alt="">
                             <p>Your cart is empty</p>
@@ -376,15 +404,32 @@ function removeCartItem(productID){
                 document.getElementById("cartItem"+productID).remove(); 
 
                   cartArray.splice(indexToDelete, 1); // Remove the item at the found index
-                  // Update the document in Firestore with the modified array
-                    dbFirestore.collection("Users").doc(uid).update({
+                  console.log(cartArray)
+                  dbFirestore.collection("Users").doc(uid).update({
                         cartItems: cartArray
                     }).then(() => {
                 
                         console.log("Item deleted successfully.");
                         // reupdateGrandTotal()
                         updateCartCount(uid)
-                        toCart()
+                        if(cartArray==''){
+
+                           
+                              
+                             var  cartItemDiv=`
+                                <div id="emptyCart">
+                                                <img src="./Media/empty cart.png" alt="">
+                                                <p>Your cart is empty</p>
+                                            </div>
+
+
+                            `
+                            document.getElementById("cartItemsWrap").innerHTML=cartItemDiv;
+
+                            
+                        }else{
+
+                        }
             
                     }).catch((error) => {
                         console.error("Error updating document:", error);
@@ -409,10 +454,75 @@ function removeCartItem(productID){
 
 function addProductQuantityCart(productDocId){
     var itemEl=document.getElementById("cartitemnumber"+productDocId)
+    var singleitemTotalPrice=document.getElementById("cartproductTotalPrice"+productDocId)
+    var itemOrgPrice=parseInt(document.getElementById("cartProdOrgPrice"+productDocId).innerText)
     var itemNumber=parseInt(itemEl.innerText);
-    console.log(itemNumber)
 
    if(itemNumber < 50){
-        itemEl.innerText=itemNumber+1
+        itemNumber++;
+        itemEl.innerText=itemNumber
+        singleitemTotalPrice.innerText= itemOrgPrice*itemNumber;
+        console.log(singleitemTotalPrice.innerText)
+
    }
+}
+function minusProductQuantityCart(productDocId){
+    var itemEl=document.getElementById("cartitemnumber"+productDocId)
+    var singleitemTotalPrice=document.getElementById("cartproductTotalPrice"+productDocId)
+    var itemOrgPrice=parseInt(document.getElementById("cartProdOrgPrice"+productDocId).innerText)
+    var itemNumber=parseInt(itemEl.innerText);
+
+   if(itemNumber > 1){
+        itemNumber--;
+
+        itemEl.innerText=itemNumber;
+        singleitemTotalPrice.innerText= itemOrgPrice*itemNumber;
+
+   }
+}
+
+
+function toCategory(e){
+    var catName=e.querySelector("p").innerText;
+
+    if(catName=="All"){
+        renderProducts()
+    }else{
+        dbFirestore.collection("Products").where('productCat','>=', catName ).where('productCat', '<=', catName + '~').get().then((shopItems)=>{
+            var productCard='';
+            shopItems.forEach(shopitem => {
+             var pname=shopitem.data().productName;
+             var pprice=shopitem.data().productPrice;
+             var pid=shopitem.data().productDocId;
+             var pimg=shopitem.data().productUrl;
+             var pcat=shopitem.data().productCat;
+             var pdesc=shopitem.data().productDesc;
+             var pdisc=shopitem.data().productDiscount;
+     
+     
+             productCard+=
+             `
+             <div class="shopProduct">
+                                 <div class="spTop">
+                                     <img width="10px" src=${pimg} alt="">
+                                 </div>
+                                 <div class="spBottom">
+                                     <h4>${pname}</h4>
+                                     <p>Ksh. ${pprice}</p>
+                                   <div class="buyandCart">
+                                     <button class="buyshopBtn" onclick="toBuy('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}')">Buy</button>
+                                     <button class="tocartShopBtn" onclick="addtoCartAllPro('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}')"><i class="icofont-cart-alt"></i></button>
+                                   </div>
+                                 </div>
+                             </div>
+             
+     
+             `
+        })
+        document.getElementById("shopProductsWrapper").innerHTML=productCard
+
+        })
+
+    }
+
 }

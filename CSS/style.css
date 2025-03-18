@@ -606,7 +606,7 @@ h1,h2,h3,h4,h5,h6{
     width: 100%;
     overflow-y: auto;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 20px; /* Spacing between items */
     height: 100%;
 
@@ -2350,4 +2350,9 @@ height: 10vh;
    width: 150px;
    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.165));
    
+}
+.cartProdOrgPrice{
+    position: absolute;
+    z-index: -2;
+    transform: scale(.0001);
 }
