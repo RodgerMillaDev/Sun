@@ -532,13 +532,14 @@ function updateGrandTotal() {
     });
 
     // Apply promo discount if available
-    var discountedTotal = cipAll;
+    var discountedTotal = Math.ceil(cipAll);
     if (appliedPromoPerc > 0) {
-        discountedTotal = cipAll - (cipAll * (appliedPromoPerc / 100));
+        discountedTotal = Math.ceil(cipAll - (cipAll * (appliedPromoPerc / 100)));
     }
 
     // Update localStorage and UI
     localStorage.setItem("grandTotal", discountedTotal);
+    localStorage.setItem("PromoCode", appliedPromoPerc);
     document.getElementById("totalCartCost").innerText = discountedTotal.toLocaleString();
     document.getElementById("cartPromoPercDiscount").innerText = appliedPromoPerc;
     document.getElementById("grandTotalCartItems").innerText = discountedTotal.toLocaleString();
@@ -698,6 +699,7 @@ function toCheckout() {
         }).then(()=>{
             delCountyDet()
             localStorage.setItem("carttocheckPrice",cipAll)
+            document.getElementById("checkRTopDetDisocunt").innerText=localStorage.getItem("PromoCode")
             document.getElementById("checkRTopDetproductCost").innerText=cipAll.toLocaleString()
             document.getElementById("fidiShopOffer").style.top='0vh'
             document.getElementById("catnSearchCont").style.top='35vh'
@@ -716,22 +718,3 @@ function toCheckout() {
     
 }
 
-
-function applyPromo(){
-    var prm=document.getElementById("shopPromo").value;
-    dbFirestore.collection("PromoCode").doc(prm).get().then((doc)=>{
-        if(doc.exists){
-            var promoPerc=doc.data().promoPerc;
-            applyPromo=promoPerc;
-            updateGrandTotal()
-
-
-        }else{
-            appliedPromoPerc = 0.0; // Reset promo if invalid
-            updateGrandTotal(); // Ensure the price updates
-            Swal.fire("Invalid Promo Code", "Please enter a valid code.", "error");
-
-        }
-    })
-    
-}
