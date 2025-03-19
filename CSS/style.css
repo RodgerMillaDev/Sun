@@ -1226,7 +1226,7 @@ cursor: pointer;
    background: aliceblue;
    width: 100%;
    display: flex;
-   right: -101%;
+   right: -105%;
    justify-content: center;
    align-items: center;
    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
@@ -1280,7 +1280,7 @@ cursor: pointer;
 .delDet{
     width: 100%;
     margin-top: 10px;
-    height: 50px;
+    height: 40px;
 }
 .delivDetWrap h4{
     margin: 10px 0;
@@ -1386,7 +1386,7 @@ cursor: pointer;
 .checkRBottom{
     height: 50%;
     width: 100%;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -2460,4 +2460,42 @@ height: 10vh;
   font-family: Jost;
   height: 50px;
   border-radius: 50px;
+}
+
+.delCounty{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    flex-direction: column;
+    height: 70px;
+}
+.delCountyBtns{
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.delCountyBtns button{
+  height: 100%;
+  width: 49%;
+  border: none;
+  border-radius: 40px;
+  font-family: Jost;
+  background: var(--ter-color);
+  cursor: pointer;
+  color: aliceblue;
+ 
+}
+.delCountyBtnActive{
+    background: var(--priDark-color) !important;
+    color: var(--textGreen-color) !important;
+}
+
+#delCountyInputWrap{
+    display: none;
+}
+#delCountyTownWrap{
+    display: none;
 }

@@ -64,7 +64,7 @@
                         <div class="admIconLk">
                             <i class="icofont-money-bag"></i>
                         </div>
-                        <p>Financal Analysis</p>
+                        <p>Financial Analysis</p>
                     </div>
                     <div class="adminLink" onclick="toDestination()">
                         <div class="admIconLk" >
@@ -115,8 +115,8 @@
                                         <p>sunupcollections@gmail.com</p>
                                         <div class="miniSep"></div>
                                         <div class="admDetBtns">
-                                            <button>Email</button>
-                                            <button>Log Out</button>
+                                            <button onclick="writeEmail()">Email</button>
+                                            <button onclick="signOut()">Log Out</button>
                                         </div>
     
                                     </div>
@@ -139,27 +139,28 @@
                                                 <div class="opIcon">
                                                     <i class="icofont-sale-discount"></i>
                                                 </div>
-                                                <div class="opInfo">
+                                                <div class="opInfo" onclick="createOffer()">
                                                     <p>Discount</p>
                                                     <p>Current discount 0%</p>
                                                 </div>
                                             </div>
-                                            <div class="operation">
-                                                <div class="opIcon">
-                                                    <i class="icofont-tree-alt"></i>
-                                                </div>
-                                                <div class="opInfo">
-                                                    <p>Template</p>
-                                                    <p>Post email template</p>
-                                                </div>
-                                            </div>
+                                         
                                             <div class="operation">
                                                 <div class="opIcon">
                                                     <i class="icofont-star-shape"></i>
                                                 </div>
                                                 <div class="opInfo">
-                                                    <p>Edit Reviews</p>
-                                                    <p>Edit customer review</p>
+                                                    <p>Templates</p>
+                                                    <p>Create email template</p>
+                                                </div>
+                                            </div>
+                                            <div class="operation" onclick="createPromoCode()">
+                                                <div class="opIcon">
+                                                    <i class="icofont-tree-alt"></i>
+                                                </div>
+                                                <div class="opInfo">
+                                                    <p>Promo Code</p>
+                                                    <p>Create promo code</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -369,7 +370,7 @@
                                 
                             </div>
                             <div class="uploadLocInput">
-                                <select name="county" id="Route">
+                                <select name="route" id="Route">
                                     <option value="">Select Route</option>
                                     <option value="Thika Road">Thika Road</option>
                                     <option value="Jogoo Road">Jogoo Road</option>

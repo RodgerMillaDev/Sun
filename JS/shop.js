@@ -38,7 +38,13 @@ function setupCartListener() {
         if (doc.exists) {
             allCartItems = doc.data().cartItems || [];
             cartItemsNumber = allCartItems.filter(item => item !== "").length;
+            var username = doc.data().name ;
+            var strngname = username.split(" ") ;
+            var clname = strngname[0] ;
+
             document.getElementById("lapiCartNumber").innerText = cartItemsNumber;
+            document.getElementById("LapiNavDp").innerText = clname;
+
         } else {
             console.log("No cart data found for this user.");
         }
@@ -513,19 +519,31 @@ function minusProductQuantityCart(productDocId) {
 }
 
 
-var cipAll
-function updateGrandTotal(){
-    cipAll=0
-    var cartItemPrices=document.querySelectorAll(".cartproductTotalPriceSingle");
-    cartItemPrices.forEach(cartItemPrice=>{
-        var cip = parseInt(cartItemPrice.innerText) || 0;
-        cipAll += cip
-    })
-    localStorage.setItem("grandTotal",cipAll)
-    document.getElementById("totalCartCost").innerText=(cipAll).toLocaleString()
-    document.getElementById("grandTotalCartItems").innerText=(cipAll).toLocaleString()
+var cipAll = 0;
+var appliedPromoPerc = 0.0; // Store promo percentage globally
 
+function updateGrandTotal() {
+    cipAll = 0;
+    var cartItemPrices = document.querySelectorAll(".cartproductTotalPriceSingle");
+
+    cartItemPrices.forEach(cartItemPrice => {
+        var cip = parseInt(cartItemPrice.innerText) || 0;
+        cipAll += cip;
+    });
+
+    // Apply promo discount if available
+    var discountedTotal = cipAll;
+    if (appliedPromoPerc > 0) {
+        discountedTotal = cipAll - (cipAll * (appliedPromoPerc / 100));
+    }
+
+    // Update localStorage and UI
+    localStorage.setItem("grandTotal", discountedTotal);
+    document.getElementById("totalCartCost").innerText = discountedTotal.toLocaleString();
+    document.getElementById("cartPromoPercDiscount").innerText = appliedPromoPerc;
+    document.getElementById("grandTotalCartItems").innerText = discountedTotal.toLocaleString();
 }
+
 
 function toCategory(e){
     var catName=e.querySelector("p").innerText;
@@ -592,13 +610,10 @@ function toCategory(e){
 function pullSearched(e){
     var searchInput=(e.value).toLowerCase();
     if(searchInput){
-        console.log(searchInput)
-
     
     dbFirestore.collection("Products").where('productNameLower','>=', searchInput ).where('productNameLower', '<=', searchInput + '~').get().then((shopItems)=>{
         var productCard='';
         if(shopItems.empty){
-            console.log("jakuna")
             productCard =`
             <div class="noSuchProduct">
                 <i class="fa-brands fa-dropbox"></i>
@@ -681,6 +696,7 @@ function toCheckout() {
         firebase.firestore().collection("Users").doc(uid).update({
             cartItems:newCartItems,
         }).then(()=>{
+            delCountyDet()
             localStorage.setItem("carttocheckPrice",cipAll)
             document.getElementById("checkRTopDetproductCost").innerText=cipAll.toLocaleString()
             document.getElementById("fidiShopOffer").style.top='0vh'
@@ -701,3 +717,21 @@ function toCheckout() {
 }
 
 
+function applyPromo(){
+    var prm=document.getElementById("shopPromo").value;
+    dbFirestore.collection("PromoCode").doc(prm).get().then((doc)=>{
+        if(doc.exists){
+            var promoPerc=doc.data().promoPerc;
+            applyPromo=promoPerc;
+            updateGrandTotal()
+
+
+        }else{
+            appliedPromoPerc = 0.0; // Reset promo if invalid
+            updateGrandTotal(); // Ensure the price updates
+            Swal.fire("Invalid Promo Code", "Please enter a valid code.", "error");
+
+        }
+    })
+    
+}

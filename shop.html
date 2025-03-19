@@ -122,7 +122,7 @@
                          <h2>40%</h2>
                          <div class="offerBtnandCont">
                              <p>All bathroom products on offer</p>
-                             <button>Claim Now</button>
+                             <button>Shop Now</button>
                          </div>
                         </div>
                         </div>
@@ -138,7 +138,7 @@
                          <h2>10%</h2>
                          <div class="offerBtnandCont">
                              <p>All kitchen products on offer</p>
-                             <button>Claim Now</button>
+                             <button>Shop Now</button>
                          </div>
                         </div>
                         </div>
@@ -239,8 +239,8 @@
                     <div class="promoTotalCart">
                         <div class="promoTotalCartWrap">
                             <div class="promoWrap">
-                                <input type="number" placeholder="Promo Code">
-                                <div class="promoBtn">
+                                <input type="text"  id="shopPromo" placeholder="Promo Code">
+                                <div class="promoBtn" onclick="applyPromo()">
                                   <p>Apply</p> 
                                 </div>
                             </div>
@@ -393,8 +393,18 @@
                             <div class="delTruck">
                                 <img width="100px" src="./Media/van (2).png" alt="">
                             </div>
+
                             <div class="delivDetWrap">
-                                <h4>Delivery Address</h4>
+                                <!-- <h4>Delivery Address</h4> -->
+
+                                <div class="delCounty">
+                                    <p>Select County:</p>
+                                    <div class="delCountyBtns">
+                                        <button onclick="delCountyClicked(this)" class="delCountyBtn delCountyBtnActive">Nairobi</button>
+                                        <button onclick="delCountyClicked(this)"  class="delCountyBtn">Past Nairobi</button>
+
+                                    </div>
+                                </div>
                                 <div class="delDet">
                                     <input type="text" placeholder="Your Name" value="Rodger Milla">
                                     
@@ -403,28 +413,88 @@
                                     <input type="text" placeholder="Your Phone" value="0708004700">
                                     
                                  </div>
-                                <div class="delDet">
-                                    <select name="" id="">
+                                 <div class="delDet" id="delCountyInputWrap">
+                                    <select name="county" id="delCountyInput">
                                         <option value="">Select County</option>
-                             
-                                        <option value="Nairobi">Nairobi</option>
-                                  
-                                        <option value="Machakos">Machakos</option>
+                                        <option value="baringo">Baringo</option>
+                                        <option value="bomet">Bomet</option>
+                                        <option value="bungoma">Bungoma</option>
+                                        <option value="busia">Busia</option>
+                                        <option value="elgeyo-marakwet">Elgeyo Marakwet</option>
+                                        <option value="embu">Embu</option>
+                                        <option value="garissa">Garissa</option>
+                                        <option value="homa-bay">Homa Bay</option>
+                                        <option value="isiolo">Isiolo</option>
+                                        <option value="kajiado">Kajiado</option>
+                                        <option value="kakamega">Kakamega</option>
+                                        <option value="kericho">Kericho</option>
+                                        <option value="kiambu">Kiambu</option>
+                                        <option value="kilifi">Kilifi</option>
+                                        <option value="kirinyaga">Kirinyaga</option>
+                                        <option value="kisii">Kisii</option>
+                                        <option value="kisumu">Kisumu</option>
+                                        <option value="kitui">Kitui</option>
+                                        <option value="kwale">Kwale</option>
+                                        <option value="laikipia">Laikipia</option>
+                                        <option value="lamu">Lamu</option>
+                                        <option value="machakos">Machakos</option>
+                                        <option value="makueni">Makueni</option>
+                                        <option value="mandera">Mandera</option>
+                                        <option value="marsabit">Marsabit</option>
+                                        <option value="meru">Meru</option>
+                                        <option value="migori">Migori</option>
+                                        <option value="mombasa">Mombasa</option>
+                                        <option value="muranga">Murang'a</option>
+                                        <option value="nakuru">Nakuru</option>
+                                        <option value="nandi">Nandi</option>
+                                        <option value="narok">Narok</option>
+                                        <option value="nyamira">Nyamira</option>
+                                        <option value="nyandarua">Nyandarua</option>
+                                        <option value="nyeri">Nyeri</option>
+                                        <option value="samburu">Samburu</option>
+                                        <option value="siaya">Siaya</option>
+                                        <option value="taita-taveta">Taita Taveta</option>
+                                        <option value="tana-river">Tana River</option>
+                                        <option value="tharaka-nithi">Tharaka Nithi</option>
+                                        <option value="trans-nzoia">Trans Nzoia</option>
+                                        <option value="turkana">Turkana</option>
+                                        <option value="uasin-gishu">Uasin Gishu</option>
+                                        <option value="vihiga">Vihiga</option>
+                                        <option value="wajir">Wajir</option>
+                                        <option value="west-pokot">West Pokot</option>
+                                    </select>
+                                 </div>
+                                 <div class="delDet" id="delCountyTownWrap">
+                                      <input type="text" id="delCountyTownInput" placeholder="Town e.g Kitale Town">
+                                   
+                                </div>
+                                 
+                                
+                                <div class="delDet" id="delDetRoute">
+                                    <select name="route" id="Route" onchange="selectedRoute(this)">
+                                        <option value="">Select Route</option>
+                                        <option value="Thika Road">Thika Road</option>
+                                        <option value="Jogoo Road">Jogoo Road</option>
+                                        <option value="Outering Road">Outering Road</option>
+                                        <option value="Kangundo Road">Kangundo Road</option>
+                                        <option value="Mombasa Road">Mombasa Road</option>
+                                        <option value="Waiyaki Way">Waiyaki Way</option>
+                                        <option value="Lower Kabete">Lower Kabete </option>
+                                        <option value="Kiambu Road">Kiambu Road</option>
+                                        <option value="Limuru Road">Limuru Road</option>
+                                        <option value="Juja Road">Juja Road</option>
+                                        <option value="Langata Road">Langata Road</option>
+                                        <option value="Ngong Road">Ngong Road</option>
                                     </select>
                                 </div>
-                                <div class="delDet">
+                                <div class="delDet" id="delDetArea">
                                     <select name="" id="">
-                                        <option value="">Select Location</option>
-                                  
-                                        <option value="Mirema Drive">Mirema Drive</option>
-                                
-                                        <option value="Mirema Drive">Mirema Drive</option>
-                                
+                                        <option value="">Select Area</option>
                                         <option value="Mirema Drive">Mirema Drive</option>
                                     </select>
                                    
                                 </div>
-                                <div class="delDet">
+                                <div class="delDet" id="delDetBuilding">
                                    <input type="text" placeholder="Builiding e.g Jewel Plaza">
                                    
                                 </div>
@@ -447,7 +517,7 @@
                                          </div>
                                          <div class="amountPay">
                                             <p>Amount To Pay</p>
-                                            <p class="cardPrice">Ksh. <span id="cardPrice"></span></p>
+                                            <p class="cardPrice">Ksh. <span id="cardPrice">0</span></p>
                                          </div>
                                     
                                     </div>
@@ -512,6 +582,7 @@
 
 <script src="./JS/config.js"></script>
 <script src="./JS/index.js"></script>
+<script src="./JS/checkout.js"></script>
 <script src="./JS/shop.js"></script>
 
 <script>

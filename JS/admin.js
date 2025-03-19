@@ -29,14 +29,11 @@ function toUploadProduct(){
 
  
 function toDestination(){
-    console.log("aloo")
     document.getElementById("adminMenuNavId").style.left="-101%"
     document.getElementById("adminDashboard").style.right="-105%"
     document.getElementById("AllProducts").style.right="-105%"
     document.getElementById("UploadProduct").style.right="-105%"
     document.getElementById("UploadLocation").style.right="0%"
-  
-  
   }
   
 
@@ -46,9 +43,6 @@ async function uploadProduct(e){
     var ProductPrice=document.getElementById("UploadProductPrice").value;
     var ProductCategory=document.getElementById("UploadProductCategory").value;
     var ProductDescription=document.getElementById("UploadProductDescription").value;
-
-
-
     if(ProductImg && ProductName && ProductPrice && ProductCategory && ProductDescription){
        document.getElementById("uploadProductBtn").style.display="none"
        document.getElementById("uploadProLoader").style.display="block"
@@ -190,8 +184,79 @@ function uplodLoc(){
             
           }).catch((error) => {
     
+            console.log(error)
             // An error happened.
           });  
     }
     
     
+    async function createOffer() {
+        const { value: discount } = await Swal.fire({
+            title: "Input Percentage Discount",
+            input: "number",
+            inputPlaceholder: "e.g 23%",
+            inputAttributes: {
+                min: 0,
+                max: 100,
+                step: 1
+            }
+        });
+    
+        if (discount !== undefined && discount !== "" && !isNaN(discount)) {
+            const discountValue = parseFloat(discount);
+            const batch = dbFirestore.batch();
+            
+            dbFirestore.collection("Products").get().then((snapshot) => {
+                snapshot.forEach((doc) => {
+                    const productRef = dbFirestore.collection("Products").doc(doc.id);
+                    const productData = doc.data();
+                    
+                    // Assuming the product has a 'price' field
+                    const originalPrice = productData.productPrice;
+                    const discountedPrice = Math.ceil(originalPrice - (originalPrice * (discountValue / 100))); // Round up
+    
+                    batch.update(productRef, { 
+                        discountPercentage: discountValue,
+                        discountedPrice: discountedPrice 
+                    });
+                });
+    
+                return batch.commit();
+            }).then(() => {
+                Swal.fire("Success", "Discount applied to all products!", "success");
+            }).catch((error) => {
+                Swal.fire("Error", error.message, "error");
+            });
+        } else {
+            Swal.fire("Invalid Input", "Please enter a valid number.", "error");
+        }
+    }
+    
+
+  async  function createPromoCode(){
+    const { value: formValues } = await Swal.fire({
+        title: "Create Promo Code",
+        html: `
+          <input id="promoCodeInput" class="swal2-input" placeholder="Promo Code">
+          <input id="promoCodePercent" class="swal2-input" placeholder="Percentage Off">
+        `,
+        focusConfirm: false,
+        preConfirm: () => {
+          return [
+            document.getElementById("promoCodeInput").value,
+            document.getElementById("promoCodePercent").value
+          ];
+        }
+      });
+      if (formValues) {
+        firebase.firestore().collection("PromoCode").doc(formValues[0]).set({
+            promoCode:formValues[0],
+            promoPerc:formValues[1]
+        }).then(()=>{
+            Swal.fire("Success", "Promo Code created!", "success");
+
+        })
+      }else{
+        return;
+      }
+    }
