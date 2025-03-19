@@ -66,7 +66,13 @@
                         </div>
                         <p>Financal Analysis</p>
                     </div>
-                    <div class="adminLink">
+                    <div class="adminLink" onclick="toDestination()">
+                        <div class="admIconLk" >
+                            <i class="icofont-star-shape"></i>
+                        </div>
+                        <p>New destination</p>
+                    </div>
+                    <div class="adminLink" onclick="signOut()">
                         <div class="admIconLk">
                             <i class="icofont-ui-user"></i>
                         </div>
@@ -345,6 +351,65 @@
                     </div>
                  </div>
                  <!-- upload product end -->
+                 <!-- upload location  -->
+
+                 <div id="UploadLocation">
+                    <div class="uploadLocationPlacer">
+                        <div class="lorryIcon">
+                            <img src="./Media/van (2).png" alt="">
+
+                        </div>
+                        <div class="uploadLocationInputsWrap">
+                            <div class="uploadLocInput">
+                                <select name="county" id="County">
+                                    <option value="">Select County</option>
+                                    <option value="nairobi">Nairobi</option>
+                                  
+                                </select>
+                                
+                            </div>
+                            <div class="uploadLocInput">
+                                <select name="county" id="Route">
+                                    <option value="">Select Route</option>
+                                    <option value="Thika Road">Thika Road</option>
+                                    <option value="Jogoo Road">Jogoo Road</option>
+                                    <option value="Outering Road">Outering Road</option>
+                                    <option value="Kangundo Road">Kangundo Road</option>
+                                    <option value="Mombasa Road">Mombasa Road</option>
+                                    <option value="Waiyaki Way">Waiyaki Way</option>
+                                    <option value="Lower Kabete">Lower Kabete </option>
+                                    <option value="Kiambu Road">Kiambu Road</option>
+                                    <option value="Limuru Road">Limuru Road</option>
+                                    <option value="Juja Road">Juja Road</option>
+                                    <option value="Langata Road">Langata Road</option>
+                                    <option value="Ngong Road">Ngong Road</option>
+                                </select>
+
+                            </div>
+                            <div class="uploadLocInput">
+
+                                <input type="text" name="" id="areaName" placeholder="Area name e.g Pangani">
+                            </div>
+                            <div class="uploadLocInput">
+
+                                <input type="number" name="" id="transportCost" placeholder="Transport Cost">
+                            </div>
+                            <div class="uploadLocBtn">
+                                <div class="uploadLocLoader" id="uploadLocLoader">
+
+                                    <l-pulsar
+                                    size="30"
+                                    speed="1.4"
+                                    color="#179487" 
+                                    ></l-pulsar>
+                                </div>
+                                <button id="uploadLocBtn" onclick="uplodLoc()">Upload Location</button>
+                            </div>
+                        </div>
+                       
+                    </div>
+                 </div>
+                 <!-- upload location end -->
 
 
 

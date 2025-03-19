@@ -1,44 +1,55 @@
-
-var dbFirestore=firebase.firestore();
+var dbFirestore = firebase.firestore();
 var uid;
-var isLoggedIn=false
-let allCartItems=false
+var isLoggedIn = false;
+let allCartItems = [];
+var cartItemsNumber = 0;
 
-firebase.auth().onAuthStateChanged((user)=>{
-    if(user){
-         uid=user.uid;
-         isLoggedIn=true;
-    }else{
-        isLoggedIn=false;
+// Listen for authentication state changes
+firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+        uid = user.uid;
+        isLoggedIn = true;
+        setupCartListener(); // Start listening for cart changes
+    } else {
+        isLoggedIn = false;
+        console.log("User not signed in");
     }
-})
+});
 
-function updateCartCount(){
-
-    
-firebase.auth().onAuthStateChanged((user)=>{
-    if(user){
-         uid=user.uid;
-         isLoggedIn=true;
-
-
-         if(isLoggedIn){
-            dbFirestore.collection("Users").doc(uid).get().then((doc)=>{
-                allCartItems=doc.data().cartItems
-                var cartItemsNumber=allCartItems.filter(item =>item !== "").length;
-                document.getElementById("lapiCartNumber").innerText=cartItemsNumber
-            })
-    
-        }else{
-            console.log("User not signed in")
-    
-        }
-    }else{
-        isLoggedIn=false;
+function updateCartCount() {
+    if (isLoggedIn && uid) {
+        dbFirestore.collection("Users").doc(uid).get().then((doc) => {
+            if (doc.exists) {
+                allCartItems = doc.data().cartItems || [];
+                cartItemsNumber = allCartItems.filter(item => item !== "").length;
+                document.getElementById("lapiCartNumber").innerText = cartItemsNumber;
+            } else {
+                console.log("Cart data not found");
+            }
+        }).catch(error => {
+            console.error("Error fetching cart items:", error);
+        });
     }
-})
-    
 }
+
+// Real-time cart update listener
+function setupCartListener() {
+    dbFirestore.collection('Users').doc(uid).onSnapshot((doc) => {
+        if (doc.exists) {
+            allCartItems = doc.data().cartItems || [];
+            cartItemsNumber = allCartItems.filter(item => item !== "").length;
+            document.getElementById("lapiCartNumber").innerText = cartItemsNumber;
+        } else {
+            console.log("No cart data found for this user.");
+        }
+    }, (error) => {
+        console.error("Error getting cart items:", error);
+    });
+}
+
+
+
+
 
 updateCartCount()
 
@@ -288,6 +299,7 @@ function addtoCartAllPro(pid,pprice,pdesc,pimg,pname,pcat,pdisc){
 
 function toCart(){
     if(isLoggedIn){
+
         var cartItemDiv="";
         document.getElementById("drawerTitle").innerText='My Cart'
         document.getElementById("actDrawerProfile").style.right='-101%'
@@ -296,8 +308,10 @@ function toCart(){
         document.getElementById("checkoutPage").style.right='-101%'
         document.getElementById("actDrawerSuccessCheck").style.right='-101%'
         document.getElementById("actDrawerCart").style.right='0%'
-      var availableCartItem=allCartItems.filter(item => item !=='')
+        var availableCartItem=allCartItems.filter(item => item !=='')
       if(availableCartItem.length!=0){
+
+
 
         availableCartItem.forEach((cartItem)=>{
         
@@ -318,15 +332,23 @@ function toCart(){
             
     
                             <div class="cartItem" id="cartItem${productDocId}">
+
                                 <div class="cartItemWrap">
                                     <div class="cartImgNDetail">
+                                         <p class="cartProdOrgPrice" id="cartProdName${productDocId}">${productName}</p>
                                          <p class="cartProdOrgPrice" id="cartProdOrgPrice${productDocId}">${productPrice}</p>
+                                         <p class="cartProdOrgPrice" id="cartProDocId${productDocId}">${productDocId}</p>
+                                         <p class="cartProdOrgPrice" id="cartProUrl${productDocId}">${productUrl}</p>
+                                         <p class="cartProdOrgPrice" id="cartProCat${productDocId}">${productCat}</p>
+                                         <p class="cartProdOrgPrice" id="cartProDesc${productDocId}">${productDesc}</p>
+                                         <p class="cartProdOrgPrice" id="cartProQuantity${productDocId}">${productQuantity}</p>
+                                         <p class="cartProdOrgPrice" id="cartProDiscount${productDocId}">${productDiscount}</p>
                                     
                                         <img width="100px" src="${productUrl}" alt="">
                                         <div class="cartItemDet">
                                             <h4>${productName}</h4>
                                             <p>${productCat}</p>
-                                            <h4>Ksh. <span id="cartproductTotalPrice${productDocId}">${productTotalPrice}</span> </h4>
+                                            <h4>Ksh. <span id="cartproductTotalPrice${productDocId}" class="cartproductTotalPriceSingle">${productTotalPrice}</span> </h4>
                                         </div>
                                     </div>
                                   
@@ -365,7 +387,10 @@ function toCart(){
           `
       }
       
-
+     // THEN, calculate totals
+        setTimeout(() => {
+        updateGrandTotal()
+        }, 100); 
     document.getElementById("cartItemsWrap").innerHTML=cartItemDiv;
 
     }else{
@@ -451,36 +476,56 @@ function removeCartItem(productID){
 
 
 
+let cartUpdates = {}; // Object to store updated cart quantities
 
-function addProductQuantityCart(productDocId){
-    var itemEl=document.getElementById("cartitemnumber"+productDocId)
-    var singleitemTotalPrice=document.getElementById("cartproductTotalPrice"+productDocId)
-    var itemOrgPrice=parseInt(document.getElementById("cartProdOrgPrice"+productDocId).innerText)
-    var itemNumber=parseInt(itemEl.innerText);
+function addProductQuantityCart(productDocId) {
+    var itemEl = document.getElementById("cartitemnumber" + productDocId);
+    var singleitemTotalPrice = document.getElementById("cartproductTotalPrice" + productDocId);
+    var itemOrgPrice = parseInt(document.getElementById("cartProdOrgPrice" + productDocId).innerText);
+    var itemNumber = parseInt(itemEl.innerText);
 
-   if(itemNumber < 50){
+    if (itemNumber < 50) {
         itemNumber++;
-        itemEl.innerText=itemNumber
-        singleitemTotalPrice.innerText= itemOrgPrice*itemNumber;
-        console.log(singleitemTotalPrice.innerText)
+        itemEl.innerText = itemNumber;
+        singleitemTotalPrice.innerText = itemOrgPrice * itemNumber;
+        updateGrandTotal();
 
-   }
+        // Store the updated quantity locally
+        cartUpdates[productDocId] = itemNumber;
+    }
 }
-function minusProductQuantityCart(productDocId){
-    var itemEl=document.getElementById("cartitemnumber"+productDocId)
-    var singleitemTotalPrice=document.getElementById("cartproductTotalPrice"+productDocId)
-    var itemOrgPrice=parseInt(document.getElementById("cartProdOrgPrice"+productDocId).innerText)
-    var itemNumber=parseInt(itemEl.innerText);
 
-   if(itemNumber > 1){
+function minusProductQuantityCart(productDocId) {
+    var itemEl = document.getElementById("cartitemnumber" + productDocId);
+    var singleitemTotalPrice = document.getElementById("cartproductTotalPrice" + productDocId);
+    var itemOrgPrice = parseInt(document.getElementById("cartProdOrgPrice" + productDocId).innerText);
+    var itemNumber = parseInt(itemEl.innerText);
+
+    if (itemNumber > 1) {
         itemNumber--;
+        itemEl.innerText = itemNumber;
+        singleitemTotalPrice.innerText = itemOrgPrice * itemNumber;
+        updateGrandTotal();
 
-        itemEl.innerText=itemNumber;
-        singleitemTotalPrice.innerText= itemOrgPrice*itemNumber;
-
-   }
+        // Store the updated quantity locally
+        cartUpdates[productDocId] = itemNumber;
+    }
 }
 
+
+var cipAll
+function updateGrandTotal(){
+    cipAll=0
+    var cartItemPrices=document.querySelectorAll(".cartproductTotalPriceSingle");
+    cartItemPrices.forEach(cartItemPrice=>{
+        var cip = parseInt(cartItemPrice.innerText) || 0;
+        cipAll += cip
+    })
+    localStorage.setItem("grandTotal",cipAll)
+    document.getElementById("totalCartCost").innerText=(cipAll).toLocaleString()
+    document.getElementById("grandTotalCartItems").innerText=(cipAll).toLocaleString()
+
+}
 
 function toCategory(e){
     var catName=e.querySelector("p").innerText;
@@ -605,3 +650,54 @@ function pullSearched(e){
 
 }
 }
+
+
+function toCheckout() {
+    if(allCartItems && cartItemsNumber !=0){
+        var newCartItems = [];
+        var cartDivs = document.querySelectorAll(".cartItem");
+    
+        cartDivs.forEach(cartDiv => {
+            const item = {};
+    
+            // Get productDocId first
+            const productDocId = cartDiv.querySelector(".cartProdOrgPrice[id^='cartProDocId']").innerText.trim();
+            item.productDocId = productDocId;
+    
+            // Now use productDocId to get other elements
+            item.productName = cartDiv.querySelector("#cartProdName" + productDocId).innerText.trim();
+            item.productCat = cartDiv.querySelector("#cartProCat" + productDocId).innerText.trim();
+            item.productPrice = cartDiv.querySelector("#cartProdOrgPrice" + productDocId).innerText.trim();
+            item.productUrl = cartDiv.querySelector("#cartProUrl" + productDocId).innerText.trim();
+            item.productDesc = cartDiv.querySelector("#cartProDesc" + productDocId).innerText.trim();
+            item.productQuantity = cartDiv.querySelector("#cartitemnumber" + productDocId).innerText.trim();
+            item.productDiscount = cartDiv.querySelector("#cartProDiscount" + productDocId).innerText.trim();
+    
+            newCartItems.push(item);
+        });
+    
+    
+    
+        firebase.firestore().collection("Users").doc(uid).update({
+            cartItems:newCartItems,
+        }).then(()=>{
+            localStorage.setItem("carttocheckPrice",cipAll)
+            document.getElementById("checkRTopDetproductCost").innerText=cipAll.toLocaleString()
+            document.getElementById("fidiShopOffer").style.top='0vh'
+            document.getElementById("catnSearchCont").style.top='35vh'
+            document.getElementById("shopProducts").style.top='45vh'
+            document.getElementById("drawerTitle").innerText='Product'
+            document.getElementById("actDrawerCart").style.right='-101%'
+            document.getElementById("actDrawerProfile").style.right='-101%'
+            document.getElementById("actDrawerShop").style.right='-101%'
+            document.getElementById("actDrawerProduct").style.right='-101%'
+            document.getElementById("actDrawerSuccessCheck").style.right='-101%'
+            document.getElementById("checkoutPage").style.right='0%'
+        })
+    }else{
+         Swal.fire("You have no items in cart")
+    }
+    
+}
+
+
