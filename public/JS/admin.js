@@ -12,7 +12,7 @@ firebase.auth().onAuthStateChanged((user)=>{
             window.location.href="index.html"
         }
     }else{
-        window.location.href="indexedDB.html"
+        window.location.href="index.html"
     }
   
 })
@@ -176,9 +176,8 @@ function uplodLoc(){
     
     function signOut(){
         firebase.auth().signOut().then(() => {
-            document.getElementById("authDet").innerText="Signed Out"
             Swal.fire("Signed out successfully").then(()=>{
-              window.location.href="shop.html";
+              window.location.href="index.html";
               
             })
             

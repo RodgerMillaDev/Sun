@@ -7,11 +7,11 @@
             document.getElementById("authLogBtn").style.display = "none";
             document.getElementById("authLogLoader").style.display = "flex";
     
-            firebase.auth().signInWithEmailAndPassword(em, pass)
+            auth.signInWithEmailAndPassword(em, pass)
                 .then((userCred) => {
                     var user = userCred.user;
                     if(user.emailVerified){
-                        window.location.href='shop.html'
+                        window.location.href='index.html'
                     
                     }else{
                             // Email is not verified, prevent sign-in
@@ -139,7 +139,7 @@
               inputPlaceholder: "Enter email"
             });
             if (email) {
-              firebase.auth().sendPasswordResetEmail(email)
+              auth.sendPasswordResetEmail(email)
             .then(() => {
               // Password reset email sent!
               // ..
@@ -161,8 +161,8 @@
           function contWithGoogle() {
               var provider = new firebase.auth.GoogleAuthProvider(); 
             
-              firebase.auth()
-                .signInWithPopup(provider)
+              
+                auth.signInWithPopup(provider)
                 .then((result) => {
                   /** @type {firebase.auth.OAuthCredential} */
                   var user = result.user;
@@ -172,7 +172,7 @@
                   var uid=user.uid
                   db.collection("Users").doc(uid).get().then((doc)=>{
                     if(doc.exists){
-                      window.location.href="shop.html"
+                      window.location.href="index.html"
           
                     }else{
           
@@ -182,7 +182,7 @@
                         uid:user.uid
           
                     }).then(()=>{
-                        window.location.href="shop.html"
+                        window.location.href="index.html"
                     })
                     }
           

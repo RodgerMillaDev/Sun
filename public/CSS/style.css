@@ -119,10 +119,11 @@ h1,h2,h3,h4,h5,h6{
 
 }
 ::-webkit-scrollbar {
-    width: 8px;
+    display: none;
+    width: 0px;
   }
 ::-webkit-scrollbar-track {
-    border-radius: 8px;
+    border-radius: 0px;
   }
 ::-webkit-scrollbar-thumb {
     background: var(--sec-color); 
@@ -280,6 +281,9 @@ h1,h2,h3,h4,h5,h6{
     top: 0;
     z-index: 3;
     width: 100%;
+}
+.mobileDrawerLabel{
+    display: none;
 }
 .drawerCont{
   width: 98%;
@@ -568,7 +572,6 @@ h1,h2,h3,h4,h5,h6{
     background: rgb(25, 25, 25);
     color: var(--textGreen-color);
     background: var(--sec-color);
-
     cursor: pointer;
 
 }
