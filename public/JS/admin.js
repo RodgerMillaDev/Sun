@@ -55,6 +55,7 @@ async function uploadProduct(e){
             formData.append("prodCat",ProductCategory)
             formData.append("prodDesc",ProductDescription)
             console.log(ProductPrice)
+            // var backUrl='https://new-sun-back.onrender.com/upload';
             var backUrl='http://localhost:3333/upload';
             const response = await fetch(backUrl,{
                 method:'POST',

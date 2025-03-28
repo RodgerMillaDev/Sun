@@ -143,23 +143,7 @@ function toProduct(){
     }
   
 }
-function toSignUp(){
-    document.getElementById("shopMainMenu").style.left="-103%"
-    document.getElementById("authLog").style.top="-100%"
-    document.getElementById("authSign").style.top="0"
-    document.getElementById("authRightH3").innerText="Everything You Need, All in One Place!"
-    document.getElementById("authRightp").innerText="Welcome to Sun Up Collections"
 
-}
-
-function toLogIn(){
-    document.getElementById("shopMainMenu").style.left="-103%"
-    document.getElementById("authLog").style.top="0%"
-    document.getElementById("authSign").style.top="100%" 
-    document.getElementById("authRightH3").innerText="Can’t get enough? Shop some more!"
-    document.getElementById("authRightp").innerText="Fill in your credentials to access your account"
-
-}
 
 function openFonNav(){
     document.getElementById("adminMenuNavId").style.left="0%"

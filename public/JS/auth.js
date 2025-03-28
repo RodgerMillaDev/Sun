@@ -1,3 +1,18 @@
+function toSignUp(){
+    document.getElementById("authLog").style.top="-100%"
+    document.getElementById("authSign").style.top="0"
+    document.getElementById("authRightH3").innerText="Everything You Need, All in One Place!"
+    document.getElementById("authRightp").innerText="Welcome to Sun Up Collections"
+
+}
+function toLogIn(){
+    document.getElementById("authLog").style.top="0%"
+    document.getElementById("authSign").style.top="100%" 
+    document.getElementById("authRightH3").innerText="Can’t get enough? Shop some more!"
+    document.getElementById("authRightp").innerText="Fill in your credentials to access your account"
+
+}
+
 
     function LogIn() {
         var em = document.getElementById("emLog").value;
@@ -132,7 +147,7 @@
         }
     }
 
- async   function resetPass(){
+ async function resetPass(){
             const { value: email } = await Swal.fire({
               input: "email",
               inputLabel: "Reset Your Password",
