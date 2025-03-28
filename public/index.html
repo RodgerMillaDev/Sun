@@ -67,13 +67,15 @@
                     <p>Profile Settings</p>
 
                 </div>
-                
+                <div class="menuLink" onclick="toAdminpanel()">
+                    <i class="icofont-chair"></i>
+                    <p>Admin Panel</p>
+                </div>
              </div>
              <div class="mainMneuAuth" onclick="shoptoAuth()">
                 <div class="menuLink">
                     <i class="fa-solid fa-arrow-right-from-bracket"></i>             
                            <p id="shopAuth">Sign In</p>
-
                 </div>
              </div>
 
@@ -86,47 +88,54 @@
         <div class="shopDrawer">
             <div class="drawerCont">
 
-                <div class="mobileDrawerLabel">
+            
+
+               <div class="drawerLabel" id="drawerLabel">
+
+                  <div class="pcDrLabel">
+                    <h2 id="drawerTitle">Home</h2>
+                    <div class="switchPortal">
+                        <p class="activePort">Shop</p>
+                        <p>Website</p>
+                    </div>
+                    <div class="drawerAuthsWrap">
+                    <div class="drawerAuths">
+                        <div class="notIcon">
+                            <i class="fa-solid fa-bell"></i>
+                        </div>
+                        <div class="userDrawer">
+                             <img width="10px" src="./Media/newUse.png" alt="">
+                             <p id="LapiNavDp">User</p>
+                        </div>
+                    </div>
+                    </div>
+                  </div>
+                  <div class="fonDrlabel">
+
                     <div class="fonDrawerLabelPlacer">
                         <div class="fondrlblTop">
-                            <h1>Home</h1>
+                            <h2 id="mobPgLb">Home</h2>
                             <div class="fonminiNav">
-                                <div class="fonCart">
+                                <div class="fonCart" onclick="toCart()">
+                                    <p id="fcn">0</p>
                                     <i class="fa-solid fa-cart-shopping"></i>
                                 </div>
-                                <div class="fonNavIcon">
+                                <div class="fonNavIcon" onclick="showFonNav()">
                                     <i class="fa-solid fa-bars"></i>
                                 </div>
                             </div>
                         </div>
                         <div class="fondrlblBtm">
                            <div class="mobilPortal">
-                            <div class="shopMobile"><p>Shop</p></div>
-                            <div class="webMobile mobPortActive">Website</div>
+                            <div class="shopMobile mobPortActive"><p>Shop</p></div>
+                            <div class="webMobile"> <p>Website</p></div>
                            </div>
 
                         </div>
                     </div>
 
-                </div>
+                  </div>
 
-               <div class="drawerLabel" id="drawerLabel">
-                <h2 id="drawerTitle">Home</h2>
-                <div class="switchPortal">
-                    <p class="activePort">Shop</p>
-                    <p>Website</p>
-                </div>
-                <div class="drawerAuthsWrap">
-                <div class="drawerAuths">
-                    <div class="notIcon">
-                        <i class="fa-solid fa-bell"></i>
-                    </div>
-                    <div class="userDrawer">
-                         <img width="10px" src="./Media/newUse.png" alt="">
-                         <p id="LapiNavDp">User</p>
-                    </div>
-                </div>
-                </div>
                </div>
 
                <div class="actDrawerWrap">
@@ -147,7 +156,7 @@
                          <h2>40%</h2>
                          <div class="offerBtnandCont">
                              <p>All bathroom products on offer</p>
-                             <button>Shop Now</button>
+                             <button onclick="toProducts()">Shop</button>
                          </div>
                         </div>
                         </div>
@@ -163,7 +172,7 @@
                          <h2>10%</h2>
                          <div class="offerBtnandCont">
                              <p>All kitchen products on offer</p>
-                             <button>Shop Now</button>
+                             <button onclick="toProducts()">Shop</button>
                          </div>
                         </div>
                         </div>
@@ -173,7 +182,7 @@
 
                 
                 <div class="catnSearchCont" id="catnSearchCont">
-                    <div class="shopSearch">
+                    <div class="shopSearch" onmouseenter="opsEnt()" onmouseleave="opsLeave()">
                         <input type="text" placeholder="Search" onkeyup="pullSearched(this)">
                         <div class="shpSearchBtn">
                             <i class="fa-solid fa-magnifying-glass"></i>
@@ -296,7 +305,7 @@
                 <div class="actDrawerProfile" id="actDrawerProfile">
                     <div class="actDrawerProfPlacer">
                         <div class="editProfileImage">
-                            <img width="10px" src="./Media/pexels-readymade-3847592.jpg" alt="">
+                            <img width="10px" src="./Media/userTest.jpg" alt="">
                         </div>
                         <div class="editProfileInputs">
                             <div>
@@ -316,9 +325,7 @@
                     </div>
                     
                 </div>
-
                 <!-- success checkout  -->
-
                 <div class="actDrawerSuccessCheck" id="actDrawerSuccessCheck">
                     <div class="actDrawerProfPlacer">
                         <div class="successImage">
@@ -356,10 +363,7 @@
                     </div>
                     
                 </div>
-
-
                 <!-- product page  -->
-
                 <div class="actDrawerProduct" id="actDrawerProduct">
                   <div class="actDrawerProdPlacer">
                     <div class="actDrawerProdLeft">
@@ -400,7 +404,7 @@
                             </div>
                             <div class="prodtBuyBtn">
                                 <button onclick="addtoCartViewPro()">Add to cart</button>
-                                <button onclick="toCheckout()">Buy</button>
+                                <!-- <button onclick="toCheckout()">Buy</button> -->
                             </div>
                          
                         </div>
@@ -431,11 +435,11 @@
                                     </div>
                                 </div>
                                 <div class="delDet">
-                                    <input type="text" placeholder="Your Name" value="Rodger Milla" id="delName">
+                                    <input type="text" placeholder="Your Name" id="checkoutName" value="" id="delName">
                                     
                                  </div>
                                  <div class="delDet">
-                                    <input type="text" placeholder="Your Phone" value="0708004700" id="delPhone">
+                                    <input type="text" placeholder="Your Phone" value="0700000000" id="delPhone">
                                     
                                  </div>
                                  <div class="delDet" id="delCountyInputWrap">
@@ -493,8 +497,7 @@
                                       <input type="text" id="delCountyTownInput" placeholder="Town e.g Kitale Town">
                                    
                                 </div>
-                                 
-                                
+        
                                 <div class="delDet" id="delDetRoute">
                                     <select name="route" id="Route" onchange="selectedRoute(this)">
                                         <option value="">Select Route</option>
@@ -515,7 +518,6 @@
                                 <div class="delDet" id="delDetArea">
                                     <select name="" id="delAreaInput">
                                         <option value="">Select Area</option>
-                                        <option value="Mirema Drive">Mirema Drive</option>
                                     </select>
                                    
                                 </div>
@@ -528,10 +530,7 @@
                           
 
                         </div>
-                        <div class="checkoutCenter">
-
-
-                        </div>
+                        <div class="checkoutCenter"></div>
                         <div class="checkoutRight">
                             <div class="checkoutrightPlacer">
                                 <div class="checkRTop">
@@ -605,6 +604,9 @@
 <script src="./JS/config.js" defer></script>
 <script src="./JS/index.js" defer></script>
 <script src="./JS/shop.js" defer></script>
+<script src="./JS/shopAuth.js" defer></script>
+<script src="./JS/cart.js" defer></script>
+<script src="./JS/checkout.js" defer></script>
 
 
 

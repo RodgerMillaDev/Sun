@@ -306,14 +306,18 @@
     }
     .offerCont {
         width: 100%;
+        border-radius: 10px;
+        height: 95%;
     }
 
     .fidiShopOffer{
         width: 100%;
-        height: 25vh;
+        height: 30vh;
         position: absolute;
-        top: 0;
+        top: 0vh;
         transition: .4s ease;
+        justify-content: center;
+        align-items: center;
         display: flex;
         justify-content: space-between;
     }
@@ -327,18 +331,28 @@
     
         height: 100%;
     }
-    .noSuchProduct p{
-        width: 20%;
-        text-align: center;
+    .categoriesShop{
+        width: 95%;
+        height: 95%;
+        overflow-x: auto;
+        white-space: nowrap;
+        scroll-snap-type: x mandatory;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow-y: hidden;
+    
+    
     }
+  
     .noSuchProduct i{
         color: var(--priDark-color);
         margin: 20px;
         font-size: 30px;
     }
     .offerWrapperPlacer{
-        width: 95%;
-        padding: 2% 5%;
+        width: 100%;
+        padding: 0% 3%;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -359,9 +373,10 @@
     }
 
     .drawerLabel{
-        height: 10vh;
+        height: 15vh;
         display: flex;
-        background: aliceblue;
+        margin-top:3px;
+        background: none;
         justify-content: space-between;
         transition: .3s ease;
         align-items: center;
@@ -369,15 +384,30 @@
         top: 0;
         z-index: 3;
         width: 100%;
-        display: none;
     }
     .mobileDrawerLabel{
-        display: flex;
+        display: none;
     }
     .shopProductsWrapper {
         gap: 5px; /* Spacing between items */
 
         grid-template-columns: repeat(2, 1fr); /* Forces exactly 2 columns */
+    }
+    .shopProducts{
+        height: 48vh;
+        width: 100%;
+        transition: .4s ease;
+        position: absolute;
+        top:38vh;
+     
+    }
+    .offerPeriod{
+        padding: 5px 15px;
+        color: var(--text-color);
+        background: aliceblue;
+        border-radius: 10px;
+        display: none;
+    
     }
     .shopProduct{
         height: 300px;
@@ -438,7 +468,9 @@
 .spBottom h4{
     text-align: center;
     font-weight: 100;
-    font-size: .8rem;
+    font-size: .9rem;
+    font-weight: 600;
+    width: 97%;
 }
 .spBottom p{
     font-size: .9rem;
@@ -457,11 +489,22 @@
     font-size: 15px;
 
 }
+.catDivActive{
+    background: var(--priDark-color);
+
+}
+.vsep2{
+    border-radius: 3px;
+ width: 2px;
+ height: 60%;
+ margin: 0 5px;
+ background: rgb(0, 0, 0);
+}
 .catDiv{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 90%;
+    height: 70%;
     width: fit-content;
     padding: 0 20px;
     margin-right: 7px;
@@ -476,13 +519,457 @@
 }
 .catnSearchCont{
     width: 100%;
-    height: 6vh;
-    margin: 0vh 0;
+    height: 8vh;
+    margin: 0;
     position: absolute;
-    top:35vh;
+    top:29vh;
     transition: .4s ease;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
+
+.pcDrLabel{
+    display: none;
+}
+.mobileDrawerLabel{
+    width: 100%;
+    height: 15vh;
+    margin-top: 4px;
+
+    background: var(--ter-color);
+    border-radius: 7px;
+}
+.actDrawerWrap{
+    height: 85vh;
+    width: 100%;
+    position: absolute;
+    top: 15vh;
+ 
+}
+.actDrawerShop{
+    border-radius: 20px;
+    height: 100%;
+    right: 0%;
+    transition: .4s ease;
+    position: absolute;
+    background: aliceblue;
+    width: 100%;
+ }
+ .fonDrlabel{
+    background: var(--pri-color);
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.fonDrawerLabelPlacer{
+    display: flex;
+    width: 95%;
+    flex-direction: column;
+    height: 90%;
+    justify-content: space-between;
+}
+.fondrlblTop{
+    width: 100%;
+    height: 60%;
+    color: aliceblue;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.fondrlblTop h2{
+  font-size: 1.5rem;
+  color: aliceblue;
+  width:calc(100% - 90px) ;
+  
+}
+.fonminiNav{
+    width: 90px;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.fonCart{
+    width: 50px;
+    height: 38px;
+    border-radius: 10px;
+    /* background: rgba(240, 248, 255, 0.247); */
+    display: flex;
+    justify-content: center;
+    position: relative;
+    align-items: center;
+}
+.fonCart p{
+    position: absolute;
+    left: 30px;
+    font-size: 12px;
+    top: 0;
+    color: aliceblue;
+}
+.fonCart i{
+    position: absolute;
+    left:8px ;
+    top: 50%;
+    transform: translateY(-50%);
+    color: aliceblue;
+}
+.fonNavIcon{
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(240, 248, 255, 0.247);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.fondrlblBtm{
+    width: 100%;
+    height: 35%;
+    background: aliceblue;
+    display: flex;
+    border-radius: 40px;
+    justify-content: center;
+    align-items: center;
+}
+
+.mobilPortal{
+    width: 99%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.shopMobile{
+    width: 45%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--priDark-color);
+    border-radius: 40px;
+}
+.webMobile{
+    width: 45%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 40px;  
+}
+
+.webMobile p{
+
+}
+.shopMobile p{
+
+}
+.mobPortActive{
+    background: var(--priDark-color);
+
+
+}
+.mobPortActive p{
+    color: var(--textGreen-color);
+
+
+}
+/* 
+.opsSearch{
+    width: 900px;
+} */
+
+
+  .shopSearch .shpSearchBtn{
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 50px;
+    color: var(--text-color);
+
+}
+.promoTotalCartWrap{
+    width: 95%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 90%;
+}
+
+.promoTotalCart{
+    height: 35%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.164);
+    width: 100%;
+    background: var(--sec-color);  
+}
+
+.actDrawerProduct{
+    border-radius: 20px;
+    height: 84vh;
+    right: -101%;
+    transition: .4s ease;
+    position: absolute;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.178);
+    display: flex;
+    justify-content: center;
+    background: aliceblue;
+    align-items: center;
+    width: 100%;
+}
+.actDrawerProdPlacer{
+    width: 95%;
+    height: 82vh !important;
+    display: block;
+    flex-direction: column;
+    background: aliceblue;
+    box-shadow: none;
+    align-items: center;
+    justify-content: space-between;
+    overflow: scroll;
+}
+.actDrawerProdLeft{
+    width: 100%;
+    position: relative;
+    height: 42vh;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+}
+.actDrawerProdRight{
+    width: 100%;
+    height: auto !important;
+    padding: 20px 0;
+ 
+}
+.selectQuantityProductP{
+    height: 60px;
+    width: 100%;
+    margin: 5px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.productDesc{
+    padding: 10px 0;
+    color: var(--text-color);
+}
+.actDrawerProdRightPlacer{
+    width: 100%;
+    height: 95%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin:  0 auto;
+}
+
+
+.offerCont h4{
+    color: aliceblue;
+    font-size: 1.1rem;
+    margin: 2px 0;
+}
+.offerCont h2{
+    color: aliceblue;
+    font-size: 1.5rem;
+    margin: 0px 30px;
+    color: yellow;
+    margin-right: 30px;
+}
+.actDrawerProdRightTop{
+    color: var(--text-color);
+} 
+.actDrawerProdRightTop p{
+    color: grey;
+    margin: 10px 0;
+    
+}
+
+.promoBtn{
+    width: 20%;
+    height: 30px !important;
+    margin-right: 4px;
+    display: flex;
+    justify-content: center;
+    background: var(--priDark-color);
+    align-items: center;
+    border-radius: 40px;
+    color: var(--textGreen-color);
+}
+
+.quantNRemove{
+    width: 20%;
+}
+.cartImgNDetail img{
+    object-fit: cover;
+    height: 120px;
+    width: 80px;
+    border-radius: 10px;
+    margin-right: 7px;
+}
+.addItemCart,.minusItemCart{
+    cursor: pointer;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 900;
+    font-size: 30px;
+    height: 30px;
+    border-radius: 5px;
+    background: var(--sec-color);
+    color: aliceblue;
+}
+.checkoutPage{
+    border-radius: 20px;
+    height: 85vh;
+    transition: .4s ease;
+    position: absolute;
+    background: aliceblue;
+    width: 100%;
+    display: flex;
+    right: -105%;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+ 
+ }
+.checkoutPlacer{
+    width: 100%;
+    height: 83vh;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    border-radius: 10px;
+    background: aliceblue;
+    box-shadow: none;
+    align-items: center;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.checkoutLeft{
+    width:100%;
+    display: flex;
+    height: fit-content;
+    padding: 10px 0;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+
+}
+.checkoutCenter{
+    height:1px;
+    width: 80%;
+    background: rgba(0, 0, 0, 0.5);
+    
+}
+.checkoutRight{
+    width: 100%;
+    height:fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    
+}
+.delTruck{
+    height: 120px;
+    width: 120px;
+    background: var(--dark-white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    border-radius: 50%;
+}
+
+.checkRBottom{
+    height: 350px;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+.checkRTopDet{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 40px;
+    background: rgba(0, 0, 0, 0.055);
+    margin-bottom: 5px;
+}
+
+.delDet{
+    width: 100%;
+    margin-top: 10px;
+    height: 50px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    border-radius: 40px;
+    overflow: hidden;
+}
+.delDet input{
+    background: aliceblue;
+    height: 100%;
+    padding: 0 0 0 10px;
+    box-shadow: none;
+}
+.delivDetWrap{
+    width: 90%;
+    display: flex;
+    height: fit-content;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+
+.checkoutrightPlacer{
+    width: 90%;
+    height: 90%;
+}
+.checkRTop{
+    height: 40%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+}
+.checkoutCard{
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 200px;
+    background-image: linear-gradient(109deg, rgba(236, 236, 236,0.02) 0%, rgba(236, 236, 236,0.02) 13%,transparent 13%, transparent 64%,rgba(55, 55, 55,0.02) 64%, rgba(55, 55, 55,0.02) 71%,rgba(239, 239, 239,0.02) 71%, rgba(239, 239, 239,0.02) 100%),linear-gradient(205deg, rgba(8, 8, 8,0.02) 0%, rgba(8, 8, 8,0.02) 1%,transparent 1%, transparent 60%,rgba(9, 9, 9,0.02) 60%, rgba(9, 9, 9,0.02) 80%,rgba(198, 198, 198,0.02) 80%, rgba(198, 198, 198,0.02) 100%),linear-gradient(153deg, rgba(134, 134, 134,0.02) 0%, rgba(134, 134, 134,0.02) 30%,transparent 30%, transparent 43%,rgba(85, 85, 85,0.02) 43%, rgba(85, 85, 85,0.02) 47%,rgba(103, 103, 103,0.02) 47%, rgba(103, 103, 103,0.02) 100%),linear-gradient(284deg, rgba(178, 178, 178,0.02) 0%, rgba(178, 178, 178,0.02) 8%,transparent 8%, transparent 47%,rgba(161, 161, 161,0.02) 47%, rgba(161, 161, 161,0.02) 61%,rgba(19, 19, 19,0.02) 61%, rgba(19, 19, 19,0.02) 100%),linear-gradient(125deg, var(--pri-color),var(--priDark-color));
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
 }

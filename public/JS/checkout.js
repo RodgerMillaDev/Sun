@@ -1,102 +1,27 @@
 var cartPrice=localStorage.getItem("grandTotal");
 
-
-function toCheckout() {
-    if(allCartItems && cartItemsNumber !=0){
-        var newCartItems = [];
-        var cartDivs = document.querySelectorAll(".cartItem");
-    
-        cartDivs.forEach(cartDiv => {
-            const item = {};
-    
-            // Get productDocId first
-            const productDocId = cartDiv.querySelector(".cartProdOrgPrice[id^='cartProDocId']").innerText.trim();
-            item.productDocId = productDocId;
-    
-            // Now use productDocId to get other elements
-            item.productName = cartDiv.querySelector("#cartProdName" + productDocId).innerText.trim();
-            item.productCat = cartDiv.querySelector("#cartProCat" + productDocId).innerText.trim();
-            item.productPrice = cartDiv.querySelector("#cartProdOrgPrice" + productDocId).innerText.trim();
-            item.productUrl = cartDiv.querySelector("#cartProUrl" + productDocId).innerText.trim();
-            item.productDesc = cartDiv.querySelector("#cartProDesc" + productDocId).innerText.trim();
-            item.productQuantity = cartDiv.querySelector("#cartitemnumber" + productDocId).innerText.trim();
-            item.productDiscount = cartDiv.querySelector("#cartProDiscount" + productDocId).innerText.trim();
-    
-            newCartItems.push(item);
-        });
-    
-    
-    
-        firebase.firestore().collection("Users").doc(uid).update({
-            cartItems:newCartItems,
-        }).then(()=>{
-            delCountyDet()
-            localStorage.setItem("carttocheckPrice",cipAll)
-            const params = new URLSearchParams(window.location.search);
-
-            params.set('cartTotal', cipAll);
-            params.set('cartDiscount', appliedPromoPerc);
-            history.replaceState(null, '', '?' + params.toString());
-
-            document.getElementById("checkRTopDetDisocunt").innerText=localStorage.getItem("PromoCode")
-            document.getElementById("checkRTopDetproductCost").innerText=cipAll.toLocaleString()
-            document.getElementById("fidiShopOffer").style.top='0vh'
-            document.getElementById("catnSearchCont").style.top='35vh'
-            document.getElementById("shopProducts").style.top='45vh'
-            document.getElementById("drawerTitle").innerText='Product'
-            document.getElementById("actDrawerCart").style.right='-101%'
-            document.getElementById("actDrawerProfile").style.right='-101%'
-            document.getElementById("actDrawerShop").style.right='-101%'
-            document.getElementById("actDrawerProduct").style.right='-101%'
-            document.getElementById("actDrawerSuccessCheck").style.right='-101%'
-            document.getElementById("checkoutPage").style.right='0%'
-        })
-    }else{
-         Swal.fire("You have no items in cart")
-    }
-    
-}
-
 // var discountPercent=localStorage.getItem()
 function checkoutMath(transportCost){
     var prevCost=parseInt(localStorage.getItem("carttocheckPrice"))
     const gt=prevCost+transportCost
     document.getElementById("checkRTopDetGrandDisocunt").innerText=gt
     document.getElementById("cardPrice").innerText=gt
-
-    
 }
 
-const observer = new MutationObserver(() => {
-    var url= decodeURIComponent(window.location.search);
-    var urlObj=new URLSearchParams(url)
-    const cartTotal = urlObj.get('cartTotal');
-    const cartDiscount = urlObj.get('cartDiscount');
-    document.getElementById("checkRTopDetDisocunt").innerText=cartDiscount
-    document.getElementById("checkRTopDetproductCost").innerText=cartTotal
-    checkoutMath()
+// const observer = new MutationObserver(() => {
+//     var url= decodeURIComponent(window.location.search);
+//     var urlObj=new URLSearchParams(url)
+//     const cartTotal = urlObj.get('cartTotal');
+//     const cartDiscount = urlObj.get('cartDiscount');
+//     document.getElementById("checkRTopDetDisocunt").innerText=cartDiscount
+//     document.getElementById("checkRTopDetproductCost").innerText=cartTotal
+//     checkoutMath()
+// });
+// observer.observe(document, { subtree: true, childList: true });
 
-});
-observer.observe(document, { subtree: true, childList: true });
 
-function delCountyDet(){
-    var delBtn=document.querySelector(".delCountyBtnActive");
-    if(delBtn.innerText == "Nairobi"){
-  
-        document.getElementById("delDetRoute").style.display="flex"
-        document.getElementById("delDetArea").style.display="flex"
-        document.getElementById("delDetBuilding").style.display="flex"
-        document.getElementById("delCountyInputWrap").style.display="none"
-        document.getElementById("delCountyTownWrap").style.display="none"
-    }else{
-        document.getElementById("delDetRoute").style.display="none"
-        document.getElementById("delDetArea").style.display="none"
-        document.getElementById("delDetBuilding").style.display="none"
-        document.getElementById("delCountyInputWrap").style.display="flex"
-        document.getElementById("delCountyTownWrap").style.display="flex"
-    }
 
-}
+
 
 function delCountyClicked(e){
     var delBtns=document.querySelectorAll(".delCountyBtn");
@@ -105,12 +30,10 @@ function delCountyClicked(e){
         e.classList.add("delCountyBtnActive")
         delCountyDet()
     })
-
-
 }
 
 function selectedRoute(e) {
-    firebase.firestore().collection(e.value).get().then((locs) => {
+    dbFirestore.collection(e.value).get().then((locs) => {
         var selectTag = document.createElement("select"); // Create a new <select> element
         selectTag.name = "area"; 
         selectTag.id = "dynamicSelect"; 
@@ -166,9 +89,7 @@ function payNow(){
     if(delCounty=="Nairobi"){
         if(delName&&delPhone&&delRoute&&delDetArea&&delBuilding){
             var deliveryDet=delName+"?"+delPhone+"?"+delRoute+"?"+delDetArea+"?"+delBuilding
-            localStorage.setItem("deliveryDet",deliveryDet)
-
-               
+            localStorage.setItem("deliveryDet",deliveryDet)               
             document.getElementById("fidiShopOffer").style.top='0vh'
             document.getElementById("catnSearchCont").style.top='35vh'
             document.getElementById("shopProducts").style.top='45vh'
@@ -199,6 +120,5 @@ function payNow(){
         }
 
     }else{
- Swal.fire("aaloo")
     }
 }
