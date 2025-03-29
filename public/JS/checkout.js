@@ -4,8 +4,8 @@ var cartPrice=localStorage.getItem("grandTotal");
 function checkoutMath(transportCost){
     var prevCost=parseInt(localStorage.getItem("carttocheckPrice"))
     const gt=prevCost+transportCost
-    document.getElementById("checkRTopDetGrandDisocunt").innerText=gt
-    document.getElementById("cardPrice").innerText=gt
+    document.getElementById("checkRTopDetGrandDisocunt").innerText=parseInt(gt).toLocaleString()
+    document.getElementById("cardPrice").innerText=parseInt(gt).toLocaleString()
 }
 
 // const observer = new MutationObserver(() => {
@@ -19,24 +19,21 @@ function checkoutMath(transportCost){
 // });
 // observer.observe(document, { subtree: true, childList: true });
 
-
-
-
-
 function delCountyClicked(e){
     var delBtns=document.querySelectorAll(".delCountyBtn");
     delBtns.forEach(delBtn =>{
         delBtn.classList.remove("delCountyBtnActive")
         e.classList.add("delCountyBtnActive")
-        delCountyDet()
+        updateDelChoice()
     })
+
 }
 
 function selectedRoute(e) {
     dbFirestore.collection(e.value).get().then((locs) => {
         var selectTag = document.createElement("select"); // Create a new <select> element
         selectTag.name = "area"; 
-        selectTag.id = "dynamicSelect"; 
+        selectTag.id = "delAreaInput"; 
 
         // Create and append the default "Select Area" option
         var defaultOption = document.createElement("option");
@@ -88,6 +85,7 @@ function payNow(){
 
     if(delCounty=="Nairobi"){
         if(delName&&delPhone&&delRoute&&delDetArea&&delBuilding){
+  
             var deliveryDet=delName+"?"+delPhone+"?"+delRoute+"?"+delDetArea+"?"+delBuilding
             localStorage.setItem("deliveryDet",deliveryDet)               
             document.getElementById("fidiShopOffer").style.top='0vh'
@@ -122,3 +120,122 @@ function payNow(){
     }else{
     }
 }
+
+async function payNow(){
+    var sltCounty=document.querySelector(".delCountyBtnActive").innerText; 
+    var nm=document.getElementById("checkoutName").value;
+    var delfon=document.getElementById("delPhone").value;
+    var uid=localStorage.getItem("sununpUID")
+    var em=localStorage.getItem("emUserName")
+  
+    if(sltCounty=="Nairobi"){
+                  document.getElementById("payNowBtn").style.display="none"
+            document.getElementById("checkPayLoader").style.display="block"
+
+        var route=document.getElementById("Route").value;
+        var dlArea=document.getElementById("delAreaInput").value;
+        var delBuilding=document.getElementById("delDetBuildingInp").value;
+        console.log("nm:", nm, "delfon:", delfon, "sltCounty:", sltCounty, "town:", town, "route:", route, "dlArea:", dlArea, "delBuilding:", delBuilding);
+        if(nm&&delfon&&route&&dlArea&&delBuilding){
+            var county= "Nairobi"
+          try {
+            const url= "http://localhost:4455/payNow"
+            const response = await fetch(url,{
+                method:"POST",
+                headers:{
+                    'Content-Type':'application/json'
+    
+                },
+                body:JSON.stringify({nm,delfon,em,county,route,dlArea,delBuilding,uid})
+            })
+            const result = await response.json()
+            console.log(result)
+            if(result.status==true){
+                var accessCode=result.data.accessCode;
+                var refCode=result.data.reference;
+                var authUrl=result.data.authorization_url
+                console.log(authUrl)
+                localStorage.setItem('refCodePay',refCode)
+                window.location.href=authUrl
+            }else{
+                Swal.fire("Error", "An error occured try again", "error")
+             }
+        document.getElementById("payNowBtn").style.display="block"
+        document.getElementById("checkPayLoader").style.display="none"
+        } catch (error) {
+               document.getElementById("payNowBtn").style.display="block"
+        document.getElementById("checkPayLoader").style.display="none"
+            console.log(error)
+        }
+
+        }else{
+
+            Swal.fire("Missing Data", "Fill in all the delivery data", "info")
+            document.getElementById("payNowBtn").style.display="block"
+            document.getElementById("checkPayLoader").style.display="none"
+        }
+
+    }else{
+        var county=document.getElementById("delCountyInput").value;
+        var town=document.getElementById("delCountyTownInput").value;
+        if(nm,delfon,county,town){
+            try {
+                const url= "http://localhost:4455/payNow"
+                const response = await fetch(url,{
+                    method:"POST",
+                    headers:{
+                        'Content-Type':'application/json'
+        
+                    },
+                    body:JSON.stringify({nm,delfon,em,county,town,uid})
+                })
+                const result = await response.json()
+                console.log(result)
+                if(result.status==true){
+                    var accessCode=result.data.accessCode;
+                    var refCode=result.data.reference;
+                    var authUrl=result.data.authorization_url
+                    localStorage.setItem('refCodePay',refCode)
+                    window.location.href=authUrl
+
+                }else{
+                   Swal.fire("Error", "An error occured try again", "error")
+                }
+            document.getElementById("payNowBtn").style.display="block"
+            document.getElementById("checkPayLoader").style.display="none"
+            } catch (error) {
+                   document.getElementById("payNowBtn").style.display="block"
+        document.getElementById("checkPayLoader").style.display="none"
+                console.log(error)
+            }
+
+        }else{
+            Swal.fire("Missing Data", "Fill in all the delivery data", "info")
+            document.getElementById("payNowBtn").style.display="block"
+            document.getElementById("checkPayLoader").style.display="none"
+        }
+
+
+    }
+
+}
+
+function updateDelChoice(){
+    var sltCounty=document.querySelector(".delCountyBtnActive").innerText;
+    if(sltCounty=="Nairobi"){
+        document.getElementById("delCountyInputWrap").style.display="none";
+        document.getElementById("delCountyTownWrap").style.display="none";
+        document.getElementById("delDetRoute").style.display="block";
+        document.getElementById("delDetArea").style.display="block";
+        document.getElementById("delDetBuilding").style.display="block";
+    }else{
+        document.getElementById("delCountyInputWrap").style.display="flex";
+        document.getElementById("delCountyTownWrap").style.display="flex";
+        document.getElementById("delDetRoute").style.display="none";
+        document.getElementById("delDetArea").style.display="none";
+        document.getElementById("delDetBuilding").style.display="none"; 
+    }
+
+}
+
+

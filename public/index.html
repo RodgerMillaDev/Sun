@@ -9,11 +9,11 @@
     <script src="https://kit.fontawesome.com/df64ffd27a.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./Media/icofont/icofont.min.css">
     <link rel="stylesheet" href="./Media/icofont/icofont.css">
+    <script type="module" src="https://cdn.jsdelivr.net/npm/ldrs/dist/auto/pulsar.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js" integrity="sha512-jEnuDt6jfecCjthQAJ+ed0MTVA++5ZKmlUcmDGBv2vUI/REn6FuIdixLNnQT+vKusE2hhTk2is3cFvv5wA+Sgg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
-    <script type="module" src="https://cdn.jsdelivr.net/npm/ldrs/dist/auto/jellyTriangle.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js" integrity="sha512-jEnuDt6jfecCjthQAJ+ed0MTVA++5ZKmlUcmDGBv2vUI/REn6FuIdixLNnQT+vKusE2hhTk2is3cFvv5wA+Sgg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="shortcut icon" href="./Media/lightBgFav.png" type="image/x-icon">
@@ -325,6 +325,26 @@
                     </div>
                     
                 </div>
+                <!-- check payment  -->
+                <div class="actDrawerSuccessCheck" id="checkTrxStatus">
+                    <div class="checkTrxStatusPlacer">
+                        <div class="checkTrxStatusImage">
+                            <img width="10px" src="./Media/3d-casual-life-delivery-boy-with-boxes (1).webp" alt="">
+                        </div>
+                        <h4>Have you paid already? Kindly confirm your payment</h4>
+                        <div class="confirmPayWrap">
+                        <button id="confirmPaymentBtn" onclick="confirmPay()">Confirm Payment</button>  
+                        <div class="checkPayLoader" id="TrxStatusLoader"> 
+                            <l-pulsar
+                            size="40"
+                            speed="1.4"
+                            color="#179487" 
+                            ></l-pulsar>
+                        </div>                      
+                      </div>
+                    </div>
+                    
+                </div>
                 <!-- success checkout  -->
                 <div class="actDrawerSuccessCheck" id="actDrawerSuccessCheck">
                     <div class="actDrawerProfPlacer">
@@ -368,6 +388,7 @@
                   <div class="actDrawerProdPlacer">
                     <div class="actDrawerProdLeft">
                         <p id="viewProId"></p>
+                        <p id="viewOrgPrice"></p>
                         <img id="viewProImg" src="" alt="">
                     </div>
                     <div class="actDrawerProdRight">
@@ -389,13 +410,13 @@
                                       <p>Quantity:</p>
                                 </div>
                                 <div class="qsprod">
-                                    <div class="minusProduct">
+                                    <div class="minusProduct" onclick="minusProductQuantity()">
                                         <p>-</p>
                                     </div>
-                                    <div class="ProductQuantity">
-                                        <p>3</p>
+                                    <div class="ProductQuantity" >
+                                        <p id="ProductQuantityPG">1</p>
                                     </div>
-                                    <div class="addProduct">
+                                    <div class="addProduct" onclick="addProductQuantity()">
                                         <p>+</p>
                                     </div>
                                     
@@ -435,11 +456,11 @@
                                     </div>
                                 </div>
                                 <div class="delDet">
-                                    <input type="text" placeholder="Your Name" id="checkoutName" value="" id="delName">
+                                    <input type="text" placeholder="Your Name" readonly id="checkoutName" value="" id="delName">
                                     
                                  </div>
                                  <div class="delDet">
-                                    <input type="text" placeholder="Your Phone" value="0700000000" id="delPhone">
+                                    <input type="text" placeholder="Mpesa number" value="" id="delPhone" >
                                     
                                  </div>
                                  <div class="delDet" id="delCountyInputWrap">
@@ -522,7 +543,7 @@
                                    
                                 </div>
                                 <div class="delDet" id="delDetBuilding">
-                                   <input type="text" placeholder="Builiding e.g Jewel Plaza">
+                                   <input type="text" id="delDetBuildingInp" placeholder="Builiding e.g Jewel Plaza">
                                    
                                 </div>
 
@@ -565,16 +586,16 @@
                                     </div>
                                     <div class="checkPay">
                                    
-                                        <button onclick="toSuccess()">Pay Now</button>
+                                        <button onclick="payNow()" id="payNowBtn">Pay Now</button>
 
-                                        <div class="checkPayLoader">
+                                        <div class="checkPayLoader" id="checkPayLoader">
                                           
 
-                                            <l-jelly-triangle
-                                                size="30"
-                                                speed="1.75" 
-                                                color="#4ef596" 
-                                                ></l-jelly-triangle>
+                                            <l-pulsar
+                                            size="40"
+                                            speed="1.4"
+                                            color="#179487" 
+                                            ></l-pulsar>
                                         </div>
                                     </div>
 
@@ -607,6 +628,7 @@
 <script src="./JS/shopAuth.js" defer></script>
 <script src="./JS/cart.js" defer></script>
 <script src="./JS/checkout.js" defer></script>
+<script src="./JS/product.js" defer></script>
 
 
 

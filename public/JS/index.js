@@ -104,6 +104,8 @@ function toOffers(){
 function toProfile(){
     document.getElementById("shopMainMenu").style.left="-103%"
     document.getElementById("drawerTitle").innerText='Profile Settings'
+    document.getElementById("mobPgLb").innerText='Profile Settings'
+
     document.getElementById("actDrawerShop").style.right='-103%'
     document.getElementById("actDrawerProduct").style.right='-103%'
     document.getElementById("actDrawerCart").style.right='-103%'
@@ -327,9 +329,10 @@ function toBuy(pid,pprice,pdesc,pimg,pname,pcat,pdisc){
     document.getElementById("actDrawerProduct").style.right='0%'
     document.getElementById("viewProName").innerText=pname
     document.getElementById("viewProCat").innerText=pcat
-    document.getElementById("viewProPrice").innerText=pprice
+    document.getElementById("viewProPrice").innerText=(parseInt(pprice)).toLocaleString()
     document.getElementById("viewProDesc").innerText=pdesc
     document.getElementById("viewProId").innerText=pid
+    document.getElementById("viewOrgPrice").innerText=pprice
     document.getElementById("viewProImg").src=pimg
 
     }

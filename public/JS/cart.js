@@ -9,6 +9,7 @@ function applyPromo(){
             if(doc.exists){
                 var promoPerc=doc.data().promoPerc;
                 appliedPromoPerc=promoPerc;
+                localStorage.setItem("appliedPromoCode",appliedPromoPerc)
                 updateGrandTotal()
             }else{
                 appliedPromoPerc = 0.0; // Reset promo if invalid
@@ -118,9 +119,7 @@ function toCart(){
 
 
 
-        availableCartItem.forEach((cartItem)=>{
-        
-        
+        availableCartItem.forEach((cartItem)=>{ 
             var productName=cartItem.productName
             var productDocId=cartItem.productDocId
             var productCat=cartItem.productCat
@@ -130,12 +129,11 @@ function toCart(){
             var productQuantity=cartItem.productQuantity
             var productDiscount=cartItem.productDiscount
             var productTotalPrice=productPrice*productQuantity
+            localStorage.setItem("appliedPromoCode",0)
 
-    
-    
+
             cartItemDiv+=`
             
-    
                             <div class="cartItem" id="cartItem${productDocId}">
 
                                 <div class="cartItemWrap">
@@ -153,7 +151,7 @@ function toCart(){
                                         <div class="cartItemDet">
                                             <h4>${productName}</h4>
                                             <p>${productCat}</p>
-                                            <h4>Ksh. <span id="cartproductTotalPrice${productDocId}" class="cartproductTotalPriceSingle">${productTotalPrice}</span> </h4>
+                                            <h4>Ksh. <span id="cartproductTotalPrice${productDocId}" class="cartproductTotalPriceSingle">${productTotalPrice.toLocaleString()}</span> </h4>
                                         </div>
                                     </div>
                                   
@@ -166,8 +164,7 @@ function toCart(){
                                                 <p>-</p>
                                             </div>
                                             <p class="cartItemNumberP" id="cartitemnumber${productDocId}">${productQuantity}</p>
-                                    
-
+                                
                                               <div class="addItemCart" onclick="addProductQuantityCart('${productDocId}')">
                                                <p>+</p>
                                             </div> 
@@ -280,7 +277,7 @@ function addProductQuantityCart(productDocId) {
     if (itemNumber < 50) {
         itemNumber++;
         itemEl.innerText = itemNumber;
-        singleitemTotalPrice.innerText = itemOrgPrice * itemNumber;
+        singleitemTotalPrice.innerText = (itemOrgPrice * itemNumber).toLocaleString();
         updateGrandTotal();
         cartUpdates[productDocId] = itemNumber;
     }
@@ -295,17 +292,21 @@ function minusProductQuantityCart(productDocId) {
     if (itemNumber > 1) {
         itemNumber--;
         itemEl.innerText = itemNumber;
-        singleitemTotalPrice.innerText = itemOrgPrice * itemNumber;
+        singleitemTotalPrice.innerText = (itemOrgPrice * itemNumber).toLocaleString();
         updateGrandTotal();
         cartUpdates[productDocId] = itemNumber;
     }
 }
 var cipAll = 0;
-var appliedPromoPerc = 0.0; // Store promo percentage globally
+var appliedPromoPerc =0.0
 function toCheckout() {
     if(allCartItems && cartItemsNumber !=0){
         var newCartItems = [];
         var cartDivs = document.querySelectorAll(".cartItem");
+        var deGrTo=localStorage.getItem("grandTotal")
+        var uname=localStorage.getItem("sunupUserName")
+        document.getElementById("checkoutName").value=uname;
+
     
         cartDivs.forEach(cartDiv => {
             const item = {};
@@ -337,18 +338,20 @@ function toCheckout() {
             params.set('cartDiscount', appliedPromoPerc);
             history.replaceState(null, '', '?' + params.toString());
 
-            document.getElementById("checkRTopDetDisocunt").innerText=localStorage.getItem("PromoCode")
-            document.getElementById("checkRTopDetproductCost").innerText=cipAll.toLocaleString()
+            document.getElementById("checkRTopDetDisocunt").innerText=localStorage.getItem("appliedPromoCode")
+            document.getElementById("checkRTopDetproductCost").innerText=parseInt(deGrTo).toLocaleString()
             document.getElementById("fidiShopOffer").style.top='0vh'
             document.getElementById("catnSearchCont").style.top='35vh'
             document.getElementById("shopProducts").style.top='45vh'
-            document.getElementById("drawerTitle").innerText='Product'
+            document.getElementById("drawerTitle").innerText='Checkout'
+            document.getElementById("mobPgLb").innerText='Checkout'
             document.getElementById("actDrawerCart").style.right='-101%'
             document.getElementById("actDrawerProfile").style.right='-101%'
             document.getElementById("actDrawerShop").style.right='-101%'
             document.getElementById("actDrawerProduct").style.right='-101%'
             document.getElementById("actDrawerSuccessCheck").style.right='-101%'
             document.getElementById("checkoutPage").style.right='0%'
+            updateDelChoice()
         })
     }else{
          Swal.fire("You have no items in cart")
