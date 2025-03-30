@@ -1,15 +1,17 @@
-var dbFirestore = firebase.firestore();
-
-
 auth.onAuthStateChanged((user)=>{
     if(user){
         var uid=user.uid;
         console.log(uid)
         if(uid==="VBiIUAdnhVTTB2ihVTBmKrXkK6f1"){
+            Swal.fire("Auth Error", "You are not the admin", "info")
+
             document.getElementById("preloaderWrap").style.display="none"
     
         }else{
-            window.location.href="index.html"
+            document.getElementById("preloaderWrap").style.display="none"
+
+            // window.location.href="index.html"
+            Swal.fire("Auth Error", "You are not the admin", "info")
         }
     }else{
         window.location.href="index.html"
@@ -18,6 +20,31 @@ auth.onAuthStateChanged((user)=>{
 })
 
 
+function toDashboard(){
+    // document.getElementById("shopMainMenu").style.left="-103%"
+    document.getElementById("adminMenuNavId").style.left="-103%"
+    document.getElementById("allOrders").style.top="60%"
+    document.getElementById("AllProducts").style.right="-105%"
+    document.getElementById("UploadLocation").style.right="-105%"
+    document.getElementById("UploadProduct").style.right="-105%"
+    document.querySelector(".adminDashboardBottom").style.height="40%"
+    document.querySelector(".adminDashRecentOrdersWrap").style.height="32vh"
+    document.getElementById("adminDashboard").style.right="0%"
+    document.getElementById("actDash").style.top="0%"
+}
+ function toOrders(){
+    // document.getElementById("shopMainMenu").style.left="-103%"
+    document.getElementById("adminMenuNavId").style.left="-103%"
+    document.getElementById("actDash").style.top="-100%"
+    document.getElementById("allOrders").style.top="0%"
+    document.getElementById("adminDashboard").style.right="0%"
+    document.getElementById("AllProducts").style.right="-105%"
+    document.getElementById("UploadProduct").style.right="-105%"
+    document.getElementById("UploadLocation").style.right="-105%"
+    document.querySelector(".adminDashboardBottom").style.height="100%"
+    document.querySelector(".adminDashRecentOrdersWrap").style.height="92vh"
+
+ }
 function toUploadProduct(){
     document.getElementById("adminMenuNavId").style.left="-101%"
     document.getElementById("adminDashboard").style.right="-105%"
@@ -25,17 +52,22 @@ function toUploadProduct(){
     document.getElementById("UploadLocation").style.right="-105%"
     document.getElementById("UploadProduct").style.right="0%"
  }
-
-
- 
 function toDestination(){
     document.getElementById("adminMenuNavId").style.left="-101%"
     document.getElementById("adminDashboard").style.right="-105%"
     document.getElementById("AllProducts").style.right="-105%"
     document.getElementById("UploadProduct").style.right="-105%"
     document.getElementById("UploadLocation").style.right="0%"
-  }
-  
+}
+function toProducts(){
+    pullAllProducts()
+    document.getElementById("UploadLocation").style.right="-105%"
+    document.getElementById("UploadProduct").style.right="-105%"
+    document.getElementById("adminMenuNavId").style.left="-101%"
+    document.getElementById("adminDashboard").style.right="-105%"
+    document.getElementById("AllProducts").style.right="0%"
+}
+
 
 async function uploadProduct(e){
     var ProductImg=document.getElementById("ProImageFileInput").files[0];
@@ -46,7 +78,6 @@ async function uploadProduct(e){
     if(ProductImg && ProductName && ProductPrice && ProductCategory && ProductDescription){
        document.getElementById("uploadProductBtn").style.display="none"
        document.getElementById("uploadProLoader").style.display="block"
-
         try {
             const formData = new FormData();
             formData.append("image",ProductImg)
@@ -55,12 +86,11 @@ async function uploadProduct(e){
             formData.append("prodCat",ProductCategory)
             formData.append("prodDesc",ProductDescription)
             console.log(ProductPrice)
-            // var backUrl='https://official-backend-sunup.onrender.com/upload';
-            var backUrl='http://localhost:4455/upload';
+            var backUrl='https://official-backend-sunup.onrender.com/upload';
+            // var backUrl='http://localhost:4455/upload';
             const response = await fetch(backUrl,{
                 method:'POST',
                 body: formData,
-
             })
             const result = await response.json()
             console.log(result)
@@ -75,10 +105,9 @@ async function uploadProduct(e){
                 document.getElementById("uploadProductBtn").style.display="block"
                 document.getElementById("uploadProLoader").style.display="none"
             }else{
-
+                Swalf.fire("Error Occured", "An error occured try again later", "error")
             }
             
-
         } catch (error) {
                document.getElementById("uploadProductBtn").style.display="block"
                document.getElementById("uploadProLoader").style.display="none"
@@ -93,23 +122,10 @@ async function uploadProduct(e){
     }
 }
 
-function toProducts(){
-    pullAllProducts()
-    document.getElementById("UploadLocation").style.right="-105%"
-
-    document.getElementById("UploadProduct").style.right="-105%"
-    document.getElementById("adminMenuNavId").style.left="-101%"
-    document.getElementById("adminDashboard").style.right="-105%"
-    document.getElementById("AllProducts").style.right="0%"
- }
-
-
 function pullAllProducts(){
-    firebase.firestore().collection("Products").get().then((Products)=>{
-      
+   dbFirestore.collection("Products").get().then((Products)=>{
         var productListDiv=''
         Products.forEach(product => {
-            
             var pname=product.data().productName;
             var pprice=product.data().productPrice;
             var pdiscount=product.data().productDiscount;
@@ -119,19 +135,11 @@ function pullAllProducts(){
                 <td class="prodPiceTb"><p>${pprice}</p></td>
                 <td class="prodOfferTb"> <p>${pdiscount}% 0FF</p></td>
             </tr>
-        
-
-            `
-            
+            `            
         });
-
         document.getElementById("allProductsTable").innerHTML=productListDiv;
-
     })
 }
-
-
-
 function uplodLoc(){
     var County =document.getElementById("County").value;
     var Route =document.getElementById("Route").value;
