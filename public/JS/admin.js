@@ -1,7 +1,7 @@
 var dbFirestore = firebase.firestore();
 
 
-firebase.auth().onAuthStateChanged((user)=>{
+auth.onAuthStateChanged((user)=>{
     if(user){
         var uid=user.uid;
         console.log(uid)

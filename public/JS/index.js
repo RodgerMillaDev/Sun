@@ -161,9 +161,6 @@ function toDashboard(){
     document.querySelector(".adminDashRecentOrdersWrap").style.height="32vh"
     document.getElementById("adminDashboard").style.right="0%"
     document.getElementById("actDash").style.top="0%"
-
-
-
 }
  function toOrders(){
     document.getElementById("shopMainMenu").style.left="-103%"

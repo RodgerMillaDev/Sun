@@ -985,7 +985,7 @@ cursor: pointer;
     transition: .4s ease;
     position: absolute;
     background: aliceblue;
-    right: 0%;
+    right: -104%;
     justify-content: center;
     border-radius: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.164);
