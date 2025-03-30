@@ -355,27 +355,26 @@
                         <div class="successInputs">
                             <div>
                                 <p>Recipient</p>
-                                <p>Rodger Milla</p>
+                                <p id="scRecipient"></p>
                             </div>
                             <div>
                                 <p>Order No.</p>
-                                <p>#323242</p>
+                                <p>#<span id="scorderNumber"></span></p>
                             </div>
                             <div>
                                 <p>Paid</p>
-                                <p>Ksh. 2,300</p>
+                                <p>Ksh. <span id="scPaid"></span></p>
                             </div>
                             <div>
                                 <p>Date</p>
-                                <p>3rd June 2025</p>
+                                <p id="scdatePaid"></p>
                             </div>
                             <div>
                                 <p>Destination</p>
-                                <p>Kiambu Road</p>
+                                <p id="scDest"></p>
                             </div>
                             <div>
-                                <p>Phone</p>
-                                <p>0708004700</p>
+                                <button onclick="cmpltPurchase()">Done</button>
                             </div>
 
                             
@@ -464,7 +463,7 @@
                                     
                                  </div>
                                  <div class="delDet" id="delCountyInputWrap">
-                                    <select name="county" id="delCountyInput">
+                                    <select name="county" id="delCountyInput" onchange="checkoutMath(0)">
                                         <option value="">Select County</option>
                                         <option value="baringo">Baringo</option>
                                         <option value="bomet">Bomet</option>
@@ -589,8 +588,6 @@
                                         <button onclick="payNow()" id="payNowBtn">Pay Now</button>
 
                                         <div class="checkPayLoader" id="checkPayLoader">
-                                          
-
                                             <l-pulsar
                                             size="40"
                                             speed="1.4"

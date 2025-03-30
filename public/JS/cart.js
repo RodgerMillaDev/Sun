@@ -14,17 +14,11 @@ function applyPromo(){
             }else{
                 appliedPromoPerc = 0.0; // Reset promo if invalid
                 updateGrandTotal(); // Ensure the price updates
-                Swal.fire("Invalid Promo Code", "Please enter a valid code.", "error");
-    
+                Swal.fire("Invalid Promo Code", "Please enter a valid code.", "error");    
             }
         })
     }
-  
-    
 }
-
-
-
 
 function addtoCartAllPro(pid,pprice,pdesc,pimg,pname,pcat,pdisc){
 
@@ -99,11 +93,8 @@ function addtoCartAllPro(pid,pprice,pdesc,pimg,pname,pcat,pdisc){
     }
 }
 
-
-
 function toCart(){
     if(isLoggedIn){
-
         var cartItemDiv="";
         document.getElementById("drawerTitle").innerText='My Cart'
         document.getElementById("mobPgLb").innerText='My Cart'
@@ -116,9 +107,6 @@ function toCart(){
         document.getElementById("actDrawerCart").style.right='0%'
         var availableCartItem=allCartItems.filter(item => item !=='')
       if(availableCartItem.length!=0){
-
-
-
         availableCartItem.forEach((cartItem)=>{ 
             var productName=cartItem.productName
             var productDocId=cartItem.productDocId
@@ -130,8 +118,6 @@ function toCart(){
             var productDiscount=cartItem.productDiscount
             var productTotalPrice=productPrice*productQuantity
             localStorage.setItem("appliedPromoCode",0)
-
-
             cartItemDiv+=`
             
                             <div class="cartItem" id="cartItem${productDocId}">
@@ -306,15 +292,11 @@ function toCheckout() {
         var deGrTo=localStorage.getItem("grandTotal")
         var uname=localStorage.getItem("sunupUserName")
         document.getElementById("checkoutName").value=uname;
-
-    
         cartDivs.forEach(cartDiv => {
             const item = {};
-    
             // Get productDocId first
             const productDocId = cartDiv.querySelector(".cartProdOrgPrice[id^='cartProDocId']").innerText.trim();
             item.productDocId = productDocId;
-    
             // Now use productDocId to get other elements
             item.productName = cartDiv.querySelector("#cartProdName" + productDocId).innerText.trim();
             item.productCat = cartDiv.querySelector("#cartProCat" + productDocId).innerText.trim();
@@ -330,7 +312,6 @@ function toCheckout() {
         dbFirestore.collection("Users").doc(uid).update({
             cartItems:newCartItems,
         }).then(()=>{
-            // delCountyDet()
             localStorage.setItem("carttocheckPrice",cipAll)
             const params = new URLSearchParams(window.location.search);
 

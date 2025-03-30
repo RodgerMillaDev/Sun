@@ -2,22 +2,11 @@ var cartPrice=localStorage.getItem("grandTotal");
 
 // var discountPercent=localStorage.getItem()
 function checkoutMath(transportCost){
-    var prevCost=parseInt(localStorage.getItem("carttocheckPrice"))
+    var prevCost=parseInt(localStorage.getItem("grandTotal"))
     const gt=prevCost+transportCost
     document.getElementById("checkRTopDetGrandDisocunt").innerText=parseInt(gt).toLocaleString()
     document.getElementById("cardPrice").innerText=parseInt(gt).toLocaleString()
 }
-
-// const observer = new MutationObserver(() => {
-//     var url= decodeURIComponent(window.location.search);
-//     var urlObj=new URLSearchParams(url)
-//     const cartTotal = urlObj.get('cartTotal');
-//     const cartDiscount = urlObj.get('cartDiscount');
-//     document.getElementById("checkRTopDetDisocunt").innerText=cartDiscount
-//     document.getElementById("checkRTopDetproductCost").innerText=cartTotal
-//     checkoutMath()
-// });
-// observer.observe(document, { subtree: true, childList: true });
 
 function delCountyClicked(e){
     var delBtns=document.querySelectorAll(".delCountyBtn");
@@ -72,54 +61,6 @@ function selectedRoute(e) {
         console.error("Error fetching locations: ", error);
     });
 }
-function payNow(){
-    var delCounty=document.querySelector(".delCountyBtnActive").innerText;
-    var delName=document.getElementById("delName").value;
-    var delPhone=document.getElementById("delPhone").value;
-    var delCountyInput=document.getElementById("delCountyInput").value;
-    var delCountyTownWrap=document.getElementById("delCountyTownInput").value;
-    var delRoute=document.getElementById("Route").value;
-    var delDetArea=document.getElementById("delAreaInput").value;
-    var delBuilding=document.getElementById("delDetBuilding").value;
-
-
-    if(delCounty=="Nairobi"){
-        if(delName&&delPhone&&delRoute&&delDetArea&&delBuilding){
-  
-            var deliveryDet=delName+"?"+delPhone+"?"+delRoute+"?"+delDetArea+"?"+delBuilding
-            localStorage.setItem("deliveryDet",deliveryDet)               
-            document.getElementById("fidiShopOffer").style.top='0vh'
-            document.getElementById("catnSearchCont").style.top='35vh'
-            document.getElementById("shopProducts").style.top='45vh'
-            document.getElementById("drawerTitle").innerText='Product'
-            document.getElementById("actDrawerCart").style.right='-101%'
-            document.getElementById("actDrawerProfile").style.right='-101%'
-            document.getElementById("actDrawerShop").style.right='-101%'
-            document.getElementById("actDrawerProduct").style.right='-101%'
-            document.getElementById("checkoutPage").style.right='-101%'
-            document.getElementById("actDrawerSuccessCheck").style.right='0%'
-            
-        }else{
-            const Toast = Swal.mixin({
-                toast: true,
-                position: "top-end",
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                  toast.onmouseenter = Swal.stopTimer;
-                  toast.onmouseleave = Swal.resumeTimer;
-                }
-              });
-              Toast.fire({
-                icon: "warning",
-                title: "Delivery details are missing..."
-              });
-        }
-
-    }else{
-    }
-}
 
 async function payNow(){
     var sltCounty=document.querySelector(".delCountyBtnActive").innerText; 
@@ -129,9 +70,8 @@ async function payNow(){
     var em=localStorage.getItem("emUserName")
   
     if(sltCounty=="Nairobi"){
-                  document.getElementById("payNowBtn").style.display="none"
-            document.getElementById("checkPayLoader").style.display="block"
-
+        document.getElementById("payNowBtn").style.display="none"
+        document.getElementById("checkPayLoader").style.display="block"
         var route=document.getElementById("Route").value;
         var dlArea=document.getElementById("delAreaInput").value;
         var delBuilding=document.getElementById("delDetBuildingInp").value;
@@ -140,22 +80,22 @@ async function payNow(){
             var county= "Nairobi"
           try {
             const url= "http://localhost:4455/payNow"
+            // const url= "https://official-backend-sunup.onrender.com/payNow"
             const response = await fetch(url,{
                 method:"POST",
                 headers:{
                     'Content-Type':'application/json'
     
                 },
-                body:JSON.stringify({nm,delfon,em,county,route,dlArea,delBuilding,uid})
+                body:JSON.stringify({nm,delfon,em,county,route,town:"",dlArea,delBuilding,uid})
             })
             const result = await response.json()
-            console.log(result)
             if(result.status==true){
                 var accessCode=result.data.accessCode;
                 var refCode=result.data.reference;
                 var authUrl=result.data.authorization_url
-                console.log(authUrl)
                 localStorage.setItem('refCodePay',refCode)
+                console.log(localStorage.getItem('refCodePay'))
                 window.location.href=authUrl
             }else{
                 Swal.fire("Error", "An error occured try again", "error")
@@ -180,22 +120,22 @@ async function payNow(){
         var town=document.getElementById("delCountyTownInput").value;
         if(nm,delfon,county,town){
             try {
+                // const url= "https://official-backend-sunup.onrender.com/payNow"
                 const url= "http://localhost:4455/payNow"
                 const response = await fetch(url,{
                     method:"POST",
                     headers:{
                         'Content-Type':'application/json'
-        
                     },
-                    body:JSON.stringify({nm,delfon,em,county,town,uid})
+                    body:JSON.stringify({nm,delfon,em,county,route:"",town,uid,dlArea:"",delBuilding:""})
                 })
                 const result = await response.json()
-                console.log(result)
                 if(result.status==true){
                     var accessCode=result.data.accessCode;
                     var refCode=result.data.reference;
                     var authUrl=result.data.authorization_url
                     localStorage.setItem('refCodePay',refCode)
+                    console.log(localStorage.getItem('refCodePay'))
                     window.location.href=authUrl
 
                 }else{

@@ -5,11 +5,16 @@ let allCartItems = [];
 var cartItemsNumber = 0;
 const deURL = decodeURIComponent(window.location.search);
 const SU = deURL.split("?");
+
 if(deURL.includes("fromPayment")){
     var payStack=SU[3]
     var payStackArr=payStack.split("&")
     var fp=payStackArr[0].split("=")
+    var rf=payStackArr[2].split("=")
+    var ppURL=SU[3].split("&")
     const ps=fp[1]
+    const refCode=rf[1]
+    localStorage.setItem('refCodePay',refCode)
     if(ps=="true"){
         document.getElementById("fidiShopOffer").style.top='0vh'
         document.getElementById("catnSearchCont").style.top='35vh'
@@ -168,49 +173,26 @@ function addtoCartViewPro() {
         });
     }
 }
-function applyPromo(){
-    var prm=document.getElementById("shopPromo").value;
-    if(prm==""){
 
-        appliedPromoPerc=0.0
-        updateGrandTotal();
-    }else{
-        dbFirestore.collection("PromoCode").doc(prm).get().then((doc)=>{
-            if(doc.exists){
-                var promoPerc=doc.data().promoPerc;
-                appliedPromoPerc=promoPerc;
-                updateGrandTotal()
-    
-    
-            }else{
-                appliedPromoPerc = 0.0; // Reset promo if invalid
-                updateGrandTotal(); // Ensure the price updates
-                Swal.fire("Invalid Promo Code", "Please enter a valid code.", "error");
-    
-            }
-        })
-    }
-  
-    
-}
 async function confirmPay(){
     try {
-          document.getElementById("confirmPaymentBtn").style.display="none"
-            document.getElementById("TrxStatusLoader").style.display="block"
+        document.getElementById("confirmPaymentBtn").style.display="none"
+        document.getElementById("TrxStatusLoader").style.display="block"
         const url= "http://localhost:4455/trxnStatus"
+        // const url= "https://official-backend-sunup.onrender.com/trxnStatus"
         const refCode=localStorage.getItem('refCodePay')
         console.log(refCode)
-        
+        const orderNumber=localStorage.getItem('orderNumber')        
         const response = await fetch(url,{
             method:"POST",
             headers:{
                 'Content-Type':'application/json'
             },
-            body:JSON.stringify({refCode,userId:localStorage.getItem("sununpUID")})
+            body:JSON.stringify({refCode,userId:localStorage.getItem("sununpUID"),orderNumber:orderNumber})
         })
         const result = await response.json()
         console.log(result)
-        if(result.status==true && result.message=="Verification successful"){
+        if(result.orderStatus.success==true && result.orderStatus.message=="Order processed successfully"){
             localStorage.setItem('refCodePay','')
             // const newURL='https://sunup-collections.web.app'
             const newURL='http://localhost:5500/public/index.html'
@@ -224,7 +206,8 @@ async function confirmPay(){
             document.getElementById("actDrawerShop").style.right='-101%'
             document.getElementById("actDrawerProduct").style.right='-101%'
             document.getElementById("checkoutPage").style.right='-101%'
-            document.getElementById("actDrawerSuccessCheck").style.right='0%'  
+            document.getElementById("actDrawerSuccessCheck").style.right='0%'
+            readNewOrder()  
             document.getElementById("checkTrxStatus").style.right='-105%'  
         }else{
             Swal.fire("Error", "An error occured try again", "error")
@@ -237,9 +220,44 @@ async function confirmPay(){
             console.log(error)
         }
 }
+readNewOrder()
+function readNewOrder() {
+    var uid = localStorage.getItem("sununpUID");
+    dbFirestore.collection("Orders")
+        .where("orderID", "==", uid)
+        .orderBy("timestamp", "desc") // Order by timestamp (latest first)
+        .limit(1) // Get only the most recent order
+        .get()
+        .then((docs) => {
+            if (!docs.empty) {
+                var rc=docs.docs[0].data().name;
+                var on=docs.docs[0].data().orderNumber;
+                var pa=docs.docs[0].data().paidAmount;
+                var pd=docs.docs[0].data().date;
+                var dc=docs.docs[0].data().county;
+                document.getElementById("scRecipient").innerText=rc
+                document.getElementById("scorderNumber").innerText=on
+                document.getElementById("scPaid").innerText=pa
+                document.getElementById("scdatePaid").innerText=pd
+                if(dc=="Nairobi"){
+                    var adl=docs.docs[0].data().dlArea;
+                    document.getElementById("scDest").innerText=adl
+                }else{
+                    var adl=docs.docs[0].data().town;
+                    document.getElementById("scDest").innerText=adl
+                }
+            } else {
+                console.log("No orders found.");
+            }
+        })
+        .catch((error) => {
+            console.error("Error fetching latest order:", error);
+        });
+}
 
 
             
+
 
 // function toCart(){
 //     if(isLoggedIn){

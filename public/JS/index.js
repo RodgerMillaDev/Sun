@@ -178,7 +178,6 @@ function toDashboard(){
     document.querySelector(".adminDashRecentOrdersWrap").style.height="92vh"
 
  }
-
  function toCategory(e){
     document.getElementById("shopMainMenu").style.left="-103%"
     var catName=e.querySelector("p").innerText;
@@ -233,8 +232,6 @@ function toDashboard(){
     }
 
 }
-
-
 function pullSearched(e){
     var searchInput=(e.value).toLowerCase();
     if(searchInput){
@@ -292,15 +289,11 @@ function pullSearched(e){
 
 }
 }
-
 function opsEnt(){
 document.querySelector(".shopSearch").classList.add("opsSearch")
-   
 }
-
 function opsLeave(){
 document.querySelector(".shopSearch").classList.remove("opsSearch")
-   
 }
 function toBuy(pid,pprice,pdesc,pimg,pname,pcat,pdisc){
     var toBuyArray={
@@ -334,11 +327,11 @@ function toBuy(pid,pprice,pdesc,pimg,pname,pcat,pdisc){
     document.getElementById("viewProId").innerText=pid
     document.getElementById("viewOrgPrice").innerText=pprice
     document.getElementById("viewProImg").src=pimg
-
     }
-
 }
-
 function toAdminpanel(){
     window.location.href="adminpanel.html"
+}
+function cmpltPurchase(){
+    window.location.href="index.html"
 }
