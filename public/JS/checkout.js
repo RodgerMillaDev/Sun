@@ -79,8 +79,8 @@ async function payNow(){
         if(nm&&delfon&&route&&dlArea&&delBuilding){
             var county= "Nairobi"
           try {
-            const url= "http://localhost:4455/payNow"
-            // const url= "https://official-backend-sunup.onrender.com/payNow"
+            // const url= "http://localhost:4455/payNow"
+            const url= "https://official-backend-sunup.onrender.com/payNow"
             const response = await fetch(url,{
                 method:"POST",
                 headers:{
@@ -120,8 +120,8 @@ async function payNow(){
         var town=document.getElementById("delCountyTownInput").value;
         if(nm,delfon,county,town){
             try {
-                // const url= "https://official-backend-sunup.onrender.com/payNow"
-                const url= "http://localhost:4455/payNow"
+                const url= "https://official-backend-sunup.onrender.com/payNow"
+                // const url= "http://localhost:4455/payNow"
                 const response = await fetch(url,{
                     method:"POST",
                     headers:{

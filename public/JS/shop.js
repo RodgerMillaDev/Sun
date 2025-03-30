@@ -178,8 +178,8 @@ async function confirmPay(){
     try {
         document.getElementById("confirmPaymentBtn").style.display="none"
         document.getElementById("TrxStatusLoader").style.display="block"
-        const url= "http://localhost:4455/trxnStatus"
-        // const url= "https://official-backend-sunup.onrender.com/trxnStatus"
+        // const url= "http://localhost:4455/trxnStatus"
+        const url= "https://official-backend-sunup.onrender.com/trxnStatus"
         const refCode=localStorage.getItem('refCodePay')
         console.log(refCode)
         const orderNumber=localStorage.getItem('orderNumber')        
@@ -194,8 +194,8 @@ async function confirmPay(){
         console.log(result)
         if(result.orderStatus.success==true && result.orderStatus.message=="Order processed successfully"){
             localStorage.setItem('refCodePay','')
-            // const newURL='https://sunup-collections.web.app'
-            const newURL='http://localhost:5500/public/index.html'
+            const newURL='https://sunup-collections.web.app'
+            // const newURL='http://localhost:5500/public/index.html'
             window.history.replaceState({}, "", newURL) 
             document.getElementById("fidiShopOffer").style.top='0vh'
             document.getElementById("catnSearchCont").style.top='35vh'
