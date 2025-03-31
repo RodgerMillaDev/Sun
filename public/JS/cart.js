@@ -1,4 +1,5 @@
-
+var cipAll = 0;
+var appliedPromoPerc =0.0
 function applyPromo(){
     var prm=document.getElementById("shopPromo").value;
     if(prm==""){
@@ -49,21 +50,7 @@ function addtoCartAllPro(pid,pprice,pdesc,pimg,pname,pcat,pdisc){
                             cartItems:userCartItems
                         }).then(()=>{
                             updateCartCount()
-                            const Toast = Swal.mixin({
-                                toast: true,
-                                position: "top-end",
-                                showConfirmButton: false,
-                                timer: 3000,
-                                timerProgressBar: true,
-                                didOpen: (toast) => {
-                                  toast.onmouseenter = Swal.stopTimer;
-                                  toast.onmouseleave = Swal.resumeTimer;
-                                }
-                              });
-                              Toast.fire({
-                                icon: "success",
-                                title: "Added to cart"
-                              });
+                            
                         })
 
                     }else{
@@ -111,11 +98,16 @@ function toCart(){
             var productName=cartItem.productName
             var productDocId=cartItem.productDocId
             var productCat=cartItem.productCat
+            var fidiRawPrice=parseInt(cartItem.productPrice)
             var productPrice=cartItem.productPrice
             var productUrl=cartItem.productUrl
             var productDesc=cartItem.productDesc
             var productQuantity=cartItem.productQuantity
-            var productDiscount=cartItem.productDiscount
+            var productDiscount=parseInt(cartItem.discountPercentage)
+            if(productDiscount>0){
+                var rperc=100-productDiscount
+                productPrice=Math.ceil(parseInt((rperc*fidiRawPrice)/100))
+            }
             var productTotalPrice=productPrice*productQuantity
             localStorage.setItem("appliedPromoCode",0)
             cartItemDiv+=`
@@ -132,6 +124,7 @@ function toCart(){
                                          <p class="cartProdOrgPrice" id="cartProDesc${productDocId}">${productDesc}</p>
                                          <p class="cartProdOrgPrice" id="cartProQuantity${productDocId}">${productQuantity}</p>
                                          <p class="cartProdOrgPrice" id="cartProDiscount${productDocId}">${productDiscount}</p>
+                                         <p class="cartGHT" id="cartGHT${productDocId}">${productTotalPrice}</p>
                                     
                                         <img width="100px" src="${productUrl}" alt="">
                                         <div class="cartItemDet">
@@ -283,8 +276,7 @@ function minusProductQuantityCart(productDocId) {
         cartUpdates[productDocId] = itemNumber;
     }
 }
-var cipAll = 0;
-var appliedPromoPerc =0.0
+
 function toCheckout() {
     if(allCartItems && cartItemsNumber !=0){
         var newCartItems = [];

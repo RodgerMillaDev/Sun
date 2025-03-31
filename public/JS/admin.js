@@ -116,7 +116,7 @@ function pullAllProducts(){
         Products.forEach(product => {
             var pname=product.data().productName;
             var pprice=product.data().productPrice;
-            var pdiscount=product.data().productDiscount;
+            var pdiscount=product.data().discountPercentage;
             var pcat=product.data().productCat;
             var pdesc=product.data().productDesc;
             var pid=product.data().productDocId;
@@ -172,9 +172,7 @@ function uplodLoc(){
         Swal.fire("fill in all the data")
     }
 }
-
-    
-    function signOut(){
+function signOut(){
         firebase.auth().signOut().then(() => {
             Swal.fire("Signed out successfully").then(()=>{
               window.location.href="index.html";
@@ -186,10 +184,8 @@ function uplodLoc(){
             console.log(error)
             // An error happened.
           });  
-    }
-    
-    
-    async function createOffer() {
+}
+async function createOffer() {
         const { value: discount } = await Swal.fire({
             title: "Input Percentage Discount",
             input: "number",

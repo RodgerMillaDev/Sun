@@ -1,9 +1,11 @@
 var cartPrice=localStorage.getItem("grandTotal");
 
-// var discountPercent=localStorage.getItem()
+var discountPercent=localStorage.getItem()
 function checkoutMath(transportCost){
+    console.log(transportCost)
     var prevCost=parseInt(localStorage.getItem("grandTotal"))
     const gt=prevCost+transportCost
+    document.getElementById("checkRTopDetTransport").innerText=transportCost
     document.getElementById("checkRTopDetGrandDisocunt").innerText=parseInt(gt).toLocaleString()
     document.getElementById("cardPrice").innerText=parseInt(gt).toLocaleString()
 }
@@ -19,48 +21,73 @@ function delCountyClicked(e){
 }
 
 function selectedRoute(e) {
-    dbFirestore.collection(e.value).get().then((locs) => {
-        var selectTag = document.createElement("select"); // Create a new <select> element
-        selectTag.name = "area"; 
-        selectTag.id = "delAreaInput"; 
-
-        // Create and append the default "Select Area" option
-        var defaultOption = document.createElement("option");
-        defaultOption.value = "";
-        defaultOption.textContent = "Select Area";
-        selectTag.appendChild(defaultOption);
-
-        locs.forEach(loc => {
-            var locName = loc.data().areaName;
-            var locCost = loc.data().transportCost; // Get transport cost
-
-            // Create an <option> element
-            var option = document.createElement("option");
-            option.value = locName;
-            option.textContent = locName;
-            option.setAttribute("data-cost", locCost); // Store cost as a data attribute
-
-            // Append the option to the select element
-            selectTag.appendChild(option);
+    if(e.value==""){
+      checkoutMath(0)
+    }else{
+        dbFirestore.collection(e.value).get().then((locs) => {
+            var selectTag = document.createElement("select"); // Create a new <select> element
+            selectTag.name = "area"; 
+            selectTag.id = "delAreaInput"; 
+    
+            // Create and append the default "Select Area" option
+            var defaultOption = document.createElement("option");
+            defaultOption.value = "";
+            defaultOption.textContent = "Select Area";
+            selectTag.appendChild(defaultOption);
+    
+            locs.forEach(loc => {
+                var locName = loc.data().areaName;
+                var locCost = loc.data().transportCost; // Get transport cost
+    
+                // Create an <option> element
+                var option = document.createElement("option");
+                option.value = locName;
+                option.textContent = locName;
+                option.setAttribute("data-cost", locCost); // Store cost as a data attribute
+    
+                // Append the option to the select element
+                selectTag.appendChild(option);
+            });
+    
+            // Append the new <select> inside the div with id 'delDetArea'
+            var delDetArea = document.getElementById("delDetArea");
+            delDetArea.innerHTML = ""; // Clear previous content
+            delDetArea.appendChild(selectTag);
+    
+            // Add event listener to log the selected transport cost
+            selectTag.addEventListener("change", function() {
+                var selectedOption = selectTag.options[selectTag.selectedIndex]; // Get selected option
+                var transportCost = parseInt(selectedOption.getAttribute("data-cost")); // Get cost
+                checkoutMath(transportCost)
+            });
+    
+        }).catch(error => {
+            console.error("Error fetching locations: ", error);
         });
-
-        // Append the new <select> inside the div with id 'delDetArea'
-        var delDetArea = document.getElementById("delDetArea");
-        delDetArea.innerHTML = ""; // Clear previous content
-        delDetArea.appendChild(selectTag);
-
-        // Add event listener to log the selected transport cost
-        selectTag.addEventListener("change", function() {
-            var selectedOption = selectTag.options[selectTag.selectedIndex]; // Get selected option
-            var transportCost = parseInt(selectedOption.getAttribute("data-cost")); // Get cost
-            document.getElementById("checkRTopDetTransport").innerText=transportCost
-            checkoutMath(transportCost)
-        });
-
-    }).catch(error => {
-        console.error("Error fetching locations: ", error);
-    });
+    }
+    
 }
+
+function getFormattedDate(date = new Date()) {
+    const day = date.getDate();
+    const suffix = (day % 10 === 1 && day !== 11) ? 'st' :
+                   (day % 10 === 2 && day !== 12) ? 'nd' :
+                   (day % 10 === 3 && day !== 13) ? 'rd' : 'th';
+    const monthNames = ["Ja", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const month = monthNames[date.getMonth()];
+    const year = `'${date.getFullYear().toString().slice(-2)}`;
+    console.log(`${day}${suffix} ${month} ${year}`)
+    return `${day}${suffix} ${month} ${year}`;
+  }
+  function getFormattedTime(date = new Date()) {
+    let hours = date.getHours();
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    const ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12 || 12; // Convert 0 to 12 for 12-hour format
+    console.log(`${hours}:${minutes} ${ampm}`)
+
+    return `${hours}:${minutes} ${ampm}`;
+  }
 
 async function payNow(){
     var sltCounty=document.querySelector(".delCountyBtnActive").innerText; 
@@ -75,7 +102,6 @@ async function payNow(){
         var route=document.getElementById("Route").value;
         var dlArea=document.getElementById("delAreaInput").value;
         var delBuilding=document.getElementById("delDetBuildingInp").value;
-        console.log("nm:", nm, "delfon:", delfon, "sltCounty:", sltCounty, "town:", town, "route:", route, "dlArea:", dlArea, "delBuilding:", delBuilding);
         if(nm&&delfon&&route&&dlArea&&delBuilding){
             var county= "Nairobi"
           try {
@@ -87,7 +113,7 @@ async function payNow(){
                     'Content-Type':'application/json'
     
                 },
-                body:JSON.stringify({nm,delfon,em,county,route,town:"",dlArea,delBuilding,uid})
+                body:JSON.stringify({nm,delfon,em,county,route,town:"",dlArea,delBuilding,uid,data:getFormattedDate(),time:getFormattedTime()})
             })
             const result = await response.json()
             if(result.status==true){
@@ -116,6 +142,8 @@ async function payNow(){
         }
 
     }else{
+         document.getElementById("payNowBtn").style.display="none"
+        document.getElementById("checkPayLoader").style.display="block"
         var county=document.getElementById("delCountyInput").value;
         var town=document.getElementById("delCountyTownInput").value;
         if(nm,delfon,county,town){
@@ -127,7 +155,7 @@ async function payNow(){
                     headers:{
                         'Content-Type':'application/json'
                     },
-                    body:JSON.stringify({nm,delfon,em,county,route:"",town,uid,dlArea:"",delBuilding:""})
+                    body:JSON.stringify({nm,delfon,em,county,route:"",town,uid,dlArea:"",delBuilding:"",data:getFormattedDate(),time:getFormattedTime()})
                 })
                 const result = await response.json()
                 if(result.status==true){
@@ -163,12 +191,21 @@ async function payNow(){
 function updateDelChoice(){
     var sltCounty=document.querySelector(".delCountyBtnActive").innerText;
     if(sltCounty=="Nairobi"){
-        document.getElementById("delCountyInputWrap").style.display="none";
-        document.getElementById("delCountyTownWrap").style.display="none";
-        document.getElementById("delDetRoute").style.display="block";
-        document.getElementById("delDetArea").style.display="block";
-        document.getElementById("delDetBuilding").style.display="block";
+        var r =document.getElementById("Route");
+        if(r.value==""){
+            checkoutMath(0)
+        }else{
+            selectedRoute(r)
+            document.getElementById("delCountyInputWrap").style.display="none";
+            document.getElementById("delCountyTownWrap").style.display="none";
+            document.getElementById("delDetRoute").style.display="block";
+            document.getElementById("delDetArea").style.display="block";
+            document.getElementById("delDetBuilding").style.display="block";
+        }
+
     }else{
+        checkoutMath(0)
+
         document.getElementById("delCountyInputWrap").style.display="flex";
         document.getElementById("delCountyTownWrap").style.display="flex";
         document.getElementById("delDetRoute").style.display="none";

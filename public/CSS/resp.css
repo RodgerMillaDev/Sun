@@ -472,8 +472,7 @@
  
     
 .buyandCart{
-    width: 95%;
-    height: 35px;
+    width: 100%;
     justify-content: space-around;
     align-items: center;
     flex-direction: row-reverse;
@@ -481,9 +480,22 @@
     transition: .3s ease;
 
 }
+.tocartShopBtn{
+    width: 35px;
+    cursor: pointer;
+    height: 35px;
+    color: aliceblue;
+    background: rgb(25, 25, 25);
+    color: aliceblue;
+    border-radius: 50%;
+    border: none;
+    background: var(--priDark-color);
+    font-size: 20px;
+    transition: .3s ease;
+}
 
 .spBottom h4{
-    text-align: center;
+    text-align: start;
     font-weight: 100;
     font-size: .9rem;
     font-weight: 600;
@@ -493,19 +505,7 @@
     font-size: .9rem;
     margin: 4px 0;
 }
-.spBottom .buyshopBtn{
-    width: 70%;
-    cursor: pointer;
-    height: 40px;
-    border-radius: 30px;
-    border: none;
-    background: var(--priDark-color);
-    font-family:Jost;
-    transition: .3s ease;
-    color: aliceblue;
-    font-size: 15px;
 
-}
 .catDivActive{
     background: var(--priDark-color);
 

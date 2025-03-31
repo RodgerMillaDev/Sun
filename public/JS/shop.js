@@ -56,30 +56,54 @@ function renderProducts(){
        shopItems.forEach(shopitem => {
         var pname=shopitem.data().productName;
         var ppricel=(parseInt(shopitem.data().productPrice)).toLocaleString();
-        var pprice=shopitem.data().productPrice;
+        var pprice=parseInt(shopitem.data().productPrice);
         var pid=shopitem.data().productDocId;
         var pimg=shopitem.data().productUrl;
         var pcat=shopitem.data().productCat;
         var pdesc=shopitem.data().productDesc;
         var pdisc=shopitem.data().productDiscount;
-
-
-        productCard+=
-        `
-        <div class="shopProduct">
-            <div class="spTop">
-                <img width="10px" src=${pimg} alt="">
-            </div>
-            <div class="spBottom">
-                <h4>${pname}</h4>
-                <p>Ksh. ${ppricel}</p>
-                <div class="buyandCart">
-                <button class="buyshopBtn" onclick="toBuy('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}')">Buy</button>
-                <button class="tocartShopBtn" onclick="addtoCartAllPro('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}')"><i class="icofont-cart-alt"></i></button>
+        var pdi=parseInt(shopitem.data().discountPercentage);
+        if(pdi>0){
+            var rperc=100-pdi;
+            var newPrice=(Math.ceil((rperc*pprice)/100)).toLocaleString()
+            productCard+=
+            `<div class="shopProduct">
+                <div class="spTop">
+                    <img width="10px" src=${pimg} alt="">
+                </div>
+                <div class="spBottom">
+                    <h4>${pname}</h4>
+                    <div class="ProdPrices">
+                                <p class="oldPrice">Ksh. ${ppricel}</p>
+                                <p class="newPrice">Ksh. ${newPrice}</p>
+                    </div>
+                    <div class="buyandCart">
+                    <button class="buyshopBtn" onclick="toBuy('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}','${pdi}')">Buy</button>
+                    <button class="tocartShopBtn" onclick="addtoCartAllPro('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}','${pdi})"><i class="icofont-cart-alt"></i></button>
+                    </div>
                 </div>
             </div>
-        </div>
-        `
+            `
+        }else{
+            productCard+=
+            `
+            <div class="shopProduct">
+                <div class="spTop">
+                    <img width="10px" src=${pimg} alt="">
+                </div>
+                <div class="spBottom">
+                    <h4>${pname}</h4>
+                    <div class="ProdPrices">
+                        <p class="newPrice">Ksh. ${ppricel}</p>
+                    </div>
+                    <div class="buyandCart">
+                   <button class="buyshopBtn" onclick="toBuy('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}','${pdi}')">Buy</button>
+                    <button class="tocartShopBtn" onclick="addtoCartAllPro('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}','${pdi}')"><i class="icofont-cart-alt"></i></button>
+                    </div>
+                </div>
+            </div>
+            `
+        } 
        });
        document.getElementById("shopProductsWrapper").innerHTML=productCard
     })
@@ -125,20 +149,10 @@ function addtoCartViewPro() {
                 if (newCartItem) {
                     newCartItem.productQuantity = updatedQuantity;
                     userCartItems.push(newCartItem);
-
                     dbFirestore.collection("Users").doc(uid).update({
                         cartItems: userCartItems
                     }).then(() => {
                         updateCartCount();
-                        Swal.fire({
-                            icon: "success",
-                            title: "Added to cart",
-                            toast: true,
-                            position: "top-end",
-                            showConfirmButton: false,
-                            timer: 3000,
-                            timerProgressBar: true
-                        });
                     });
                 }
             } else {
@@ -256,187 +270,30 @@ function readNewOrder() {
 }
 
 
-            
+function updateGrandTotal() {
+    function parseLocalizedNumber(str) {
+    return parseInt(str.replace(/[^0-9-]/g, ""), 10);
+    }
 
+    var cipAll = 0;
+    var cartItemPrices = document.querySelectorAll(".cartproductTotalPriceSingle");
+    cartItemPrices.forEach(cartItemPrice => {
+        var cip = parseInt(parseLocalizedNumber(cartItemPrice.innerText)) || 0;
+        cipAll += cip;
+    });
 
-// function toCart(){
-//     if(isLoggedIn){
+    // Apply promo discount if available
+    var discountedTotal = Math.ceil(cipAll);
+    if (appliedPromoPerc > 0) {
+        discountedTotal = Math.ceil(cipAll - (cipAll * (appliedPromoPerc / 100)));
+    }
+    // Update localStorage and UI
+    localStorage.setItem("grandTotal", discountedTotal);
+    localStorage.setItem("PromoCode", appliedPromoPerc);
+    document.getElementById("totalCartCost").innerText = discountedTotal.toLocaleString();
+    document.getElementById("cartPromoPercDiscount").innerText = appliedPromoPerc;
+    document.getElementById("grandTotalCartItems").innerText = discountedTotal.toLocaleString();
 
-//         var cartItemDiv="";
-//         document.getElementById("drawerTitle").innerText='My Cart'
-//         document.getElementById("actDrawerProfile").style.right='-101%'
-//         document.getElementById("actDrawerProduct").style.right='-101%'
-//         document.getElementById("actDrawerShop").style.right='-101%'
-//         document.getElementById("checkoutPage").style.right='-101%'
-//         document.getElementById("actDrawerSuccessCheck").style.right='-101%'
-//         document.getElementById("actDrawerCart").style.right='0%'
-//         var availableCartItem=allCartItems.filter(item => item !=='')
-//       if(availableCartItem.length!=0){
-
-
-
-//         availableCartItem.forEach((cartItem)=>{
-        
-        
-//             var productName=cartItem.productName
-//             var productDocId=cartItem.productDocId
-//             var productCat=cartItem.productCat
-//             var productPrice=cartItem.productPrice
-//             var productUrl=cartItem.productUrl
-//             var productDesc=cartItem.productDesc
-//             var productQuantity=cartItem.productQuantity
-//             var productDiscount=cartItem.productDiscount
-//             var productTotalPrice=productPrice*productQuantity
-
-    
-    
-//             cartItemDiv+=`
-            
-    
-//                             <div class="cartItem" id="cartItem${productDocId}">
-
-//                                 <div class="cartItemWrap">
-//                                     <div class="cartImgNDetail">
-//                                          <p class="cartProdOrgPrice" id="cartProdName${productDocId}">${productName}</p>
-//                                          <p class="cartProdOrgPrice" id="cartProdOrgPrice${productDocId}">${productPrice}</p>
-//                                          <p class="cartProdOrgPrice" id="cartProDocId${productDocId}">${productDocId}</p>
-//                                          <p class="cartProdOrgPrice" id="cartProUrl${productDocId}">${productUrl}</p>
-//                                          <p class="cartProdOrgPrice" id="cartProCat${productDocId}">${productCat}</p>
-//                                          <p class="cartProdOrgPrice" id="cartProDesc${productDocId}">${productDesc}</p>
-//                                          <p class="cartProdOrgPrice" id="cartProQuantity${productDocId}">${productQuantity}</p>
-//                                          <p class="cartProdOrgPrice" id="cartProDiscount${productDocId}">${productDiscount}</p>
-                                    
-//                                         <img width="100px" src="${productUrl}" alt="">
-//                                         <div class="cartItemDet">
-//                                             <h4>${productName}</h4>
-//                                             <p>${productCat}</p>
-//                                             <h4>Ksh. <span id="cartproductTotalPrice${productDocId}" class="cartproductTotalPriceSingle">${productTotalPrice}</span> </h4>
-//                                         </div>
-//                                     </div>
-                                  
-//                                     <div class="quantNRemove">
-//                                         <div class="remvCartItem" onclick="removeCartItem('${productDocId}')">
-//                                               <i class="fa-solid fa-trash"></i>
-//                                         </div>
-//                                         <div class="quantCart">
-//                                                    <div class="minusItemCart" onclick="minusProductQuantityCart('${productDocId}')">
-//                                                 <p>-</p>
-//                                             </div>
-//                                             <p  id="cartitemnumber${productDocId}">${productQuantity}</p>
-                                    
-
-//                                               <div class="addItemCart" onclick="addProductQuantityCart('${productDocId}')">
-//                                                <p>+</p>
-//                                             </div> 
-//                                         </div>
-//                                     </div>
-//                                 </div>
-//                             </div>
-             
-//             `
-    
-//         })
-
-//       }else{
-//         console.log('no cart item')
-        
-//         cartItemDiv=`
-//             <div id="emptyCart">
-//                             <img src="./Media/empty cart.png" alt="">
-//                             <p>Your cart is empty</p>
-//                         </div>
-
-//           `
-//       }
-      
-//      // THEN, calculate totals
-//         setTimeout(() => {
-//         updateGrandTotal()
-//         }, 100); 
-//     document.getElementById("cartItemsWrap").innerHTML=cartItemDiv;
-
-//     }else{
-//         const Toast = Swal.mixin({
-//             toast: true,
-//             position: "top-end",
-//             showConfirmButton: false,
-//             timer: 3000,
-//             timerProgressBar: true,
-//             didOpen: (toast) => {
-//               toast.onmouseenter = Swal.stopTimer;
-//               toast.onmouseleave = Swal.resumeTimer;
-//             }
-//           });
-//           Toast.fire({
-//             icon: "warning",
-//             title: "Sign in to proceed"
-//           });
-        
-//         }
-    
-// }
-
-// function removeCartItem(productID){
-
-//       // Retrieve the document containing the array from Firestore
-//       dbFirestore.collection("Users").doc(uid).get().then((doc) => {
-//           if (doc.exists) {
-      
-//               // Get the current array from the document data
-//               let cartArray = doc.data().cartItems || [];
-//               // Find the index of the item to delete in the array
-//               const indexToDelete = cartArray.findIndex(item => item.productDocId === productID);
-//               // If the item is found, remove it from the array
-//               if (indexToDelete !== -1) {
-//                 document.getElementById("cartItem"+productID).remove(); 
-
-//                   cartArray.splice(indexToDelete, 1); // Remove the item at the found index
-//                   console.log(cartArray)
-//                   dbFirestore.collection("Users").doc(uid).update({
-//                         cartItems: cartArray
-//                     }).then(() => {
-                
-//                         console.log("Item deleted successfully.");
-//                         updateGrandTotal()
-//                         updateCartCount(uid)
-//                         if(cartArray==''){
-
-                           
-                              
-//                              var  cartItemDiv=`
-//                                 <div id="emptyCart">
-//                                                 <img src="./Media/empty cart.png" alt="">
-//                                                 <p>Your cart is empty</p>
-//                                             </div>
-
-
-//                             `
-//                             document.getElementById("cartItemsWrap").innerHTML=cartItemDiv;
-
-                            
-//                         }else{
-
-//                         }
-            
-//                     }).catch((error) => {
-//                         console.error("Error updating document:", error);
-//                     });
-//               } else {
-//                   console.log("Item not found in the cart.");
-//               }
-      
-              
-//           } else {
-//               console.log("User document not found.");
-//           }
-//       }).catch((error) => {
-//           console.error("Error getting document:", error);
-//       });
-      
-// }
-
-
-
-
+}
 
 

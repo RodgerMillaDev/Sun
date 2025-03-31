@@ -268,7 +268,8 @@ document.querySelector(".shopSearch").classList.add("opsSearch")
 function opsLeave(){
 document.querySelector(".shopSearch").classList.remove("opsSearch")
 }
-function toBuy(pid,pprice,pdesc,pimg,pname,pcat,pdisc){
+function toBuy(pid,pprice,pdesc,pimg,pname,pcat,pdisc,pdi){
+    console.log("aloo")
     var toBuyArray={
         productDocId:pid,
         productCat:pcat,
@@ -278,11 +279,18 @@ function toBuy(pid,pprice,pdesc,pimg,pname,pcat,pdisc){
         productDesc:pdesc,
         productQuantity:"1",
         productDiscount:pdisc,
+        discountPercentage:pdi
     }
     localStorage.setItem("toBuyJSON",JSON.stringify(toBuyArray))
     if(!pid || pid===""){
         return;
     }else{
+        var vprice=pprice;
+        var pdiN=parseInt(pdi)
+        if(pdiN>0){
+            var rperc=100-pdiN;
+            vprice=(Math.ceil((rperc*pprice)/100))
+        }
     document.getElementById("fidiShopOffer").style.top='0vh'
     document.getElementById("catnSearchCont").style.top='35vh'
     document.getElementById("shopProducts").style.top='45vh'
@@ -295,11 +303,12 @@ function toBuy(pid,pprice,pdesc,pimg,pname,pcat,pdisc){
     document.getElementById("actDrawerProduct").style.right='0%'
     document.getElementById("viewProName").innerText=pname
     document.getElementById("viewProCat").innerText=pcat
-    document.getElementById("viewProPrice").innerText=(parseInt(pprice)).toLocaleString()
+    document.getElementById("viewProPrice").innerText=(vprice).toLocaleString()
     document.getElementById("viewProDesc").innerText=pdesc
     document.getElementById("viewProId").innerText=pid
-    document.getElementById("viewOrgPrice").innerText=pprice
+    document.getElementById("viewOrgPrice").innerText=vprice;
     document.getElementById("viewProImg").src=pimg
+
     }
 }
 function toAdminpanel(){
@@ -308,3 +317,28 @@ function toAdminpanel(){
 function cmpltPurchase(){
     window.location.href="index.html"
 }
+async function strtBackend() {
+    try {
+        console.log("Sending request...");
+        const url = "https://official-backend-sunup.onrender.com/Alooo";
+        const response = await fetch(url, {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const result = await response.json();  // Expecting a JSON response
+        console.log(result.message);
+    } catch (error) {
+        console.error("Error fetching data:", error);
+    }
+}
+
+strtBackend();
+
+

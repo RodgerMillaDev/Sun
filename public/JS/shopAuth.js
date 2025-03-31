@@ -46,31 +46,3 @@ function shoptoAuth(){
 
 }
 
-
-function updateGrandTotal() {
-    function parseLocalizedNumber(str) {
-    return parseInt(str.replace(/[^0-9-]/g, ""), 10);
-}
-
-    cipAll = 0;
-    var cartItemPrices = document.querySelectorAll(".cartproductTotalPriceSingle");
-    cartItemPrices.forEach(cartItemPrice => {
-        var cip = parseInt(parseLocalizedNumber(cartItemPrice.innerText)) || 0;
-        cipAll += cip;
-    });
-
-    // Apply promo discount if available
-    var discountedTotal = Math.ceil(cipAll);
-    if (appliedPromoPerc > 0) {
-        discountedTotal = Math.ceil(cipAll - (cipAll * (appliedPromoPerc / 100)));
-    }
-
-    // Update localStorage and UI
-    localStorage.setItem("grandTotal", discountedTotal);
-    localStorage.setItem("PromoCode", appliedPromoPerc);
-    document.getElementById("totalCartCost").innerText = discountedTotal.toLocaleString();
-    document.getElementById("cartPromoPercDiscount").innerText = appliedPromoPerc;
-    document.getElementById("grandTotalCartItems").innerText = discountedTotal.toLocaleString();
-}
-
-
