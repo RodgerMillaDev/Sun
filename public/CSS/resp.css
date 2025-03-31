@@ -186,20 +186,37 @@
     }
 
     .selectOrdersToview{
-        display: none;
+        /* display: none; */
+        
     }
+    .selectOrdersToview p{
+        background: var(--sec-color);
+        color: aliceblue;
+        margin: 0 5px;
+        height: 35px;
+        font-size: .7rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 10px;
+        border-radius: 20px;
+    }
+  
     .adminDashRecentOrdersWrap table tr{
         height: 40px;
         text-align: center;
         font-size: .8rem;
         width: 90%;
     }
-    .orderNoTb,
-    .orderPhoneTb,
-    .orderDateTb,
-    .orderDateTb
+    #ordersTable tbody tr td{
+        font-size: 1px !important;
+    }
+    .orderNoTb p,
+    .orderPhoneTb p,
+    .orderDateTb p,
+    .orderDateTb p
     {
-        font-size: .08rem;
+        font-size: .85rem;
   
     }
     .admWebInfoPlacer{
@@ -975,6 +992,15 @@
     width: 60%;
     margin: 15px 0;
     text-align: center;
+}
+.viewOrderWrap{
+    width: 95vw;
+    background: aliceblue;
+    height: 75vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
 }
 
 .checkTrxStatusPlacer{

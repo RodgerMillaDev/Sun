@@ -2067,7 +2067,7 @@ cursor: pointer;
     align-items: center;
 }
 .adminDashRecentOrdersWrap{
-    height: 32vh;
+    height: 30vh;
     overflow-y: auto;
     overflow-x: hidden;
     width: 100%;
@@ -2630,4 +2630,125 @@ height: 10vh;
     color: var(--textGreen-color);
     font-family: Jost;
 
+}
+
+#viewOrder{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    transition: .3s ease;
+    display: none;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+}
+#viewID{
+    position: absolute;
+    transform: scale(.0000001);
+}
+
+.viewOrderWrap{
+    width: 30vw;
+    background: aliceblue;
+    height: 75vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+.viewOrderPlacer{
+    width: 90%;
+    height: 95%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.viewOrderTop{
+    height: 25%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.viewOrderTop h4{
+    color: var(--priDark-color);
+    width: 100%;
+    text-align: center;
+}
+.viewOrderMid{
+    height: 65%;
+    width: 100%;
+    overflow-y:auto ;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+
+}
+.viewOrderBtm{
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.viewOrderBtm button{
+    width: 49%;
+    cursor: pointer;
+    height: 50px;
+    border: none;
+    border-radius: 50px;
+    background: var(--priDark-color);
+    color: var(--textGreen-color);
+    font-family: Jost;
+
+}
+
+.viewOrderCart{
+    width: 98%;
+    height: 100px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+    background: aliceblue;
+    margin-top: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+.vocPlacer{
+    display: flex;
+    flex-direction: row;
+    height: 90%;
+    width: 95%;
+}
+
+.vocImg {
+    width: 20%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.vocImg img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+.vocCont{
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: end;
+}
+.vocCont p{
+    font-size: .9rem;
+    margin: 2px;
+    width: 90%;
+    text-align: end;
 }

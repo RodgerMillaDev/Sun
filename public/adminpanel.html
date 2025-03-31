@@ -25,6 +25,30 @@
 
     </div>
     </div>
+    <div id="viewOrder">
+        <div class="viewOrderWrap">
+            <div class="viewOrderPlacer">
+                <div class="viewOrderTop">
+                    <h4 id="voname"></h4>
+                    <h4 id="vofon"></h4>
+                    <h4 id="voCounty"></h4>
+                    <h4 id="vodrive"><span id="voroute"></span> - <span id="voarea"></span></h4>
+                    <h4 id="vobuilding"></h4>
+                    <h4 id="votown"></h4>
+                    <p id="viewID"></p>
+                </div>
+                <div class="viewOrderMid" id="viewOrderMid">
+
+
+                </div>
+                <div class="viewOrderBtm">
+                    <button onclick="removeViewOrder()">Back</button>
+                    <button>Clear</button>
+                </div>
+            </div>
+        </div>
+       
+    </div>
     <section id="AdminPanel">
 
         <div class="adminLeft" id="adminMenuNavId">
@@ -120,7 +144,7 @@
                                         <h3>My Operations</h3>
                                         <div class="vseparator"></div>
                                         <div class="operationsWrap">
-                                            <div class="operation">
+                                            <div class="operation" onclick="getSMSBalance()">
                                                 <div class="opIcon">
                                                     <i class="icofont-bell-alt"></i>
                                                 </div>
@@ -167,12 +191,12 @@
                                     <div class="adminSumTop">
                                         <p>Orders</p>
                                         <div class="miniSep"></div>
-                                        <p>Total 0</p>
+                                        <p>Total <span id="totalOrders">0</span></p>
                                     </div>
                                     <div class="adminSumBtm">
-                                        <p>Total Sale</p>
+                                        <p>Total Sales</p>
                                         <div class="miniSep"></div>
-                                        <p>Ksh 0</p>
+                                        <p>Ksh. <span id="allSales">0</span></p>
                                     </div>
                                 </div>
     
@@ -183,9 +207,8 @@
                             <div class="adminDashboardBottomTitle">
                                 <h3>Pending Orders</h3>
                                 <div class="selectOrdersToview">
-                                    <p>All </p>
-                                    <p >Completed </p>
-                                    <p class="activeOrderList">Pending</p>
+                                    <p class="OrderList activeOrderList">Pending</p>
+                                    <p class="OrderList">Completed </p>
                                 </div>
     
                             </div>
@@ -196,48 +219,12 @@
                                             <th>Order No.</th>
                                             <th>Phone</th>
                                             <th>Date</th>
-                                            <th>Status</th>
+                                            <th>Time</th>
                                         </tr>
                                         
                                     </thead>
                                   
-                                    <tbody>
-                                        <tr>
-                                            <td class="orderNoTb"><p>#539593</p> </td>
-                                            <td class="orderPhoneTb"><p>0708004700</p></td>
-                                            <td class="orderDateTb"> <p>3rd May '25</p></td>
-                                            <td class=" orderDateTb orderPending"><p>Pending</p></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="orderNoTb"><p>#539593</p> </td>
-                                            <td class="orderPhoneTb"><p>0708004700</p></td>
-                                            <td class="orderDateTb"> <p>3rd May '25</p></td>
-                                            <td class=" orderDateTb orderPending"><p>Pending</p></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="orderNoTb"><p>#539593</p> </td>
-                                            <td class="orderPhoneTb"><p>0708004700</p></td>
-                                            <td class="orderDateTb"> <p>3rd May '25</p></td>
-                                            <td class=" orderDateTb orderPending"><p>Pending</p></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="orderNoTb"><p>#539593</p> </td>
-                                            <td class="orderPhoneTb"><p>0708004700</p></td>
-                                            <td class="orderDateTb"> <p>3rd May '25</p></td>
-                                            <td class=" orderDateTb orderPending"><p>Pending</p></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="orderNoTb"><p>#539593</p> </td>
-                                            <td class="orderPhoneTb"><p>0708004700</p></td>
-                                            <td class="orderDateTb"> <p>3rd May '25</p></td>
-                                            <td class=" orderDateTb orderPending"><p>Pending</p></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="orderNoTb"><p>#539593</p> </td>
-                                            <td class="orderPhoneTb"><p>0708004700</p></td>
-                                            <td class="orderDateTb"> <p>3rd May '25</p></td>
-                                            <td class=" orderDateTb orderPending"><p>Pending</p></td>
-                                        </tr>
+                                    <tbody id="ordersTable">
                                     </tbody>
                                 </table>
     
@@ -405,24 +392,12 @@
                     </div>
                  </div>
                  <!-- upload location end -->
-
-
-
-
-                    
                 </div>
-
-         
-
             </div>
-
         </div>
 
-
         
-    </section>
-
-    
+    </section>    
 <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
@@ -433,6 +408,7 @@
 <script src="./JS/config.js"></script>
 <script src="./JS/index.js"></script>
 <script src="./JS/admin.js"></script>
+<script src="./JS/adminFunc.js"></script>
 
 <script>
 
@@ -453,10 +429,6 @@ function handleFileSelect(event) {
     }
 
 }
-
-
-
-
 
        const animationPath ='./Media/logoLoader.json';
               const animation = lottie.loadAnimation({
