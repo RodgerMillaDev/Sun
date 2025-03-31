@@ -96,6 +96,8 @@ function toLogIn(){
                             name:fn,
                             em:em,
                             uid:user.uid,
+                            fonReg:"",
+                            sexReg:"",
                             cartItems:[]
                         }).then(()=>{
                             const Toast = Swal.mixin({

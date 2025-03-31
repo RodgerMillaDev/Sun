@@ -101,19 +101,7 @@ function toOffers(){
   
 
 }
-function toProfile(){
-    document.getElementById("shopMainMenu").style.left="-103%"
-    document.getElementById("drawerTitle").innerText='Profile Settings'
-    document.getElementById("mobPgLb").innerText='Profile Settings'
 
-    document.getElementById("actDrawerShop").style.right='-103%'
-    document.getElementById("actDrawerProduct").style.right='-103%'
-    document.getElementById("actDrawerCart").style.right='-103%'
-    document.getElementById("checkoutPage").style.right='-103%'
-    document.getElementById("actDrawerSuccessCheck").style.right='-103%'
-    document.getElementById("actDrawerProfile").style.right='0'
-
-}
 
 function toProduct(){
     if(scrW<=768){

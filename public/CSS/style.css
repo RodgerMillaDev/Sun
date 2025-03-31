@@ -2919,3 +2919,7 @@ height: 10vh;
     background: var(--priDark-color);
     color: var(--textGreen-color);
 }
+
+#toadminLink{
+    display: none;
+}
