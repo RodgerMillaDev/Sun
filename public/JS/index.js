@@ -341,4 +341,9 @@ async function strtBackend() {
 
 strtBackend();
 
+function toWhatsapp() {
+    const phoneNumber = "254700249623"; // Replace with the recipient's phone number (use international format without `+`)
+    const message = encodeURIComponent("Hello SunUp Collections,"); // Custom message
 
+    window.location.href = `https://wa.me/${phoneNumber}?text=${message}`;
+}
