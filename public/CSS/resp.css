@@ -1028,3 +1028,12 @@
 }
 
 }
+.viewProductAdminWrap{
+    width: 95vw;
+    background: aliceblue;
+    height: 75vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}

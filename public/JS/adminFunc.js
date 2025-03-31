@@ -36,13 +36,13 @@ function pullAnalysis(){
         console.log(error)
     })
 }
-function pullPendingOrders() {
-    dbFirestore.collection("Orders").where("orderStatus", "==", "pending").get().then((docs) => {
+pullAnalysis()
+function pullOrders(viewStatus) {
+    dbFirestore.collection("Orders").where("orderStatus", "==", viewStatus).get().then((docs) => {
         let orderRow = '';
         docs.forEach(doc => {
             let docId = doc.id;  // ✅ Fix: Correct way to get document ID
             let orderData = doc.data();
-
             let orderId = orderData.orderID;
             let date = orderData.date;
             let orderNumber = orderData.orderNumber;
@@ -55,14 +55,10 @@ function pullPendingOrders() {
             let name = orderData.name;
             let route = orderData.route;
             let town = orderData.town;
-
-            console.log("Cart Items in pullPendingOrders:", cartItems);  // ✅ Debugging
-
             // Encode cartItems properly to avoid issues with special characters
             let encodedCartItems = encodeURIComponent(JSON.stringify(cartItems));
-
             orderRow += `
-               <tr onclick="viewOrder('${docId}', '${orderId}', '${fon}', '${encodedCartItems}', '${county}', '${dlArea}', '${dlBuilding}', '${name}', '${route}', '${town}')">
+               <tr onclick="viewOrder('${viewStatus}','${docId}', '${orderId}', '${fon}', '${encodedCartItems}', '${county}', '${dlArea}', '${dlBuilding}', '${name}', '${route}', '${town}')">
                     <td class="orderNoTb"><p>${orderNumber}</p></td>
                     <td class="orderPhoneTb"><p>${fon}</p></td>
                     <td class="orderDateTb"><p>${date}</p></td>
@@ -77,10 +73,20 @@ function pullPendingOrders() {
     });
 }
 
-pullPendingOrders();
+pullOrders("Pending");
 
-function viewOrder(docId, orderId, fon, cartItems, county, dlArea, dlBuilding, name, route, town) {
+function viewOrder(viewStatus,docId, orderId, fon, cartItems, county, dlArea, dlBuilding, name, route, town) {
     // ✅ Decode and parse cartItems
+
+    if(viewStatus=="Pending"){
+        document.getElementById("viewBackBtn").style.width="49%"
+        document.getElementById("clearBtn").style.display="block"
+    }else{
+        document.getElementById("clearBtn").style.display="none"
+        document.getElementById("viewBackBtn").style.width="100%"
+    }
+    
+    
     let parsedCartItems = JSON.parse(decodeURIComponent(cartItems));
 
     console.log("Cart Items in viewOrder:", parsedCartItems);  // ✅ Console log cartItems
@@ -138,10 +144,13 @@ function clearOrder(){
     var fon=document.getElementById("vofon").innerText;
     var name=document.getElementById("voname").innerText;
     dbFirestore.collection("Orders").doc(docid).update({
-        orderStatus:"completed"
-    }).then(()=>{
+        orderStatus:"Completed"
+    }).then(()=>{    
+        Swal.fire("Order Cleared", `You have cleared ${name}'s order`, "success" )
         sendDelSMS(fon,name)
-        pullPendingOrders()
+        pullOrders("Pending")
+        document.getElementById("viewOrder").style.display="none"
+
     })
 }
 async function sendDelSMS(fon,name){
@@ -166,44 +175,71 @@ async function sendDelSMS(fon,name){
 
 }
 
+function removeViewOrder(){
+    document.getElementById("viewOrder").style.display="none"
+}
+function sltOrderView(e){
+   var viewStatus= e.innerText;
+   var ordersBtn= document.querySelectorAll(".OrderList");
+   ordersBtn.forEach(orderBtn=>[
+    orderBtn.classList.remove("activeOrderList")
+   ])
+   e.classList.add("activeOrderList")
+   pullOrders(viewStatus)
 
-function pullCompleteOrders(){
-    dbFirestore.collection("Orders").where("orderStatus", "==", "completed").get().then((docs) => {
-        let orderRow = '';
-        docs.forEach(doc => {
-            let docId = doc.id;  // ✅ Fix: Correct way to get document ID
-            let orderData = doc.data();
 
-            let orderId = orderData.orderID;
-            let date = orderData.date;
-            let orderNumber = orderData.orderNumber;
-            let fon = orderData.fon;
-            let time = orderData.time;
-            let cartItems = orderData.cartItems;
-            let county = orderData.county;
-            let dlArea = orderData.dlArea;
-            let dlBuilding = orderData.dlBuilding;
-            let name = orderData.name;
-            let route = orderData.route;
-            let town = orderData.town;
+}
 
-            console.log("Cart Items in pullPendingOrders:", cartItems);  // ✅ Debugging
+function vpAdmin(pid,pname,pprice,pdiscount,pdesc,pcat){
+        document.getElementById("viewProductAdmin").style.display="flex"
+        document.getElementById("vpahidID").value=pid
+        document.getElementById("vpaName").value=pname
+        document.getElementById("vpaPrice").value=pprice
+        document.getElementById("vpaOffer").value=pdiscount
+        document.getElementById("vpaCat").value=pcat
+        document.getElementById("vpaDescription").innerText=pdesc
 
-            // Encode cartItems properly to avoid issues with special characters
-            let encodedCartItems = encodeURIComponent(JSON.stringify(cartItems));
 
-            orderRow += `
-               <tr onclick="viewOrder('${docId}', '${orderId}', '${fon}', '${encodedCartItems}', '${county}', '${dlArea}', '${dlBuilding}', '${name}', '${route}', '${town}')">
-                    <td class="orderNoTb"><p>${orderNumber}</p></td>
-                    <td class="orderPhoneTb"><p>${fon}</p></td>
-                    <td class="orderDateTb"><p>${date}</p></td>
-                    <td class="orderDateTb"><p>${time}</p></td>
-               </tr>
-            `;
-        });
+}
 
-        document.getElementById("ordersTable").innerHTML = orderRow;
-    }).catch(error => {
-        console.log("Error fetching orders:", error);
+function removevpAdmin(){
+    document.getElementById("viewProductAdmin").style.display="none"
+
+}
+function deleteProduct(){
+    var pid=document.getElementById("vpahidID").value=pid
+    dbFirestore.collection("Products").doc(pid).delete()
+    .then(() => {
+        document.getElementById("viewProductAdmin").style.display="none"
+        Swal.fire("Product Deleted", "You have successfuly deleted the product", "success")
+        pullAllProducts()
+    })
+    .catch((error) => {
+        console.error("Error removing product: ", error);
     });
+}
+function saveProduct(){
+    var pid=document.getElementById("vpahidID").innerText;
+    var pname=document.getElementById("vpaName").value;
+    var pprice=document.getElementById("vpaPrice").value;
+    var pdiscount = document.getElementById("vpaOffer").value;
+    var pcat=document.getElementById("vpaCat").value;
+    var pdesc=document.getElementById("vpaDescription").innerText;
+    dbFirestore.collection("Products").doc(pid).update({
+        productName:pname,
+        productPrice:pprice,
+        productDiscount:pdiscount,
+        productCategory:pcat,
+        productDescription:pdesc,
+    }).then(()=>{
+        document.getElementById("viewProductAdmin").style.display="none"
+        Swal.fire("Product Saved", "You have successfuly updated product data", "success")
+
+    }).catch((error) => {
+        console.error("Error removing product: ", error);
+    });
+
+
+
+
 }

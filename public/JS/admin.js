@@ -1,27 +1,15 @@
 auth.onAuthStateChanged((user)=>{
     if(user){
         var uid=user.uid;
-        console.log(uid)
-        if(uid==="VBiIUAdnhVTTB2ihVTBmKrXkK6f1"){
-            Swal.fire("Auth Error", "You are not the admin", "info")
-
-            document.getElementById("preloaderWrap").style.display="none"
-    
+        if(uid==="VBiIUAdnhVTTB2ihVTBmKrXkK6f1" || uid==="kJOGf3BXgpPnrj94lDuox3qdPBf1"){
+            document.getElementById("preloaderWrap").style.display="none"    
         }else{
-            document.getElementById("preloaderWrap").style.display="none"
-
-            // window.location.href="index.html"
-            Swal.fire("Auth Error", "You are not the admin", "info")
+            window.location.href="index.html"
         }
     }else{
         window.location.href="index.html"
-    }
-  
+    }  
 })
-
-
-
-
 function toDashboard(){
     // document.getElementById("shopMainMenu").style.left="-103%"
     document.getElementById("adminMenuNavId").style.left="-103%"
@@ -69,8 +57,6 @@ function toProducts(){
     document.getElementById("adminDashboard").style.right="-105%"
     document.getElementById("AllProducts").style.right="0%"
 }
-
-
 async function uploadProduct(e){
     var ProductImg=document.getElementById("ProImageFileInput").files[0];
     var ProductName=document.getElementById("UploadProductName").value;
@@ -131,8 +117,11 @@ function pullAllProducts(){
             var pname=product.data().productName;
             var pprice=product.data().productPrice;
             var pdiscount=product.data().productDiscount;
+            var pcat=product.data().productCat;
+            var pdesc=product.data().productDesc;
+            var pid=product.data().productDocId;
             productListDiv +=`
-             <tr>
+             <tr onclick="vpAdmin('${pid}','${pname}','${pprice}','${pdiscount}','${pdesc}','${pcat}')">
                 <td class="prodNameTb"><p>${pname}</p> </td>
                 <td class="prodPiceTb"><p>${pprice}</p></td>
                 <td class="prodOfferTb"> <p>${pdiscount}% 0FF</p></td>

@@ -25,6 +25,42 @@
 
     </div>
     </div>
+    <div id="viewProductAdmin">
+        <div class="viewProductAdminWrap">
+            <div class="viewProductAdminPlacer">
+                <div class="vpaTop">
+                    <h4>Product Edit</h4>
+                    <p id="vpahidID"></p>
+                    <div class="cancelPAV" onclick="removevpAdmin()">
+                        <i class="fa-solid fa-xmark"></i>
+                    </div>
+                </div>
+                <div class="vpaMid">
+                    <div class="vpaMidInWrap">
+                        <input type="text" name="" id="vpaName" placeholder="Product Name">
+                    </div>
+                    <div class="vpaMidInWrap">
+                        <input type="number" name="" id="vpaPrice" placeholder="Product Price">
+                    </div>
+                   
+                    <div class="vpaMidInWrap">
+                        <input type="number" name="" id="vpaOffer" placeholder="Percentage Offer">
+                    </div>
+                    <div class="vpaMidInWrap">
+                        <input type="text" name="" id="vpaCat" placeholder="Product Category">
+                    </div>
+                    <div class="vpaMidInWrapTxt">
+                        <textarea name="" id="vpaDescription" placeholder="Product Description"></textarea>
+                    </div>
+                </div>
+                <div class="vpaBtm">
+                    <button onclick="deleteProduct()">Delete</button>
+                    <button onclick="saveProduct()">Save</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
     <div id="viewOrder">
         <div class="viewOrderWrap">
             <div class="viewOrderPlacer">
@@ -42,8 +78,8 @@
 
                 </div>
                 <div class="viewOrderBtm">
-                    <button onclick="removeViewOrder()">Back</button>
-                    <button>Clear</button>
+                    <button id="viewBackBtn" onclick="removeViewOrder()">Back</button>
+                    <button id="clearBtn" onclick="clearOrder()">Clear</button>
                 </div>
             </div>
         </div>
@@ -207,8 +243,8 @@
                             <div class="adminDashboardBottomTitle">
                                 <h3>Pending Orders</h3>
                                 <div class="selectOrdersToview">
-                                    <p class="OrderList activeOrderList">Pending</p>
-                                    <p class="OrderList">Completed </p>
+                                    <p class="OrderList activeOrderList" onclick="sltOrderView(this)">Pending</p>
+                                    <p class="OrderList" onclick="sltOrderView(this)">Completed</p>
                                 </div>
     
                             </div>
@@ -243,7 +279,7 @@
                             <h3>All Products</h3>
                             <div class="selectTableToview">
                                 <p class="activeBtnList">All </p>
-                                <p >On Offer </p>
+                                <!-- <p >On Offer </p> -->
                             </div>
                         </div>
                         <div class="allProductsTable">
