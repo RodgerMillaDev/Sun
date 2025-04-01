@@ -102,7 +102,6 @@ function toOffers(){
 
 }
 
-
 function toProduct(){
     if(scrW<=768){
         document.getElementById("shopMainMenu").style.left="-103%"
@@ -133,12 +132,9 @@ function toProduct(){
     }
   
 }
-
-
 function openFonNav(){
-    document.getElementById("adminMenuNavId").style.left="0%"
+document.getElementById("adminMenuNavId").style.left="0%"
 }
-
  function toCategory(e){
     document.getElementById("shopMainMenu").style.left="-103%"
     var catName=e.querySelector("p").innerText;

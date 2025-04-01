@@ -113,7 +113,7 @@ async function payNow(){
                     'Content-Type':'application/json'
     
                 },
-                body:JSON.stringify({nm,delfon,em,county,route,town:"",dlArea,delBuilding,uid,data:getFormattedDate(),time:getFormattedTime()})
+                body:JSON.stringify({nm,delfon,em,county,route,town:"",dlArea,delBuilding,uid,date:getFormattedDate(),time:getFormattedTime()})
             })
             const result = await response.json()
             if(result.status==true){
@@ -155,7 +155,7 @@ async function payNow(){
                     headers:{
                         'Content-Type':'application/json'
                     },
-                    body:JSON.stringify({nm,delfon,em,county,route:"",town,uid,dlArea:"",delBuilding:"",data:getFormattedDate(),time:getFormattedTime()})
+                    body:JSON.stringify({nm,delfon,em,county,route:"",town,uid,dlArea:"",delBuilding:"",date:getFormattedDate(),time:getFormattedTime()})
                 })
                 const result = await response.json()
                 if(result.status==true){
