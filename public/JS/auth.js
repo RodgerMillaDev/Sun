@@ -26,7 +26,7 @@ function toLogIn(){
                 .then((userCred) => {
                     var user = userCred.user;
                     if(user.emailVerified){
-                        window.location.href='shop.html'
+                        window.location.href='index.html'
                     
                     }else{
                             // Email is not verified, prevent sign-in
