@@ -331,3 +331,7 @@ function toWhatsapp() {
 
     window.location.href = `https://wa.me/${phoneNumber}?text=${message}`;
 }
+
+function toWeb(){
+    window.location.href="index.html"
+}
