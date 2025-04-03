@@ -381,6 +381,7 @@ nav{
 .aboutIntro p{
     font-size: 1.1rem;
     text-align: center;
+    width: 80%;
     color: aliceblue;
 }
 .aboutIntro h2{
@@ -692,7 +693,8 @@ nav{
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 70vh;
+        height: fit-content;
+        padding-top: 5vh;
         background: #001516;
     }
     .footerPlacer{
