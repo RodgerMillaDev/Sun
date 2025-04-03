@@ -45,9 +45,8 @@ function shoptoAuth(){
             localStorage.setItem("carttocheckPrice",0)
             localStorage.setItem("PromoCode",0)
             localStorage.setItem("PromoCode","")
-
             Swal.fire("Signed out successfully").then(()=>{
-              window.location.href="auth.html";
+              window.location.href="index.html";
               
             })
             

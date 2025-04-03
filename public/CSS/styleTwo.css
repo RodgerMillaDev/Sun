@@ -6,12 +6,21 @@
     outline: none;                            
 
 }
+html{
+    scroll-behavior: smooth;
+}
+.fonNavDrawer{
+    display: none;
+}
 button{
     border: none;
     font-family: Jost;
     transition: .3s ease;
     cursor: pointer;
 
+}
+.fonNavIcon{
+    display: none;
 }
 .whatsAppIcon{
     position: fixed;
@@ -188,6 +197,7 @@ nav{
     height: 90vh;
     display: flex;
     justify-content: center;
+    width: 100%;
     align-items: center;
 }
 .heroContLeft{
@@ -210,6 +220,8 @@ nav{
 }
 .heroContLeft p{
     width: 95%;
+    line-height: 30px;
+
     font-size: 1.2rem;
     margin: 20px 0;
 }
@@ -368,6 +380,7 @@ nav{
 }
 .aboutIntro p{
     font-size: 1.1rem;
+    text-align: center;
     color: aliceblue;
 }
 .aboutIntro h2{
@@ -507,6 +520,9 @@ nav{
     font-family: JostBold;
     font-weight: 900;
     color: var(--priDark-color);
+}
+.aboutRight h2 span{
+    color: var(--sec-color);
 }
 .abContInfo{
     position: absolute;

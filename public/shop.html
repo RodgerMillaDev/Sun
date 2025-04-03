@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./CSS/style.css">
+    <link rel="stylesheet" href="./CSS/resp.css">
+    <meta name="format-detection" content="telephone=no">
+    <script src="https://kit.fontawesome.com/df64ffd27a.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./Media/icofont/icofont.min.css">
+    <link rel="stylesheet" href="./Media/icofont/icofont.css">
+    <meta name="description" content="Browse and shop a wide range of household items at Sun Up Collections. Quality home essentials with fast delivery across Kenya. Find everything you need for your home today!">
+    <script type="module" src="https://cdn.jsdelivr.net/npm/ldrs/dist/auto/pulsar.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js" integrity="sha512-jEnuDt6jfecCjthQAJ+ed0MTVA++5ZKmlUcmDGBv2vUI/REn6FuIdixLNnQT+vKusE2hhTk2is3cFvv5wA+Sgg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js" integrity="sha512-jEnuDt6jfecCjthQAJ+ed0MTVA++5ZKmlUcmDGBv2vUI/REn6FuIdixLNnQT+vKusE2hhTk2is3cFvv5wA+Sgg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="shortcut icon" href="./Media/lightBgFav.png" type="image/x-icon">
+    <title>SunUp Collections</title>
+</head>
+<body>
+
+    <div class="whatsappWrapper" onclick="toWhatsapp()">
+        <i class="fa-brands fa-whatsapp"></i> 
+    </div>
+    
+
+    <div id="preloaderWrap">
+    <div id="preloader">
+
+    </div>
+    </div>
+    <section id="Shop">
+         
+        <div class="shopMainMenu" id="shopMainMenu">
+           <div class="mainMenuPlacer">
+             <div class="mainLogo">
+                <img src="./Media/fullLogo.png" alt="">
+                <div class="menuSeparator"></div>
+             </div>
+             
+             <div class="menuLinks">
+                <div class="menuLink" onclick="toHome()">
+                    <i class="icofont-home"></i>
+                    <p>Home</p>
+
+                </div>
+                <div class="menuLink" onclick="toProducts()">
+                    <i class="icofont-tags"></i>
+                    <p>All Products</p>
+
+                </div>
+                
+                <div class="menuLink" onclick="toCart()">
+                    <i class="icofont-cart-alt"></i>
+                    <p>My Cart</p>
+
+                    <div class="lapiCartNumber">
+                        <p id="lapiCartNumber">0</p>
+                    </div>
+
+                </div>
+                <div class="menuLink" onclick="toOffers()">
+                    <i class="icofont-sale-discount"></i>
+                    <p>On Offer</p>
+                </div>
+                <div class="menuLink" onclick="toProfile()">
+                    <i class="icofont-ui-user"></i>
+                    <p>Profile Settings</p>
+
+                </div>
+                <div class="menuLink" id="toadminLink" onclick="toAdminpanel()">
+                    <i class="icofont-chair"></i>
+                    <p>Admin Panel</p>
+                </div>
+             </div>
+             <div class="mainMneuAuth" onclick="shoptoAuth()">
+                <div class="menuLink">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>             
+                           <p id="shopAuth">Sign In</p>
+                </div>
+             </div>
+
+           </div>
+        </div>
+        <div class="vsep">
+
+        </div>
+
+        <div class="shopDrawer">
+            <div class="drawerCont">
+
+            
+
+               <div class="drawerLabel" id="drawerLabel">
+
+                  <div class="pcDrLabel">
+                    <h2 id="drawerTitle">Home</h2>
+                    <div class="switchPortal">
+                        <p class="activePort">Shop</p>
+                        <p>Website</p>
+                    </div>
+                    <div class="drawerAuthsWrap">
+                    <div class="drawerAuths">
+                        <div class="notIcon">
+                            <i class="fa-solid fa-bell"></i>
+                        </div>
+                        <div class="userDrawer">
+                             <img width="10px" src="./Media/newUse.png" alt="">
+                             <p id="LapiNavDp">User</p>
+                        </div>
+                    </div>
+                    </div>
+                  </div>
+                  <div class="fonDrlabel">
+
+                    <div class="fonDrawerLabelPlacer">
+                        <div class="fondrlblTop">
+                            <h2 id="mobPgLb">Home</h2>
+                            <div class="fonminiNav">
+                                <div class="fonCart" onclick="toCart()">
+                                    <p id="fcn">0</p>
+                                    <i class="fa-solid fa-cart-shopping"></i>
+                                </div>
+                                <div class="fonNavIcon" onclick="showFonNav()">
+                                    <i class="fa-solid fa-bars"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fondrlblBtm">
+                           <div class="mobilPortal">
+                            <div class="shopMobile mobPortActive"><p>Shop</p></div>
+                            <div class="webMobile"> <p>Website</p></div>
+                           </div>
+
+                        </div>
+                    </div>
+
+                  </div>
+
+               </div>
+
+               <div class="actDrawerWrap">
+               <div class="actDrawer">
+
+
+                 <!-- products  -->
+                <div class="actDrawerShop" id="actDrawerShop">
+
+                <div class="fidiShopOffer" id="fidiShopOffer">
+                    <div class="offerCont offerCont1">
+                        <div class="offerWrapper">
+                         <div class="offerWrapperPlacer">
+ 
+                         <p class="offerPeriod">Welcome</p>
+                         <!-- <h4>Upgrade Your Home with Quality Essentials</h4>
+                         <h4>Up to</h4> -->
+                         <h2>Make Your Home Complete</h2>
+                         <h2>With Just a Click!</h2>
+                         <div class="offerBtnandCont">
+                             <p>Hurry up don't miss out!</p>
+                             <button onclick="toProducts()">Shop</button>
+                         </div>
+                        </div>
+                        </div>
+                 
+                 </div>
+                 <div class="offerCont offerCont2">
+                        <div class="offerWrapper">
+                         <div class="offerWrapperPlacer">
+ 
+                         <p class="offerPeriod">Limited Offer</p>
+                         <h2>Find Everything You Need in One Place</h2>
+                     
+                         <div class="offerBtnandCont">
+                             <p>Check out  items on offer</p>
+                             <button onclick="toProducts()">Shop</button>
+                         </div>
+                        </div>
+                        </div>
+                 
+                 </div>
+                </div>
+
+                
+                <div class="catnSearchCont" id="catnSearchCont">
+                    <div class="shopSearch" onmouseenter="opsEnt()" onmouseleave="opsLeave()">
+                        <input type="text" placeholder="Search" onkeyup="pullSearched(this)">
+                        <div class="shpSearchBtn">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                    </div>
+                    <div class="vsep2">
+
+                    </div>
+
+                    <div class="categoriesShop">
+                        <div class="catShopWrapper">
+                            <div class="catDiv catDivActive" onclick="toCategory(this)" >
+                                <i class="icofont-cubes"></i>
+                                <p >All</p>
+                            </div>
+                            <div class="catDiv" onclick="toCategory(this)">
+                                <i class="icofont-culinary"></i>
+                                <p>Kitchen</p>
+                            </div>
+                            <div class="catDiv" onclick="toCategory(this)">
+                                <i class="icofont-duotone icofont-plugins"></i>
+                                <p>Appliances</p>
+                            </div>
+                            <div class="catDiv" onclick="toCategory(this)">
+                                <i class="icofont-gift"></i>
+                                <p>Gifts</p>
+                            </div>
+                            <div class="catDiv" onclick="toCategory(this)">
+                                <i class="icofont-travelling"></i>
+                                <p>Travel</p>
+                            </div>
+                            <div class="catDiv" onclick="toCategory(this)">
+                                <i class="icofont-washing-machine"></i>
+                                <p>Laundry</p>
+                            </div>
+                            <div class="catDiv" onclick="toCategory(this)">
+                                <i class="icofont-foot-print"></i>
+                                <p>Shoe Racks</p>
+                            </div>
+                            <div class="catDiv" onclick="toCategory(this)">
+                                <i class="icofont-bed"></i>
+                                <p>Bedroom</p>
+                            </div>
+                            <div class="catDiv" onclick="toCategory(this)">
+                                <i class="icofont-layers"></i>
+                                <p>Organizers & Storage</p>
+                            </div>
+                            <div class="catDiv" onclick="toCategory(this)">
+                                <i class="icofont-baby"></i>
+                                <p>Kids Store</p>
+                            </div>
+                            <div class="catDiv" onclick="toCategory(this)">
+                                <i class="icofont-mop"></i>
+                                <p>Carpets and Rugs</p>
+                            </div>
+                      
+                        </div>
+                    </div>
+                
+                
+                
+                </div>
+
+
+                <div class="shopProducts" id="shopProducts">
+                    <div class="shopProductsWrapper" id="shopProductsWrapper">
+                      
+                      
+            
+                </div>
+
+                </div>
+
+                </div>
+
+                <!-- cart  -->
+
+                <div class="actDrawerCart" id="actDrawerCart">
+
+                    <div class="cartItemsWrap" id="cartItemsWrap">
+
+                        <div id="emptyCart">
+                            <img src="./Media/empty cart.png" alt="">
+                            <p>Your cart is empty</p>
+                        </div>
+
+                    </div>
+                    <div class="promoTotalCart">
+                        <div class="promoTotalCartWrap">
+                            <div class="promoWrap">
+                                <input type="text"  id="shopPromo" placeholder="Promo Code">
+                                <div class="promoBtn" onclick="applyPromo()">
+                                  <p>Apply</p> 
+                                </div>
+                            </div>
+                            <div class="cartCashSummary">
+                                <div class="cartCashSum">
+                                    <p>Sub Total</p>
+                                    <p>Ksh. <span id="totalCartCost">0</span></p>
+                                </div>
+                            
+                                <div class="cartCashSum">
+                                    <p>Discount</p>
+                                    <p> <span id="cartPromoPercDiscount">0.0</span> %</p>
+                                </div>
+                                <div class="cartCashSum">
+                                    <p>Total Cost</p>
+                                    <p>Ksh. <span id="grandTotalCartItems">0</span></p>
+                                </div>
+                            </div>
+                            <button onclick="toCheckout()">Checkout</button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- profile  -->
+
+                <div class="actDrawerProfile" id="actDrawerProfile">
+                    <div class="actDrawerProfPlacer">
+                        <div class="editProfileImage">
+                            <img width="10px" src="./Media/newUse.png" alt="">
+                        </div>
+                        <div class="editProfileInputs">
+                            <div>
+                                <input type="text" name="" id="setName" placeholder="Name">
+                            </div>
+                            <div>
+                                <input type="text" name="" id="setEmail" placeholder="Email">
+                            </div>
+                            <div>
+                                <input type="text" name="" id="setPhone" placeholder="Phone">
+                            </div>
+                            <div>
+                                <input type="text" name="" id="setGender" placeholder="Gender">
+                            </div>
+                            <button id="">Save</button>
+                        </div>
+                    </div>
+                    
+                </div>
+                <!-- check payment  -->
+                <div class="actDrawerSuccessCheck" id="checkTrxStatus">
+                    <div class="checkTrxStatusPlacer">
+                        <div class="checkTrxStatusImage">
+                            <img width="10px" src="./Media/3d-casual-life-delivery-boy-with-boxes (1).webp" alt="">
+                        </div>
+                        <h4>Have you paid already? Kindly confirm your payment</h4>
+                        <div class="confirmPayWrap">
+                        <button id="confirmPaymentBtn" onclick="confirmPay()">Confirm Payment</button>  
+                        <div class="checkPayLoader" id="TrxStatusLoader"> 
+                            <l-pulsar
+                            size="40"
+                            speed="1.4"
+                            color="#179487" 
+                            ></l-pulsar>
+                        </div>                      
+                      </div>
+                    </div>
+                    
+                </div>
+                <!-- success checkout  -->
+                <div class="actDrawerSuccessCheck" id="actDrawerSuccessCheck">
+                    <div class="actDrawerProfPlacer">
+                        <div class="successImage">
+                            <img width="10px" src="./Media/success.png" alt="">
+                        </div>
+                        <h4>Purchased successfuly. Your delivery is on the way</h4>
+                        <div class="successInputs">
+                            <div>
+                                <p>Recipient</p>
+                                <p id="scRecipient"></p>
+                            </div>
+                            <div>
+                                <p>Order No.</p>
+                                <p>#<span id="scorderNumber"></span></p>
+                            </div>
+                            <div>
+                                <p>Paid</p>
+                                <p>Ksh. <span id="scPaid"></span></p>
+                            </div>
+                            <div>
+                                <p>Date</p>
+                                <p id="scdatePaid"></p>
+                            </div>
+                            <div>
+                                <p>Destination</p>
+                                <p id="scDest"></p>
+                            </div>
+                                <button onclick="cmpltPurchase()">Done</button>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+                <!-- product page  -->
+                <div class="actDrawerProduct" id="actDrawerProduct">
+                  <div class="actDrawerProdPlacer">
+                    <div class="actDrawerProdLeft">
+                        <p id="viewProId"></p>
+                        <p id="viewOrgPrice"></p>
+                        <img id="viewProImg" src="" alt="">
+                    </div>
+                    <div class="actDrawerProdRight">
+
+                        <div class="actDrawerProdRightPlacer">
+
+                        <div class="actDrawerProdRightTop">
+                            <h4 id="viewProName"></h4>
+                            <p id="viewProCat"></p>
+                            <h4 >Ksh. <span id="viewProPrice">0</span></h4>
+                        </div>
+                        <div class="actDrawerProdRightBtm">
+                            <div class="productDesc">
+                                <p id="viewProDesc"></p>
+                            </div>
+                           
+                            <div class="selectQuantityProductP">
+                                <div>
+                                      <p>Quantity:</p>
+                                </div>
+                                <div class="qsprod">
+                                    <div class="minusProduct" onclick="minusProductQuantity()">
+                                        <p>-</p>
+                                    </div>
+                                    <div class="ProductQuantity" >
+                                        <p id="ProductQuantityPG">1</p>
+                                    </div>
+                                    <div class="addProduct" onclick="addProductQuantity()">
+                                        <p>+</p>
+                                    </div>
+                                    
+                                </div>
+                               
+                            </div>
+                            <div class="prodtBuyBtn">
+                                <button onclick="addtoCartViewPro()">Add to cart</button>
+                                <!-- <button onclick="toCheckout()">Buy</button> -->
+                            </div>
+                         
+                        </div>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- checkout page  -->
+
+                <div class="checkoutPage" id="checkoutPage">
+                    <div class="checkoutPlacer">
+
+                        <div class="checkoutLeft">
+                            <div class="delTruck">
+                                <img width="100px" src="./Media/van (2).png" alt="">
+                            </div>
+
+                            <div class="delivDetWrap">
+                                <!-- <h4>Delivery Address</h4> -->
+
+                                <div class="delCounty">
+                                    <p>Select County:</p>
+                                    <div class="delCountyBtns">
+                                        <button onclick="delCountyClicked(this)" class="delCountyBtn delCountyBtnActive">Nairobi</button>
+                                        <button onclick="delCountyClicked(this)"  class="delCountyBtn">Past Nairobi</button>
+
+                                    </div>
+                                </div>
+                                <div class="delDet">
+                                    <input type="text" placeholder="Your Name" readonly id="checkoutName" value="" id="delName">
+                                    
+                                 </div>
+                                 <div class="delDet">
+                                    <input type="text" placeholder="Mpesa number" value="" id="delPhone" >
+                                    
+                                 </div>
+                                 <div class="delDet" id="delCountyInputWrap">
+                                    <select name="county" id="delCountyInput" onchange="checkoutMath(0)">
+                                        <option value="">Select County</option>
+                                        <option value="baringo">Baringo</option>
+                                        <option value="bomet">Bomet</option>
+                                        <option value="bungoma">Bungoma</option>
+                                        <option value="busia">Busia</option>
+                                        <option value="elgeyo-marakwet">Elgeyo Marakwet</option>
+                                        <option value="embu">Embu</option>
+                                        <option value="garissa">Garissa</option>
+                                        <option value="homa-bay">Homa Bay</option>
+                                        <option value="isiolo">Isiolo</option>
+                                        <option value="kajiado">Kajiado</option>
+                                        <option value="kakamega">Kakamega</option>
+                                        <option value="kericho">Kericho</option>
+                                        <option value="kiambu">Kiambu</option>
+                                        <option value="kilifi">Kilifi</option>
+                                        <option value="kirinyaga">Kirinyaga</option>
+                                        <option value="kisii">Kisii</option>
+                                        <option value="kisumu">Kisumu</option>
+                                        <option value="kitui">Kitui</option>
+                                        <option value="kwale">Kwale</option>
+                                        <option value="laikipia">Laikipia</option>
+                                        <option value="lamu">Lamu</option>
+                                        <option value="machakos">Machakos</option>
+                                        <option value="makueni">Makueni</option>
+                                        <option value="mandera">Mandera</option>
+                                        <option value="marsabit">Marsabit</option>
+                                        <option value="meru">Meru</option>
+                                        <option value="migori">Migori</option>
+                                        <option value="mombasa">Mombasa</option>
+                                        <option value="muranga">Murang'a</option>
+                                        <option value="nakuru">Nakuru</option>
+                                        <option value="nandi">Nandi</option>
+                                        <option value="narok">Narok</option>
+                                        <option value="nyamira">Nyamira</option>
+                                        <option value="nyandarua">Nyandarua</option>
+                                        <option value="nyeri">Nyeri</option>
+                                        <option value="samburu">Samburu</option>
+                                        <option value="siaya">Siaya</option>
+                                        <option value="taita-taveta">Taita Taveta</option>
+                                        <option value="tana-river">Tana River</option>
+                                        <option value="tharaka-nithi">Tharaka Nithi</option>
+                                        <option value="trans-nzoia">Trans Nzoia</option>
+                                        <option value="turkana">Turkana</option>
+                                        <option value="uasin-gishu">Uasin Gishu</option>
+                                        <option value="vihiga">Vihiga</option>
+                                        <option value="wajir">Wajir</option>
+                                        <option value="west-pokot">West Pokot</option>
+                                    </select>
+                                 </div>
+                                 <div class="delDet" id="delCountyTownWrap">
+                                      <input type="text" id="delCountyTownInput" placeholder="Town e.g Kitale Town">
+                                   
+                                </div>
+        
+                                <div class="delDet" id="delDetRoute">
+                                    <select name="route" id="Route" onchange="selectedRoute(this)">
+                                        <option value="">Select Route</option>
+                                        <option value="Thika Road">Thika Road</option>
+                                        <option value="Jogoo Road">Jogoo Road</option>
+                                        <option value="Outering Road">Outering Road</option>
+                                        <option value="Kangundo Road">Kangundo Road</option>
+                                        <option value="Mombasa Road">Mombasa Road</option>
+                                        <option value="Waiyaki Way">Waiyaki Way</option>
+                                        <option value="Lower Kabete">Lower Kabete </option>
+                                        <option value="Kiambu Road">Kiambu Road</option>
+                                        <option value="Limuru Road">Limuru Road</option>
+                                        <option value="Juja Road">Juja Road</option>
+                                        <option value="Langata Road">Langata Road</option>
+                                        <option value="Ngong Road">Ngong Road</option>
+                                    </select>
+                                </div>
+                                <div class="delDet" id="delDetArea">
+                                    <select name="" id="delAreaInput">
+                                        <option value="">Select Area</option>
+                                    </select>
+                                   
+                                </div>
+                                <div class="delDet" id="delDetBuilding">
+                                   <input type="text" id="delDetBuildingInp" placeholder="Builiding e.g Jewel Plaza">
+                                   
+                                </div>
+
+                            </div>
+                          
+
+                        </div>
+                        <div class="checkoutCenter"></div>
+                        <div class="checkoutRight">
+                            <div class="checkoutrightPlacer">
+                                <div class="checkRTop">
+                                    <div class="checkoutCard">
+                                         <div class="mpesaLogo">
+                                            <img class="cardSim" src="./Media/simcard2-Photoroom.png" alt="">
+                                            <img class="mpesaLogoImg" width="100px" src="./Media/1200x630wa-Photoroom.png" alt="">
+                                         </div>
+                                         <div class="amountPay">
+                                            <p>Amount To Pay</p>
+                                            <p class="cardPrice">Ksh. <span id="cardPrice">0</span></p>
+                                         </div>
+                                    
+                                    </div>
+                                </div>
+                                <div class="checkRBottom">
+                                    <div class="checkRTopDet">
+                                        <p>Total</p>
+                                        <p>Ksh. <span id="checkRTopDetproductCost">0</span> </p>
+                                    </div>
+                                    <div class="checkRTopDet">
+                                        <p>Transport Charges</p>
+                                        <p>Ksh. <span id="checkRTopDetTransport">0</span></p>
+                                    </div>
+                                    <div class="checkRTopDet">
+                                        <p>Discount</p>
+                                        <p> <span id="checkRTopDetDisocunt">0</span>%</p>
+                                    </div>
+                                    <div class="checkRTopDet">
+                                        <p>Grand Total</p>
+                                        <p>Ksh. <span id="checkRTopDetGrandDisocunt">0</span></p>
+                                    </div>
+                                    <div class="checkPay">
+                                   
+                                        <button onclick="payNow()" id="payNowBtn">Pay Now</button>
+
+                                        <div class="checkPayLoader" id="checkPayLoader">
+                                            <l-pulsar
+                                            size="40"
+                                            speed="1.4"
+                                            color="#179487" 
+                                            ></l-pulsar>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        
+                    </div>
+                </div>
+
+               </div>
+               </div>
+               </div>
+        </div>
+
+        
+    </section>
+
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-storage.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="./JS/config.js" defer></script>
+<script src="./JS/index.js" defer></script>
+<script src="./JS/shop.js" defer></script>
+<script src="./JS/shopAuth.js" defer></script>
+<script src="./JS/cart.js" defer></script>
+<script src="./JS/checkout.js" defer></script>
+<script src="./JS/product.js" defer></script>
+
+
+
+
+<script>
+       const animationPath ='./Media/logoLoader.json';
+              const animation = lottie.loadAnimation({
+          container: document.getElementById('preloader'), // the dom element that will contain the animation
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: animationPath // path to the animation json
+        });
+    window.addEventListener("load",()=>{
+        document.getElementById("preloaderWrap").style.display="none"
+    })
+</script>
+
+</body>
+</html>

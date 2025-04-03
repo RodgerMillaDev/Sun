@@ -816,10 +816,8 @@
 }
 .offerCont h2{
     color: aliceblue;
-    font-size: 1.5rem;
-    margin: 0px 30px;
-    color: yellow;
-    margin-right: 30px;
+    font-size: 1.3rem;
+    margin-right: 0px;
 }
 .actDrawerProdRightTop{
     color: var(--text-color);
