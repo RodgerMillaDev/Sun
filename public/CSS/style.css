@@ -209,6 +209,7 @@ h1,h2,h3,h4,h5,h6{
     width: 100%;
     position: relative;
 }
+
 .lapiCartNumber{
     position: absolute;
 
@@ -491,6 +492,10 @@ h1,h2,h3,h4,h5,h6{
     align-items: start;
     height: 100%;
     background:linear-gradient(90deg,rgba(0, 0, 0, 0.39), rgba(0, 0, 0, 0));
+}
+.offerWrapperPlacer h2{
+    font-size: 1.9rem !important;
+    line-height: 31px;
 }
  .offerPeriod{
     padding: 5px 15px;
@@ -2142,7 +2147,7 @@ cursor: pointer;
 .oldPrice{
     color: red;
     text-decoration: line-through;
-    font-size: .9rem;
+    font-size: .6rem !important;
 }
 .newPrice{
     color: rgb(8, 8, 8);
@@ -2353,13 +2358,26 @@ height: 10vh;
     height: 30%;
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
     margin: 0 auto;
     width: 100%;
   }
+  .upldExtrImgs{
+    width: 40px;
+    height: 40px;
+    margin-top: 6px;
+    border-radius: 50%;
+    display: flex;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    background: var(--priDark-color);
+    color: var(--textGreen-color);
+  }
   .upImgWrap{
-    width: 170px;
-    height: 170px;
+    width: 140px;
+    height: 140px;
     display: flex;
     justify-content: center;
     position: relative;
@@ -2423,18 +2441,24 @@ height: 10vh;
 .uploadInput{
     background: rgb(255, 255, 255);
     width: 100%;
-    height: 45px;
+    height: 43px;
     border-radius: 50px;
     overflow: hidden;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.137);
     /* background: aliceblue; */
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 
+}
+.uploadInput input{
+    padding-left: 15px;
+}
+.uploadInput select{
+    padding-left: 12px;
 }
 
 .uploadInputTextArea{
     width: 100%;
-    height: 150px;
+    height: 120px;
     border-radius: 10px;
     display: flex;
     justify-content: center;
@@ -2935,4 +2959,39 @@ height: 10vh;
 
 #toadminLink{
     display: none;
+}
+.multiImagesInput{
+    position: absolute;
+    z-index: -3;
+    opacity: .0;
+    transform: scale(.0001);
+}
+
+.selectColorPrPg{
+    width: 100%;
+    display: none;
+    height: 150px;
+    margin: 7px 0;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+
+
+}
+.selectColorPrPg .colorImg{
+    width: 70px;
+    height: 100px;
+    margin-right: 7px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.116);
+    border-radius: 10px;
+}
+.selectColorPrPg .colorImg img{
+    aspect-ratio: 1/1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover ;
+    align-items: center;
+
 }

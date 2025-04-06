@@ -19,6 +19,9 @@
 </head>
 <body>
     
+  <div class="multiImagesInput">
+    <input type="file" multiple accept="image/*" id="multiImagesInput">
+  </div>
 
     <div id="preloaderWrap">
     <div id="preloader">
@@ -312,18 +315,19 @@
                             <div class="upImgWrap">
                                 <div class="uploaderDiv" onclick="document.getElementById('ProImageFileInput').click()">
                                     <input type="file" id="ProImageFileInput" accept="image/*" onchange="handleFileSelect(event)">
-
                                     <img width="10px" src="./Media/unnamed (1)-Photoroom.png" alt="" >
-
                                 </div>
                                 <div class="uploadedImage">
                                     <img id="selectedImage" src="" alt="">
                                 </div>
-                                
                             </div>  
+                            <div class="upldExtrImgs" onclick="document.getElementById('multiImagesInput').click()">
+                                <i class="fa-solid fa-plus"></i>
+                            </div>
                         </div>
                         <div class="uploadProductBtm">
                             <div class="uploadInputWraps">
+                             
                                 <div class="uploadInput">
                                     <input type="text" placeholder="Product Name" id="UploadProductName">
                                 </div>

@@ -155,32 +155,61 @@ document.getElementById("adminMenuNavId").style.left="0%"
                 `
             }else{
 
-            shopItems.forEach(shopitem => {
-             var pname=shopitem.data().productName;
-             var pprice=shopitem.data().productPrice;
-             var pid=shopitem.data().productDocId;
-             var pimg=shopitem.data().productUrl;
-             var pcat=shopitem.data().productCat;
-             var pdesc=shopitem.data().productDesc;
-             var pdisc=shopitem.data().productDiscount;
-     
-     
-             productCard+=
-             `
-             <div class="shopProduct">
-                                 <div class="spTop">
-                                     <img width="10px" src=${pimg} alt="">
-                                 </div>
-                                 <div class="spBottom">
-                                     <h4>${pname}</h4>
-                                     <p>Ksh. ${pprice}</p>
-                                   <div class="buyandCart">
-                                     <button class="buyshopBtn" onclick="toBuy('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}')">Buy</button>
-                                     <button class="tocartShopBtn" onclick="addtoCartAllPro('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}')"><i class="icofont-cart-alt"></i></button>
-                                   </div>
-                                 </div>
-                             </div>
-             `
+                shopItems.forEach(shopitem => {
+                    var pname=shopitem.data().productName;
+                    var ppricel=(parseInt(shopitem.data().productPrice)).toLocaleString();
+                    var pprice=parseInt(shopitem.data().productPrice);
+                    var pid=shopitem.data().productDocId;
+                    var pimg=shopitem.data().productUrl;
+                    var pcat=shopitem.data().productCat;
+                    var pdesc=shopitem.data().productDesc;
+                    var pdisc=shopitem.data().productDiscount;
+                    var isMulti=shopitem.data().isMulti;
+                    var extraIamgeUrls=shopitem.data().extraIamgeUrls;
+                    const imageString = JSON.stringify(extraImageUrls).replace(/"/g, '&quot;');
+
+                    var pdi=parseInt(shopitem.data().discountPercentage);
+                    if(pdi>0){
+                        var rperc=100-pdi;
+                        var newPrice=(Math.ceil((rperc*pprice)/100)).toLocaleString()
+                        productCard+=
+                        `<div class="shopProduct">
+                            <div class="spTop">
+                                <img width="10px" src=${pimg} alt="">
+                            </div>
+                            <div class="spBottom">
+                                <h4>${pname}</h4>
+                                <div class="ProdPrices">
+                                            <p class="oldPrice">Ksh. ${ppricel}</p>
+                                            <p class="newPrice">Ksh. ${newPrice}</p>
+                                </div>
+                                <div class="buyandCart">
+                                <button class="buyshopBtn" onclick="toBuy('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}','${pdi}','${isMulti}','${imageString}')">Buy</button>
+                                <button class="tocartShopBtn" onclick="addtoCartAllPro('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}','${pdi})"><i class="icofont-cart-alt"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        `
+                    }else{
+                        productCard+=
+                        `
+                        <div class="shopProduct">
+                            <div class="spTop">
+                                <img width="10px" src=${pimg} alt="">
+                            </div>
+                            <div class="spBottom">
+                                <h4>${pname}</h4>
+                                <div class="ProdPrices">
+                                    <p class="newPrice">Ksh. ${ppricel}</p>
+                                </div>
+                                <div class="buyandCart">
+                               <button class="buyshopBtn" onclick="toBuy('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}','${pdi}','${isMulti}','${imageString}')">Buy</button>
+                                <button class="tocartShopBtn" onclick="addtoCartAllPro('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}','${pdi}')"><i class="icofont-cart-alt"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        `
+                    } 
         })
     }
         document.getElementById("shopProductsWrapper").innerHTML=productCard
@@ -205,34 +234,60 @@ function pullSearched(e){
             `
 
         }else{
+           
             shopItems.forEach(shopitem => {
                 var pname=shopitem.data().productName;
-                console.log(shopitem.data().productNameLower)
-                var pprice=shopitem.data().productPrice;
+                var ppricel=(parseInt(shopitem.data().productPrice)).toLocaleString();
+                var pprice=parseInt(shopitem.data().productPrice);
                 var pid=shopitem.data().productDocId;
                 var pimg=shopitem.data().productUrl;
                 var pcat=shopitem.data().productCat;
                 var pdesc=shopitem.data().productDesc;
                 var pdisc=shopitem.data().productDiscount;
-        
-        
-                productCard+=
-                `
-                <div class="shopProduct">
-                                    <div class="spTop">
-                                        <img width="10px" src=${pimg} alt="">
-                                    </div>
-                                    <div class="spBottom">
-                                        <h4>${pname}</h4>
-                                        <p>Ksh. ${pprice}</p>
-                                      <div class="buyandCart">
-                                        <button class="buyshopBtn" onclick="toBuy('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}')">Buy</button>
-                                        <button class="tocartShopBtn" onclick="addtoCartAllPro('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}')"><i class="icofont-cart-alt"></i></button>
-                                      </div>
-                                    </div>
-                                </div>
-            
-                `
+                var isMulti=shopitem.data().isMulti;
+                var extraIamgeUrls=shopitem.data().extraIamgeUrls;
+                var pdi=parseInt(shopitem.data().discountPercentage);
+                if(pdi>0){
+                    var rperc=100-pdi;
+                    var newPrice=(Math.ceil((rperc*pprice)/100)).toLocaleString()
+                    productCard+=
+                    `<div class="shopProduct">
+                        <div class="spTop">
+                            <img width="10px" src=${pimg} alt="">
+                        </div>
+                        <div class="spBottom">
+                            <h4>${pname}</h4>
+                            <div class="ProdPrices">
+                                        <p class="oldPrice">Ksh. ${ppricel}</p>
+                                        <p class="newPrice">Ksh. ${newPrice}</p>
+                            </div>
+                            <div class="buyandCart">
+                            <button class="buyshopBtn" onclick="toBuy('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}','${pdi}','${isMulti}','${extraIamgeUrls}')">Buy</button>
+                            <button class="tocartShopBtn" onclick="addtoCartAllPro('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}','${pdi})"><i class="icofont-cart-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    `
+                }else{
+                    productCard+=
+                    `
+                    <div class="shopProduct">
+                        <div class="spTop">
+                            <img width="10px" src=${pimg} alt="">
+                        </div>
+                        <div class="spBottom">
+                            <h4>${pname}</h4>
+                            <div class="ProdPrices">
+                                <p class="newPrice">Ksh. ${ppricel}</p>
+                            </div>
+                            <div class="buyandCart">
+                           <button class="buyshopBtn" onclick="toBuy('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}','${pdi}','${isMulti}','${extraIamgeUrls}')">Buy</button>
+                            <button class="tocartShopBtn" onclick="addtoCartAllPro('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}','${pdi}')"><i class="icofont-cart-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    `
+                } 
            })
 
         }
@@ -252,8 +307,7 @@ document.querySelector(".shopSearch").classList.add("opsSearch")
 function opsLeave(){
 document.querySelector(".shopSearch").classList.remove("opsSearch")
 }
-function toBuy(pid,pprice,pdesc,pimg,pname,pcat,pdisc,pdi){
-    console.log("aloo")
+function toBuy(pid,pprice,pdesc,pimg,pname,pcat,pdisc,pdi,isMulti,imageString){
     var toBuyArray={
         productDocId:pid,
         productCat:pcat,
@@ -263,7 +317,9 @@ function toBuy(pid,pprice,pdesc,pimg,pname,pcat,pdisc,pdi){
         productDesc:pdesc,
         productQuantity:"1",
         productDiscount:pdisc,
-        discountPercentage:pdi
+        discountPercentage:pdi,
+        extraImageUrls:JSON.parse(imageString),
+        isMulti:isMulti
     }
     localStorage.setItem("toBuyJSON",JSON.stringify(toBuyArray))
     if(!pid || pid===""){
@@ -274,6 +330,28 @@ function toBuy(pid,pprice,pdesc,pimg,pname,pcat,pdisc,pdi){
         if(pdiN>0){
             var rperc=100-pdiN;
             vprice=(Math.ceil((rperc*pprice)/100))
+        }
+        if(isMulti=="True"){
+            console.log(imageString)
+            document.getElementById("selectColorPrPg").style.display='flex'
+            var extCont=''
+            var cleanArray=JSON.parse(imageString)
+            var imgAryy=cleanArray.push(pimg)
+            console.log(cleanArray)
+
+            cleanArray.forEach((imgstr)=>{
+                extCont+=`
+                    <div class="colorImg" onclick="sltdClUrl(this)">
+                        <img src="${imgstr}" alt="">
+                    </div>
+                `
+            })
+            document.getElementById("selectColorPrPg").innerHTML=extCont
+
+
+        }else{
+            document.getElementById("selectColorPrPg").style.display='none'
+
         }
     document.getElementById("fidiShopOffer").style.top='0vh'
     document.getElementById("catnSearchCont").style.top='35vh'
@@ -334,4 +412,18 @@ function toWhatsapp() {
 
 function toWeb(){
     window.location.href="index.html"
+}
+function sltdClUrl(e){
+    var sltdClUrlImg=e.querySelector("img").src;
+    document.getElementById("viewProImg").src=sltdClUrlImg
+        // Retrieve the current toBuyArray from localStorage
+        const toBuyArray = JSON.parse(localStorage.getItem("toBuyJSON"));
+    
+        // Update the productUrl in the array
+        if (toBuyArray) {
+            toBuyArray.productUrl = sltdClUrlImg;
+            
+            // Save the updated array back to localStorage
+            localStorage.setItem("toBuyJSON", JSON.stringify(toBuyArray));
+        }
 }

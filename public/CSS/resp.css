@@ -377,7 +377,10 @@
         height: 100%;
         background:linear-gradient(90deg,rgba(0, 0, 0, 0.39), rgba(0, 0, 0, 0));
     }
-    
+    .offerWrapperPlacer h2{
+        font-size: 1.7rem !important;
+        line-height: 31px;
+    }
     #Shop{
         background: var(--bright-white);
         width: 100vw;
@@ -423,7 +426,7 @@
         color: var(--text-color);
         background: aliceblue;
         border-radius: 10px;
-        display: none;
+        display: flex;
     
     }
     .shopProduct{
@@ -1040,8 +1043,6 @@
     color: var(--text-color);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.164);
 }
-
-}
 .viewProductAdminWrap{
     width: 95vw;
     background: aliceblue;
@@ -1050,4 +1051,5 @@
     justify-content: center;
     align-items: center;
     border-radius: 10px;
+}
 }

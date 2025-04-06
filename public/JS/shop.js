@@ -50,6 +50,7 @@ function setupCartListener() {
     });
 }
 updateCartCount()
+
 function renderProducts(){
     dbFirestore.collection("Products").get().then((shopItems)=>{
         var productCard='';
@@ -62,7 +63,11 @@ function renderProducts(){
         var pcat=shopitem.data().productCat;
         var pdesc=shopitem.data().productDesc;
         var pdisc=shopitem.data().productDiscount;
+        var isMulti=shopitem.data().isMulti;
+        var extraImageUrls=shopitem.data().extraImageUrls;
+        const imageString = JSON.stringify(extraImageUrls).replace(/"/g, '&quot;');
         var pdi=parseInt(shopitem.data().discountPercentage);
+       
         if(pdi>0){
             var rperc=100-pdi;
             var newPrice=(Math.ceil((rperc*pprice)/100)).toLocaleString()
@@ -78,7 +83,7 @@ function renderProducts(){
                                 <p class="newPrice">Ksh. ${newPrice}</p>
                     </div>
                     <div class="buyandCart">
-                    <button class="buyshopBtn" onclick="toBuy('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}','${pdi}')">Buy</button>
+                    <button class="buyshopBtn" onclick="toBuy('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}','${pdi}','${isMulti}','${imageString}')">Buy</button>
                     <button class="tocartShopBtn" onclick="addtoCartAllPro('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}','${pdi})"><i class="icofont-cart-alt"></i></button>
                     </div>
                 </div>
@@ -97,7 +102,7 @@ function renderProducts(){
                         <p class="newPrice">Ksh. ${ppricel}</p>
                     </div>
                     <div class="buyandCart">
-                   <button class="buyshopBtn" onclick="toBuy('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}','${pdi}')">Buy</button>
+                   <button class="buyshopBtn" onclick="toBuy('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}','${pdi}','${isMulti}','${imageString}')">Buy</button>
                     <button class="tocartShopBtn" onclick="addtoCartAllPro('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}','${pdi}')"><i class="icofont-cart-alt"></i></button>
                     </div>
                 </div>
@@ -268,8 +273,6 @@ function readNewOrder() {
             console.error("Error fetching latest order:", error);
         });
 }
-
-
 function updateGrandTotal() {
     function parseLocalizedNumber(str) {
     return parseInt(str.replace(/[^0-9-]/g, ""), 10);

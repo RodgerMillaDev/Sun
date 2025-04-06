@@ -1,6 +1,6 @@
 async function getSMSBalance(){
     try {
-        const url= "https://official-backend-sunup.onrender.com/getBalance"
+        const url= "https://official-backend-sunup.onrender.com/smsBalance"
         // const url= "http://localhost:4455/smsBalance"
         const response = await fetch(url,{
             method:"POST",
@@ -13,7 +13,19 @@ async function getSMSBalance(){
         if(result["response-code"]==200){
             
             var deBalance=result.credit
-            Swal.fire(`Your sms balance is ${deBalance}`)
+            Swal.fire({
+                title: deBalance,
+                text: `Your credit balance is ${deBalance}. Do you want to top up?`,
+                showCancelButton: true,
+                confirmButtonColor: "#003335",
+                cancelButtonColor: "#003335",
+                confirmButtonText: "Top up",
+                cancelButtonText: "Cancel"
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  window.location.href="https://sms.textsms.co.ke/auth/login"
+                }
+              });
         }
         console.log(result)
      
@@ -192,7 +204,7 @@ function sltOrderView(e){
 
 function vpAdmin(pid,pname,pprice,pdiscount,pdesc,pcat){
         document.getElementById("viewProductAdmin").style.display="flex"
-        document.getElementById("vpahidID").value=pid
+        document.getElementById("vpahidID").innerText=pid
         document.getElementById("vpaName").value=pname
         document.getElementById("vpaPrice").value=pprice
         document.getElementById("vpaOffer").value=pdiscount
@@ -223,16 +235,19 @@ function saveProduct(){
     var pname=document.getElementById("vpaName").value;
     var pprice=document.getElementById("vpaPrice").value;
     var pdiscount = document.getElementById("vpaOffer").value;
+    console.log(pid)
     var pcat=document.getElementById("vpaCat").value;
     var pdesc=document.getElementById("vpaDescription").innerText;
     dbFirestore.collection("Products").doc(pid).update({
         productName:pname,
         productPrice:pprice,
         productDiscount:pdiscount,
+        discountPercentage:pdiscount,
         productCategory:pcat,
         productDescription:pdesc,
     }).then(()=>{
         document.getElementById("viewProductAdmin").style.display="none"
+        pullAllProducts()
         Swal.fire("Product Saved", "You have successfuly updated product data", "success")
 
     }).catch((error) => {
@@ -243,3 +258,24 @@ function saveProduct(){
 
 
 }
+
+const input = document.getElementById("UploadProductName");
+
+input.addEventListener("beforeinput", (e) => {
+    // Let backspace work
+    if (e.inputType === "deleteContentBackward") return;
+  
+    // Simulate the new input value
+    const current = input.value;
+    const selectionStart = input.selectionStart;
+    const selectionEnd = input.selectionEnd;
+  
+    // Insert the new character at the current cursor position
+    const newValue = 
+      current.slice(0, selectionStart) + e.data + current.slice(selectionEnd);
+  
+    const words = newValue.trim().split(/\s+/);
+    if (words.length > 4) {
+      e.preventDefault();
+    }
+  });

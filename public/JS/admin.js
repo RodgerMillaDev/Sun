@@ -4,10 +4,14 @@ auth.onAuthStateChanged((user)=>{
         if(uid==="VBiIUAdnhVTTB2ihVTBmKrXkK6f1" || uid==="kJOGf3BXgpPnrj94lDuox3qdPBf1"){
             document.getElementById("preloaderWrap").style.display="none"    
         }else{
-            window.location.href="index.html"
+            document.getElementById("preloaderWrap").style.display="none"    
+
+            // window.location.href="index.html"
         }
     }else{
-        window.location.href="index.html"
+        document.getElementById("preloaderWrap").style.display="none"    
+
+        // window.location.href="index.html"
     }  
 })
 function toDashboard(){
@@ -63,19 +67,32 @@ async function uploadProduct(e){
     var ProductPrice=document.getElementById("UploadProductPrice").value;
     var ProductCategory=document.getElementById("UploadProductCategory").value;
     var ProductDescription=document.getElementById("UploadProductDescription").value;
+    var multiImages=document.getElementById("multiImagesInput").files;
     if(ProductImg && ProductName && ProductPrice && ProductCategory && ProductDescription){
        document.getElementById("uploadProductBtn").style.display="none"
        document.getElementById("uploadProLoader").style.display="block"
+    
         try {
+            var isMulti="False"
+    
             const formData = new FormData();
+            if(multiImages.length==0){
+                isMulti="False";
+            }else{
+                isMulti="True"
+                for (let i = 0; i < multiImages.length; i++) {
+                    formData.append("multiImages[]", multiImages[i]);
+                } 
+            } 
             formData.append("image",ProductImg)
             formData.append("prodPrice",ProductPrice)
             formData.append("prodName",ProductName)
             formData.append("prodCat",ProductCategory)
             formData.append("prodDesc",ProductDescription)
-            console.log(ProductPrice)
-            var backUrl='https://official-backend-sunup.onrender.com/upload';
-            // var backUrl='http://localhost:4455/upload';
+            formData.append("isMulti",isMulti)
+            
+            // var backUrl='https://official-backend-sunup.onrender.com/upload';
+            var backUrl='http://localhost:4455/upload';
             const response = await fetch(backUrl,{
                 method:'POST',
                 body: formData,
@@ -85,6 +102,7 @@ async function uploadProduct(e){
             if(result==="Upload Done"){
                 Swal.fire("Product Uploaded")
                 document.getElementById("ProImageFileInput").value=null;
+                document.getElementById("multiImagesInput").value=null;
                 document.getElementById("UploadProductName").value="";
                 document.getElementById("UploadProductPrice").value="";
                 document.getElementById("UploadProductCategory").value="";
@@ -115,7 +133,7 @@ function pullAllProducts(){
         var productListDiv=''
         Products.forEach(product => {
             var pname=product.data().productName;
-            var pprice=product.data().productPrice;
+            var pprice=parseInt((product.data().productPrice)).toLocaleString();
             var pdiscount=product.data().discountPercentage;
             var pcat=product.data().productCat;
             var pdesc=product.data().productDesc;

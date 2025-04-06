@@ -1,6 +1,6 @@
 var cartPrice=localStorage.getItem("grandTotal");
 
-var discountPercent=localStorage.getItem()
+var discountPercent=localStorage.getItem("discountPercent")
 function checkoutMath(transportCost){
     console.log(transportCost)
     var prevCost=parseInt(localStorage.getItem("grandTotal"))
