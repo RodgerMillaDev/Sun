@@ -186,7 +186,6 @@ function toBuy(pid,pprice,pdesc,pimg,pname,pcat,pdisc,pdi,isMulti,imageString){
             var extCont=''
             var cleanArray=JSON.parse(imageString)
             var imgAryy=cleanArray.push(pimg)
-            console.log(cleanArray)
 
             cleanArray.forEach((imgstr)=>{
                 extCont+=`
@@ -222,6 +221,23 @@ function toBuy(pid,pprice,pdesc,pimg,pname,pcat,pdisc,pdi,isMulti,imageString){
 
     }
 }
+function sltdClUrl(e){
+    var sltdClUrlImg=e.querySelector("img").src;
+    document.getElementById("viewProImg").src=sltdClUrlImg
+    console.log(document.getElementById("viewProImg").src)
+
+        // Retrieve the current toBuyArray from localStorage
+        const toBuyArray = JSON.parse(localStorage.getItem("toBuyJSON"));
+    
+        // Update the productUrl in the array
+        if (toBuyArray) {
+            toBuyArray.productUrl = sltdClUrlImg;
+            
+            // Save the updated array back to localStorage
+            localStorage.setItem("toBuyJSON", JSON.stringify(toBuyArray));
+            console.log( JSON.parse(localStorage.getItem("toBuyJSON")))
+        }
+}
 function updateCartCount() {
     if (isLoggedIn && uid) {
         dbFirestore.collection("Users").doc(uid).get().then((doc) => {
@@ -239,6 +255,9 @@ function updateCartCount() {
     }
 }
 function addtoCartViewPro() {
+
+
+   
     var pid = document.getElementById("viewProId").innerText;
     if (!pid) {
         Swal.fire("No product ID found");
@@ -258,6 +277,7 @@ function addtoCartViewPro() {
             if (existingProdIndex === -1) {
                 // Product is not in cart, add it as new
                 var newCartItem = JSON.parse(localStorage.getItem("toBuyJSON"));
+           
 
                 if (newCartItem) {
                     newCartItem.productQuantity = updatedQuantity;
@@ -269,8 +289,10 @@ function addtoCartViewPro() {
                     });
                 }
             } else {
+                var newImage=document.getElementById("viewProImg").src;
                 // Product exists, update its quantity
                 userCartItems[existingProdIndex].productQuantity = updatedQuantity;
+                userCartItems[existingProdIndex].productUrl = newImage;
 
                 dbFirestore.collection("Users").doc(uid).update({
                     cartItems: userCartItems

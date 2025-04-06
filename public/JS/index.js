@@ -349,17 +349,3 @@ function toWhatsapp() {
 function toWeb(){
     window.location.href="index.html"
 }
-function sltdClUrl(e){
-    var sltdClUrlImg=e.querySelector("img").src;
-    document.getElementById("viewProImg").src=sltdClUrlImg
-        // Retrieve the current toBuyArray from localStorage
-        const toBuyArray = JSON.parse(localStorage.getItem("toBuyJSON"));
-    
-        // Update the productUrl in the array
-        if (toBuyArray) {
-            toBuyArray.productUrl = sltdClUrlImg;
-            
-            // Save the updated array back to localStorage
-            localStorage.setItem("toBuyJSON", JSON.stringify(toBuyArray));
-        }
-}
