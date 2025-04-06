@@ -282,3 +282,55 @@ input.addEventListener("beforeinput", (e) => {
       e.preventDefault();
     }
   });
+
+async function writeMail(){
+    const { value: text } = await Swal.fire({
+        input: "textarea",
+        inputLabel: "Email",
+        inputPlaceholder: "Type your email here...",
+        inputAttributes: {
+          "aria-label": "Type your email here"
+        },
+        showCancelButton: true,
+        confirmButtonColor: "#003335",
+        cancelButtonColor: "#003335",
+        confirmButtonText: "Send Mail",
+        cancelButtonText: "Cancel"
+      });
+      if (text) {
+        try {
+            const url= "https://official-backend-sunup.onrender.com/sendEmail"
+            // const url= "http://localhost:4455/sendEmail"
+    
+            const response = await fetch(url,{
+                method:"POST",
+                headers:{
+                    'Content-type':'application.json'
+                },
+                body:JSON.stringify({actEmail:text,emails:await getMails()})
+            })
+            const result= await response.json()
+            console.log(result)
+            Swal.fire("Email sent")
+    
+            
+        } catch (error) {
+            console.log(error)
+        }     
+     }
+
+    
+    }
+
+
+   async function getMails(){
+        var mails =[]
+
+      await  dbFirestore.collection("Users").where("uid", "!=", "kJOGf3BXgpPnrj94lDuox3qdPBf1").get().then((users)=>{
+            users.forEach(user => {
+                var mailNo=mails.push(user.data().em)
+            });
+
+        })
+        return mails;
+    }
