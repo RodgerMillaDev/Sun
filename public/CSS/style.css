@@ -2355,7 +2355,7 @@ height: 10vh;
 
   }
   .uploadProductTop{
-    height: 30%;
+    height: 35%;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -2385,11 +2385,7 @@ height: 10vh;
     border-radius: 50%;
     overflow: hidden;
 }
-.uploadProductBtm{
-    height: 70%;
-    width: 100%;
-    
-}
+
 .uploaderDiv{
     width: 100%;
     height: 100%;
@@ -2425,7 +2421,7 @@ height: 10vh;
 }
 
 .uploadProductBtm{
-    height: 70%;
+    height: 65%;
     display: flex;
     justify-content: center;
     align-items: center;

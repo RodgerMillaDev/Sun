@@ -219,12 +219,15 @@ function removevpAdmin(){
 
 }
 function deleteProduct(){
-    var pid=document.getElementById("vpahidID").value=pid
+    var pid=document.getElementById("vpahidID").innerText;
+    console.log(pid)
+
     dbFirestore.collection("Products").doc(pid).delete()
     .then(() => {
         document.getElementById("viewProductAdmin").style.display="none"
-        Swal.fire("Product Deleted", "You have successfuly deleted the product", "success")
         pullAllProducts()
+
+        Swal.fire("Product Deleted", "You have successfuly deleted the product", "success")
     })
     .catch((error) => {
         console.error("Error removing product: ", error);

@@ -91,8 +91,8 @@ async function uploadProduct(e){
             formData.append("prodDesc",ProductDescription)
             formData.append("isMulti",isMulti)
             
-            // var backUrl='https://official-backend-sunup.onrender.com/upload';
-            var backUrl='http://localhost:4455/upload';
+            var backUrl='https://official-backend-sunup.onrender.com/upload';
+            // var backUrl='http://localhost:4455/upload';
             const response = await fetch(backUrl,{
                 method:'POST',
                 body: formData,

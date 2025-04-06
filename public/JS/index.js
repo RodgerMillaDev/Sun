@@ -165,7 +165,7 @@ document.getElementById("adminMenuNavId").style.left="0%"
                     var pdesc=shopitem.data().productDesc;
                     var pdisc=shopitem.data().productDiscount;
                     var isMulti=shopitem.data().isMulti;
-                    var extraIamgeUrls=shopitem.data().extraIamgeUrls;
+                    var extraImageUrls=shopitem.data().extraIamgeUrls;
                     const imageString = JSON.stringify(extraImageUrls).replace(/"/g, '&quot;');
 
                     var pdi=parseInt(shopitem.data().discountPercentage);
@@ -245,7 +245,8 @@ function pullSearched(e){
                 var pdesc=shopitem.data().productDesc;
                 var pdisc=shopitem.data().productDiscount;
                 var isMulti=shopitem.data().isMulti;
-                var extraIamgeUrls=shopitem.data().extraIamgeUrls;
+                var extraImageUrls=shopitem.data().extraIamgeUrls;
+                const imageString = JSON.stringify(extraImageUrls).replace(/"/g, '&quot;');
                 var pdi=parseInt(shopitem.data().discountPercentage);
                 if(pdi>0){
                     var rperc=100-pdi;
@@ -262,7 +263,7 @@ function pullSearched(e){
                                         <p class="newPrice">Ksh. ${newPrice}</p>
                             </div>
                             <div class="buyandCart">
-                            <button class="buyshopBtn" onclick="toBuy('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}','${pdi}','${isMulti}','${extraIamgeUrls}')">Buy</button>
+                            <button class="buyshopBtn" onclick="toBuy('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}','${pdi}','${isMulti}','${imageString}')">Buy</button>
                             <button class="tocartShopBtn" onclick="addtoCartAllPro('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}','${pdi})"><i class="icofont-cart-alt"></i></button>
                             </div>
                         </div>
@@ -281,7 +282,7 @@ function pullSearched(e){
                                 <p class="newPrice">Ksh. ${ppricel}</p>
                             </div>
                             <div class="buyandCart">
-                           <button class="buyshopBtn" onclick="toBuy('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}','${pdi}','${isMulti}','${extraIamgeUrls}')">Buy</button>
+                           <button class="buyshopBtn" onclick="toBuy('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}','${pdi}','${isMulti}','${imageString}')">Buy</button>
                             <button class="tocartShopBtn" onclick="addtoCartAllPro('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}','${pdi}')"><i class="icofont-cart-alt"></i></button>
                             </div>
                         </div>
@@ -307,72 +308,7 @@ document.querySelector(".shopSearch").classList.add("opsSearch")
 function opsLeave(){
 document.querySelector(".shopSearch").classList.remove("opsSearch")
 }
-function toBuy(pid,pprice,pdesc,pimg,pname,pcat,pdisc,pdi,isMulti,imageString){
-    var toBuyArray={
-        productDocId:pid,
-        productCat:pcat,
-        productName:pname,
-        productPrice:pprice,
-        productUrl:pimg,
-        productDesc:pdesc,
-        productQuantity:"1",
-        productDiscount:pdisc,
-        discountPercentage:pdi,
-        extraImageUrls:JSON.parse(imageString),
-        isMulti:isMulti
-    }
-    localStorage.setItem("toBuyJSON",JSON.stringify(toBuyArray))
-    if(!pid || pid===""){
-        return;
-    }else{
-        var vprice=pprice;
-        var pdiN=parseInt(pdi)
-        if(pdiN>0){
-            var rperc=100-pdiN;
-            vprice=(Math.ceil((rperc*pprice)/100))
-        }
-        if(isMulti=="True"){
-            console.log(imageString)
-            document.getElementById("selectColorPrPg").style.display='flex'
-            var extCont=''
-            var cleanArray=JSON.parse(imageString)
-            var imgAryy=cleanArray.push(pimg)
-            console.log(cleanArray)
 
-            cleanArray.forEach((imgstr)=>{
-                extCont+=`
-                    <div class="colorImg" onclick="sltdClUrl(this)">
-                        <img src="${imgstr}" alt="">
-                    </div>
-                `
-            })
-            document.getElementById("selectColorPrPg").innerHTML=extCont
-
-
-        }else{
-            document.getElementById("selectColorPrPg").style.display='none'
-
-        }
-    document.getElementById("fidiShopOffer").style.top='0vh'
-    document.getElementById("catnSearchCont").style.top='35vh'
-    document.getElementById("shopProducts").style.top='45vh'
-    document.getElementById("drawerTitle").innerText='Product'
-    document.getElementById("actDrawerCart").style.right='-103%'
-    document.getElementById("actDrawerProfile").style.right='-103%'
-    document.getElementById("actDrawerShop").style.right='-103%'
-    document.getElementById("checkoutPage").style.right='-103%'
-    document.getElementById("actDrawerSuccessCheck").style.right='-103%'
-    document.getElementById("actDrawerProduct").style.right='0%'
-    document.getElementById("viewProName").innerText=pname
-    document.getElementById("viewProCat").innerText=pcat
-    document.getElementById("viewProPrice").innerText=(vprice).toLocaleString()
-    document.getElementById("viewProDesc").innerText=pdesc
-    document.getElementById("viewProId").innerText=pid
-    document.getElementById("viewOrgPrice").innerText=vprice;
-    document.getElementById("viewProImg").src=pimg
-
-    }
-}
 function toAdminpanel(){
     window.location.href="adminpanel.html"
 }

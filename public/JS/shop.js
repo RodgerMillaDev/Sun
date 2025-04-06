@@ -50,70 +50,178 @@ function setupCartListener() {
     });
 }
 updateCartCount()
+function renderProducts() {
+    dbFirestore.collection("Products").get().then((shopItems) => {
+        var productCard = '';
+        shopItems.forEach(shopitem => {
+            // Extract product data
+            const data = shopitem.data();
+            const pname = data.productName;
+            const pprice = parseInt(data.productPrice);
+            const ppricel = pprice.toLocaleString();
+            const pid = data.productDocId;
+            const pimg = data.productUrl;
+            const pcat = data.productCat;
+            const pdesc = data.productDesc;
+            const pdisc = data.productDiscount;
+            const isMulti = data.isMulti;
+            const extraImageUrls = data.extraImageUrls;
+            const imageString = JSON.stringify(extraImageUrls);
+            const pdi = parseInt(data.discountPercentage);
 
-function renderProducts(){
-    dbFirestore.collection("Products").get().then((shopItems)=>{
-        var productCard='';
-       shopItems.forEach(shopitem => {
-        var pname=shopitem.data().productName;
-        var ppricel=(parseInt(shopitem.data().productPrice)).toLocaleString();
-        var pprice=parseInt(shopitem.data().productPrice);
-        var pid=shopitem.data().productDocId;
-        var pimg=shopitem.data().productUrl;
-        var pcat=shopitem.data().productCat;
-        var pdesc=shopitem.data().productDesc;
-        var pdisc=shopitem.data().productDiscount;
-        var isMulti=shopitem.data().isMulti;
-        var extraImageUrls=shopitem.data().extraImageUrls;
-        const imageString = JSON.stringify(extraImageUrls).replace(/"/g, '&quot;');
-        var pdi=parseInt(shopitem.data().discountPercentage);
-       
-        if(pdi>0){
-            var rperc=100-pdi;
-            var newPrice=(Math.ceil((rperc*pprice)/100)).toLocaleString()
-            productCard+=
-            `<div class="shopProduct">
-                <div class="spTop">
-                    <img width="10px" src=${pimg} alt="">
-                </div>
-                <div class="spBottom">
-                    <h4>${pname}</h4>
-                    <div class="ProdPrices">
-                                <p class="oldPrice">Ksh. ${ppricel}</p>
-                                <p class="newPrice">Ksh. ${newPrice}</p>
+            // Prepare discounted price
+            let priceHTML = `<p class="newPrice">Ksh. ${ppricel}</p>`;
+            if (pdi > 0) {
+                const rperc = 100 - pdi;
+                const newPrice = Math.ceil((rperc * pprice) / 100).toLocaleString();
+                priceHTML = `
+                    <p class="oldPrice">Ksh. ${ppricel}</p>
+                    <p class="newPrice">Ksh. ${newPrice}</p>
+                `;
+            }
+
+            // Add product card HTML with data-* attributes
+            productCard += `
+                <div class="shopProduct">
+                    <div class="spTop">
+                        <img width="10px" src="${pimg}" alt="">
                     </div>
-                    <div class="buyandCart">
-                    <button class="buyshopBtn" onclick="toBuy('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}','${pdi}','${isMulti}','${imageString}')">Buy</button>
-                    <button class="tocartShopBtn" onclick="addtoCartAllPro('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}','${pdi})"><i class="icofont-cart-alt"></i></button>
-                    </div>
-                </div>
-            </div>
-            `
-        }else{
-            productCard+=
-            `
-            <div class="shopProduct">
-                <div class="spTop">
-                    <img width="10px" src=${pimg} alt="">
-                </div>
-                <div class="spBottom">
-                    <h4>${pname}</h4>
-                    <div class="ProdPrices">
-                        <p class="newPrice">Ksh. ${ppricel}</p>
-                    </div>
-                    <div class="buyandCart">
-                   <button class="buyshopBtn" onclick="toBuy('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}','${pdi}','${isMulti}','${imageString}')">Buy</button>
-                    <button class="tocartShopBtn" onclick="addtoCartAllPro('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}','${pdi}')"><i class="icofont-cart-alt"></i></button>
+                    <div class="spBottom">
+                        <h4>${pname}</h4>
+                        <div class="ProdPrices">${priceHTML}</div>
+                        <div class="buyandCart">
+                            <button 
+                                class="buyshopBtn" 
+                                onclick="handleBuyClick(this)"
+                                data-id="${pid}"
+                                data-price="${pprice}"
+                                data-desc="${encodeURIComponent(pdesc)}"
+                                data-img="${pimg}"
+                                data-name="${pname}"
+                                data-cat="${pcat}"
+                                data-disc="${pdisc}"
+                                data-pdi="${pdi}"
+                                data-multi="${isMulti}"
+                                data-extra='${encodeURIComponent(imageString)}'
+                            >Buy</button>
+                          <button 
+                            class="tocartShopBtn" 
+                            onclick="handleAddToCartClick(this)"
+                            data-id="${pid}"
+                            data-price="${pprice}"
+                            data-desc="${encodeURIComponent(pdesc)}"
+                            data-img="${pimg}"
+                            data-name="${pname}"
+                            data-cat="${pcat}"
+                            data-disc="${pdisc}"
+                            >
+                            <i class="icofont-cart-alt"></i>
+                            </button>
+
+                        </div>
                     </div>
                 </div>
-            </div>
-            `
-        } 
-       });
-       document.getElementById("shopProductsWrapper").innerHTML=productCard
-    })
+            `;
+        });
+
+        document.getElementById("shopProductsWrapper").innerHTML = productCard;
+    });
 }
-renderProducts()
+renderProducts();
+function handleAddToCartClick(btn) {
+    const pid = btn.dataset.id;
+    const pprice = btn.dataset.price;
+    const pdesc = decodeURIComponent(btn.dataset.desc);
+    const pimg = btn.dataset.img;
+    const pname = btn.dataset.name;
+    const pcat = btn.dataset.cat;
+    const pdisc = btn.dataset.disc;
+
+    addtoCartAllPro(pid, pprice, pdesc, pimg, pname, pcat, pdisc);
+}
+
+// ⬇️ New handler that pulls data from the button
+function handleBuyClick(btn) {
+    const pid = btn.dataset.id;
+    const pprice = btn.dataset.price;
+    const pdesc = decodeURIComponent(btn.dataset.desc);
+    const pimg = btn.dataset.img;
+    const pname = btn.dataset.name;
+    const pcat = btn.dataset.cat;
+    const pdisc = btn.dataset.disc;
+    const pdi = btn.dataset.pdi;
+    const isMulti = btn.dataset.multi;
+    const imageString = decodeURIComponent(btn.dataset.extra);
+
+    toBuy(pid, pprice, pdesc, pimg, pname, pcat, pdisc, pdi, isMulti, imageString);
+}
+
+function toBuy(pid,pprice,pdesc,pimg,pname,pcat,pdisc,pdi,isMulti,imageString){
+    var toBuyArray={
+        productDocId:pid,
+        productCat:pcat,
+        productName:pname,
+        productPrice:pprice,
+        productUrl:pimg,
+        productDesc:pdesc,
+        productQuantity:"1",
+        productDiscount:pdisc,
+        discountPercentage:pdi,
+        extraImageUrls:JSON.parse(imageString),
+        isMulti:isMulti
+    }
+    localStorage.setItem("toBuyJSON",JSON.stringify(toBuyArray))
+    if(!pid || pid===""){
+        return;
+    }else{
+        var vprice=pprice;
+        var pdiN=parseInt(pdi)
+        if(pdiN>0){
+            var rperc=100-pdiN;
+            vprice=(Math.ceil((rperc*pprice)/100))
+        }
+        if(isMulti=="True"){
+            console.log(imageString)
+            document.getElementById("selectColorPrPg").style.display='flex'
+            var extCont=''
+            var cleanArray=JSON.parse(imageString)
+            var imgAryy=cleanArray.push(pimg)
+            console.log(cleanArray)
+
+            cleanArray.forEach((imgstr)=>{
+                extCont+=`
+                    <div class="colorImg" onclick="sltdClUrl(this)">
+                        <img src="${imgstr}" alt="">
+                    </div>
+                `
+            })
+            document.getElementById("selectColorPrPg").innerHTML=extCont
+
+
+        }else{
+            document.getElementById("selectColorPrPg").style.display='none'
+
+        }
+    document.getElementById("fidiShopOffer").style.top='0vh'
+    document.getElementById("catnSearchCont").style.top='35vh'
+    document.getElementById("shopProducts").style.top='45vh'
+    document.getElementById("drawerTitle").innerText='Product'
+    document.getElementById("actDrawerCart").style.right='-103%'
+    document.getElementById("actDrawerProfile").style.right='-103%'
+    document.getElementById("actDrawerShop").style.right='-103%'
+    document.getElementById("checkoutPage").style.right='-103%'
+    document.getElementById("actDrawerSuccessCheck").style.right='-103%'
+    document.getElementById("actDrawerProduct").style.right='0%'
+    document.getElementById("viewProName").innerText=pname
+    document.getElementById("viewProCat").innerText=pcat;
+    document.getElementById("viewProPrice").innerText=(parseInt(vprice).toLocaleString())
+    document.getElementById("viewProDesc").innerText=pdesc
+    document.getElementById("viewProId").innerText=pid
+    document.getElementById("viewOrgPrice").innerText=vprice;
+    document.getElementById("viewProImg").src=pimg
+
+    }
+}
 function updateCartCount() {
     if (isLoggedIn && uid) {
         dbFirestore.collection("Users").doc(uid).get().then((doc) => {
