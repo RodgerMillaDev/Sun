@@ -50,7 +50,7 @@ function pullAnalysis(){
 }
 pullAnalysis()
 function pullOrders(viewStatus) {
-    dbFirestore.collection("Orders").where("orderStatus", "==", viewStatus).get().then((docs) => {
+    dbFirestore.collection("Orders").where("orderStatus", "==", viewStatus).orderBy("timestamp", "desc").get().then((docs) => {
         let orderRow = '';
         docs.forEach(doc => {
             let docId = doc.id;  // ✅ Fix: Correct way to get document ID
@@ -221,8 +221,6 @@ function removevpAdmin(){
 }
 function deleteProduct(){
     var pid=document.getElementById("vpahidID").innerText;
-    console.log(pid)
-
     dbFirestore.collection("Products").doc(pid).delete()
     .then(() => {
         document.getElementById("viewProductAdmin").style.display="none"
