@@ -157,6 +157,8 @@ function handleBuyClick(btn) {
 }
 
 function toBuy(pid,pprice,pdesc,pimg,pname,pcat,pdisc,pdi,isMulti,imageString){
+    document.getElementById("ProductQuantityPG").innerText=1
+
     var toBuyArray={
         productDocId:pid,
         productCat:pcat,

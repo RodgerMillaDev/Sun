@@ -207,6 +207,7 @@ function vpAdmin(pid,pname,pprice,pdiscount,pdesc,pcat){
         document.getElementById("vpahidID").innerText=pid
         document.getElementById("vpaName").value=pname
         document.getElementById("vpaPrice").value=pprice
+        console.log(document.getElementById("vpaPrice").value)
         document.getElementById("vpaOffer").value=pdiscount
         document.getElementById("vpaCat").value=pcat
         document.getElementById("vpaDescription").innerText=pdesc

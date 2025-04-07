@@ -144,7 +144,7 @@ document.getElementById("adminMenuNavId").style.left="0%"
     if(catName=="All"){
         renderProducts()
     }else{
-        dbFirestore.collection("Products").where('productCat','>=', catName ).where('productCat', '<=', catName + '~').get().then((shopItems)=>{
+        dbFirestore.collection("Products").where('productCat','==', catName ).get().then((shopItems)=>{
             var productCard='';
             if(shopItems.empty){
                 productCard =`
@@ -154,7 +154,6 @@ document.getElementById("adminMenuNavId").style.left="0%"
                 </div>
                 `
             }else{
-
                 shopItems.forEach(shopitem => {
                     var pname=shopitem.data().productName;
                     var ppricel=(parseInt(shopitem.data().productPrice)).toLocaleString();
@@ -165,7 +164,7 @@ document.getElementById("adminMenuNavId").style.left="0%"
                     var pdesc=shopitem.data().productDesc;
                     var pdisc=shopitem.data().productDiscount;
                     var isMulti=shopitem.data().isMulti;
-                    var extraImageUrls=shopitem.data().extraIamgeUrls;
+                    var extraImageUrls=shopitem.data().extraIamgeUrls || [];
                     const imageString = JSON.stringify(extraImageUrls).replace(/"/g, '&quot;');
 
                     var pdi=parseInt(shopitem.data().discountPercentage);
@@ -245,7 +244,7 @@ function pullSearched(e){
                 var pdesc=shopitem.data().productDesc;
                 var pdisc=shopitem.data().productDiscount;
                 var isMulti=shopitem.data().isMulti;
-                var extraImageUrls=shopitem.data().extraIamgeUrls;
+                var extraImageUrls=shopitem.data().extraIamgeUrls || [];
                 const imageString = JSON.stringify(extraImageUrls).replace(/"/g, '&quot;');
                 var pdi=parseInt(shopitem.data().discountPercentage);
                 if(pdi>0){

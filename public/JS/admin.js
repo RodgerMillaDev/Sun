@@ -128,27 +128,31 @@ async function uploadProduct(e){
     }
 }
 
-function pullAllProducts(){
-   dbFirestore.collection("Products").get().then((Products)=>{
-        var productListDiv=''
-        Products.forEach(product => {
-            var pname=product.data().productName;
-            var pprice=parseInt((product.data().productPrice)).toLocaleString();
-            var pdiscount=product.data().discountPercentage;
-            var pcat=product.data().productCat;
-            var pdesc=product.data().productDesc;
-            var pid=product.data().productDocId;
-            productListDiv +=`
-             <tr onclick="vpAdmin('${pid}','${pname}','${pprice}','${pdiscount}','${pdesc}','${pcat}')">
-                <td class="prodNameTb"><p>${pname}</p> </td>
-                <td class="prodPiceTb"><p>${pprice}</p></td>
-                <td class="prodOfferTb"> <p>${pdiscount}% 0FF</p></td>
-            </tr>
-            `            
-        });
-        document.getElementById("allProductsTable").innerHTML=productListDiv;
-    })
-}
+function pullAllProducts() {
+    dbFirestore.collection("Products").get().then((Products) => {
+         let productListDiv = '';
+ 
+         Products.forEach(product => {
+             const pname = (product.data().productName);
+             const pprice = encodeURIComponent(product.data().productPrice);
+             const pdiscount = encodeURIComponent(product.data().discountPercentage);
+             const pcat = (product.data().productCat);
+             const pdesc = (product.data().productDesc);
+             const pid = encodeURIComponent(product.data().productDocId);
+ 
+             productListDiv += `
+              <tr onclick="vpAdmin('${pid}', '${pname}', '${pprice}', '${pdiscount}', '${pdesc}', '${pcat}')">
+                 <td class="prodNameTb"><p>${(pname)}</p></td>
+                 <td class="prodPiceTb"><p>${decodeURIComponent(parseInt(pprice).toLocaleString())}</p></td>
+                 <td class="prodOfferTb"><p>${decodeURIComponent(pdiscount)}% OFF</p></td>
+              </tr>
+             `;
+         });
+ 
+         document.getElementById("allProductsTable").innerHTML = productListDiv;
+     });
+ }
+ 
 function uplodLoc(){
     var County =document.getElementById("County").value;
     var Route =document.getElementById("Route").value;
