@@ -8,6 +8,7 @@ function checkoutMath(transportCost){
     document.getElementById("checkRTopDetTransport").innerText=transportCost
     document.getElementById("checkRTopDetGrandDisocunt").innerText=parseInt(gt).toLocaleString()
     document.getElementById("cardPrice").innerText=parseInt(gt).toLocaleString()
+    localStorage.setItem("famount",gt)
 }
 
 function delCountyClicked(e){
@@ -102,6 +103,7 @@ async function payNow(){
         var route=document.getElementById("Route").value;
         var dlArea=document.getElementById("delAreaInput").value;
         var delBuilding=document.getElementById("delDetBuildingInp").value;
+        var amountPay=localStorage.getItem("famount")
         if(nm&&delfon&&route&&dlArea&&delBuilding){
             var county= "Nairobi"
           try {
@@ -113,7 +115,7 @@ async function payNow(){
                     'Content-Type':'application/json'
     
                 },
-                body:JSON.stringify({nm,delfon,em,county,route,town:"",dlArea,delBuilding,uid,date:getFormattedDate(),time:getFormattedTime()})
+                body:JSON.stringify({amountPay,nm,delfon,em,county,route,town:"",dlArea,delBuilding,uid,date:getFormattedDate(),time:getFormattedTime()})
             })
             const result = await response.json()
             if(result.status==true){
@@ -145,6 +147,8 @@ async function payNow(){
         document.getElementById("checkPayLoader").style.display="block"
         var county=document.getElementById("delCountyInput").value;
         var town=document.getElementById("delCountyTownInput").value;
+        var amountPay=localStorage.getItem("famount")
+
         if(nm,delfon,county,town){
             try {
                 const url= "https://official-backend-sunup.onrender.com/payNow"
@@ -154,7 +158,7 @@ async function payNow(){
                     headers:{
                         'Content-Type':'application/json'
                     },
-                    body:JSON.stringify({nm,delfon,em,county,route:"",town,uid,dlArea:"",delBuilding:"",date:getFormattedDate(),time:getFormattedTime()})
+                    body:JSON.stringify({amountPay,nm,delfon,em,county,route:"",town,uid,dlArea:"",delBuilding:"",date:getFormattedDate(),time:getFormattedTime()})
                 })
                 const result = await response.json()
                 if(result.status==true){

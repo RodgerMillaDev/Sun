@@ -183,7 +183,6 @@ function toBuy(pid,pprice,pdesc,pimg,pname,pcat,pdisc,pdi,isMulti,imageString){
             vprice=(Math.ceil((rperc*pprice)/100))
         }
         if(isMulti=="True"){
-            console.log(imageString)
             document.getElementById("selectColorPrPg").style.display='flex'
             var extCont=''
             var cleanArray=JSON.parse(imageString)
