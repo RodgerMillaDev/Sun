@@ -133,16 +133,16 @@ function pullAllProducts() {
          let productListDiv = '';
  
          Products.forEach(product => {
-             const pname = (product.data().productName);
+             const pname = encodeURIComponent(product.data().productName);
              const pprice = encodeURIComponent(product.data().productPrice);
              const pdiscount = encodeURIComponent(product.data().discountPercentage);
-             const pcat = (product.data().productCat);
-             const pdesc = (product.data().productDesc);
+             const pcat = encodeURIComponent(product.data().productCat);
+             const pdesc = encodeURIComponent(product.data().productDesc);
              const pid = encodeURIComponent(product.data().productDocId);
  
              productListDiv += `
               <tr onclick="vpAdmin('${pid}', '${pname}', '${pprice}', '${pdiscount}', '${pdesc}', '${pcat}')">
-                 <td class="prodNameTb"><p>${(pname)}</p></td>
+                 <td class="prodNameTb"><p>${decodeURIComponent(pname)}</p></td>
                  <td class="prodPiceTb"><p>${decodeURIComponent(parseInt(pprice).toLocaleString())}</p></td>
                  <td class="prodOfferTb"><p>${decodeURIComponent(pdiscount)}% OFF</p></td>
               </tr>
