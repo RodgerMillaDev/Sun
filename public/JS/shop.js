@@ -332,7 +332,6 @@ async function confirmPay(){
         // const url= "http://localhost:4455/trxnStatus"
         const url= "https://official-backend-sunup.onrender.com/trxnStatus"
         const refCode=localStorage.getItem('refCodePay')
-        console.log(refCode)
         const orderNumber=localStorage.getItem('orderNumber')        
         const response = await fetch(url,{
             method:"POST",

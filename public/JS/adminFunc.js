@@ -27,7 +27,6 @@ async function getSMSBalance(){
                 }
               });
         }
-        console.log(result)
      
     } catch (error) {
        
@@ -101,7 +100,6 @@ function viewOrder(viewStatus,docId, orderId, fon, cartItems, county, dlArea, dl
     
     let parsedCartItems = JSON.parse(decodeURIComponent(cartItems));
 
-    console.log("Cart Items in viewOrder:", parsedCartItems);  // ✅ Console log cartItems
 
     document.getElementById("viewID").innerText = docId;
     document.getElementById("voname").innerText = name;
@@ -209,7 +207,7 @@ function vpAdmin(pid,pname,pprice,pdiscount,pdesc,pcat){
         document.getElementById("vpaPrice").value=decodeURIComponent(pprice)
         document.getElementById("vpaOffer").value=decodeURIComponent(pdiscount)
         document.getElementById("vpaCat").value=decodeURIComponent(pcat)
-        document.getElementById("vpaDescription").innerText=decodeURIComponent(pdesc)
+        document.getElementById("vpaDescription").value=decodeURIComponent(pdesc)
 
 
 }
@@ -236,16 +234,15 @@ function saveProduct(){
     var pname=document.getElementById("vpaName").value;
     var pprice=document.getElementById("vpaPrice").value;
     var pdiscount = document.getElementById("vpaOffer").value;
-    console.log(pid)
     var pcat=document.getElementById("vpaCat").value;
-    var pdesc=document.getElementById("vpaDescription").innerText;
+    var pdesc=document.getElementById("vpaDescription").value;
     dbFirestore.collection("Products").doc(pid).update({
         productName:pname,
         productPrice:pprice,
         productDiscount:pdiscount,
         discountPercentage:pdiscount,
         productCategory:pcat,
-        productDescription:pdesc,
+        productDesc:pdesc,
     }).then(()=>{
         document.getElementById("viewProductAdmin").style.display="none"
         pullAllProducts()

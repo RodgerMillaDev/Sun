@@ -121,7 +121,6 @@ async function payNow(){
                 var refCode=result.data.reference;
                 var authUrl=result.data.authorization_url
                 localStorage.setItem('refCodePay',refCode)
-                console.log(localStorage.getItem('refCodePay'))
                 window.location.href=authUrl
             }else{
                 Swal.fire("Error", "An error occured try again", "error")
@@ -163,7 +162,6 @@ async function payNow(){
                     var refCode=result.data.reference;
                     var authUrl=result.data.authorization_url
                     localStorage.setItem('refCodePay',refCode)
-                    console.log(localStorage.getItem('refCodePay'))
                     window.location.href=authUrl
 
                 }else{

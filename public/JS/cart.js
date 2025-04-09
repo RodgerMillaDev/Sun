@@ -104,7 +104,6 @@ function toCart(){
             var productDesc=cartItem.productDesc
             var productQuantity=cartItem.productQuantity
             var productDiscount=parseInt(cartItem.discountPercentage)
-            console.log(productUrl)
             if(productDiscount>0){
                 var rperc=100-productDiscount
                 productPrice=Math.ceil(parseInt((rperc*fidiRawPrice)/100))
@@ -211,7 +210,6 @@ function removeCartItem(productID){
                 document.getElementById("cartItem"+productID).remove(); 
 
                   cartArray.splice(indexToDelete, 1); // Remove the item at the found index
-                  console.log(cartArray)
                   dbFirestore.collection("Users").doc(uid).update({
                         cartItems: cartArray
                     }).then(() => {

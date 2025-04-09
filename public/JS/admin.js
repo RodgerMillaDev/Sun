@@ -98,7 +98,6 @@ async function uploadProduct(e){
                 body: formData,
             })
             const result = await response.json()
-            console.log(result)
             if(result==="Upload Done"){
                 Swal.fire("Product Uploaded")
                 document.getElementById("ProImageFileInput").value=null;
