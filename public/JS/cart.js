@@ -81,6 +81,8 @@ function addtoCartAllPro(pid,pprice,pdesc,pimg,pname,pcat,pdisc){
 }
 
 function toCart(){
+    window.history.pushState({ page: "cart" }, "", "/shop.html");
+
     if(isLoggedIn){
         var cartItemDiv="";
         document.getElementById("drawerTitle").innerText='My Cart'
@@ -161,7 +163,7 @@ function toCart(){
         
         cartItemDiv=`
             <div id="emptyCart">
-                            <img src="./Media/empty cart.png" alt="">
+                            <img src="./Media/emptycart.png" alt="">
                             <p>Your cart is empty</p>
                         </div>
 
@@ -220,7 +222,7 @@ function removeCartItem(productID){
                         if(cartArray==''){   
                              var  cartItemDiv=`
                                 <div id="emptyCart">
-                                                <img src="./Media/empty cart.png" alt="">
+                                                <img src="./Media/emptycart.png" alt="">
                                                 <p>Your cart is empty</p>
                                             </div>
 
@@ -277,6 +279,8 @@ function minusProductQuantityCart(productDocId) {
 }
 
 function toCheckout() {
+    window.history.pushState({ page: "checkout" }, "", "/shop.html");
+
     if(allCartItems && cartItemsNumber !=0){
         var newCartItems = [];
         var cartDivs = document.querySelectorAll(".cartItem");

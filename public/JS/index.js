@@ -1,6 +1,38 @@
 var scrW=(window.innerWidth)
+window.addEventListener("popstate", (event) => {
+    const page = event.state?.page || location.pathname.replace("/", "");
+
+    // Call the appropriate function
+    switch (page) {
+        case "products":
+            toProducts();
+            break;
+        case "profile":
+            toProfile();
+            break;
+        case "product":
+            toProduct();
+            break;
+        case "offers":
+            toProducts();
+            break;
+        case "cart":
+            toCart();
+            break;
+        case "checkout":
+            toCheckout();
+            break;
+        // Add more cases for other sections
+        default:
+            // Optional: maybe go to home or a default drawer
+            toHome();
+    }
+});
+
 
 window.toHome = function () {
+    window.history.pushState({ page: "home" }, "", "/shop.html");
+
     if(scrW<=768){
         document.getElementById("shopMainMenu").style.left="-103%"
         document.getElementById("fidiShopOffer").style.top = "0vh";
@@ -32,6 +64,7 @@ window.toHome = function () {
    
 };
 function toProducts(){
+    window.history.pushState({ page: "products" }, "", "/shop.html");
     if(scrW<=768){
         document.getElementById("shopMainMenu").style.left="-103%"
         document.getElementById("fidiShopOffer").style.top='-100vh'
@@ -69,6 +102,7 @@ function showFonNav(){
 }
 
 function toOffers(){
+    window.history.pushState({ page: "products" }, "", "/shop.html");
     if(scrW<=768){
         document.getElementById("shopMainMenu").style.left="-103%"
         document.getElementById("fidiShopOffer").style.top='-100vh'
@@ -103,6 +137,8 @@ function toOffers(){
 }
 
 function toProduct(){
+    window.history.pushState({ page: "product" }, "", "/shop.html");
+
     if(scrW<=768){
         document.getElementById("shopMainMenu").style.left="-103%"
         document.getElementById("fidiShopOffer").style.top='0vh'
@@ -348,3 +384,4 @@ function toWhatsapp() {
 function toWeb(){
     window.location.href="index.html"
 }
+

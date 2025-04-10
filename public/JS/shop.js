@@ -82,8 +82,19 @@ function renderProducts() {
 
             // Add product card HTML with data-* attributes
             productCard += `
-                <div class="shopProduct">
-                    <div class="spTop">
+                <div class="shopProduct" >
+                    <div class="spTop" 
+                                onclick="handleBuyClick(this)"
+                                data-id="${pid}"
+                                data-price="${pprice}"
+                                data-desc="${encodeURIComponent(pdesc)}"
+                                data-img="${pimg}"
+                                data-name="${pname}"
+                                data-cat="${pcat}"
+                                data-disc="${pdisc}"
+                                data-pdi="${pdi}"
+                                data-multi="${isMulti}"
+                                data-extra='${encodeURIComponent(imageString)}'                    >
                         <img width="10px" src="${pimg}" alt="">
                     </div>
                     <div class="spBottom">
@@ -157,6 +168,8 @@ function handleBuyClick(btn) {
 }
 
 function toBuy(pid,pprice,pdesc,pimg,pname,pcat,pdisc,pdi,isMulti,imageString){
+    window.history.pushState({ page: "product" }, "", "/shop.html");
+
     document.getElementById("ProductQuantityPG").innerText=1
 
     var toBuyArray={
