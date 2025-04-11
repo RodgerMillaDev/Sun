@@ -11,7 +11,7 @@ window.addEventListener("popstate", (event) => {
             toProfile();
             break;
         case "product":
-            toProduct();
+            toProducts();
             break;
         case "offers":
             toProducts();
