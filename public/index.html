@@ -28,6 +28,11 @@
     <title>SunUp Collections</title>
 </head>
 <body>
+    <div id="preloaderWrap">
+        <div id="preloader">
+    
+        </div>
+        </div>
 
     <div class="fonNavDrawer" id="fonNavDrawer">
         <div class="fonNavPlacer">
@@ -85,7 +90,7 @@
                             </div>
                             <div class="ccInfo">
                                 <p>CALL OR WHATSAPP</p>
-                                <p>0712345678</p>
+                                <p>0700249623</p>
                             </div>
                         </div>
                     </div>
@@ -271,9 +276,18 @@ function showFon(){
 function toIg(){
     window.location.href="https://www.instagram.com/sunup_collections"
 }
-
+     const animationPath ='./Media/logoLoader.json';
+              const animation = lottie.loadAnimation({
+          container: document.getElementById('preloader'), // the dom element that will contain the animation
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: animationPath // path to the animation json
+        });
+    window.addEventListener("load",()=>{
+        document.getElementById("preloaderWrap").style.display="none"
+    })
 
     </script>
-    <script src="./JS/land.js"></script>
 </body>
 </html>
