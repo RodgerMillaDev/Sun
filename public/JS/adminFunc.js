@@ -273,7 +273,7 @@ input.addEventListener("beforeinput", (e) => {
       current.slice(0, selectionStart) + e.data + current.slice(selectionEnd);
   
     const words = newValue.trim().split(/\s+/);
-    if (words.length > 4) {
+    if (words.length > 10) {
       e.preventDefault();
     }
   });
