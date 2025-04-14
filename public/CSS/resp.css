@@ -449,7 +449,7 @@
         background: yellow;
     }
     .shopProduct{
-        height: 200px;
+        height: 270px;
         background:aliceblue;
         padding: 5px;
         background: rgb(255, 255, 255);
@@ -458,7 +458,7 @@
         overflow: hidden;
     }
     .spTop{
-        height: 75%;
+        height: 70%;
         position: relative;
         width: 100%;
         overflow: hidden;
@@ -467,7 +467,7 @@
     
     }
     .spBottom{
-        height:25%;
+        height:30%;
         margin-top: 1%;
         padding: 1px 0;
         display: flex;
@@ -499,8 +499,7 @@
     justify-content: space-around;
     align-items: center;
     flex-direction: row-reverse;
-    display: none;
-    transition: .3s ease;
+        transition: .3s ease;
 
 }
 .tocartShopBtn{
