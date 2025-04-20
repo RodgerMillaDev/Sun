@@ -166,6 +166,113 @@ function handleBuyClick(btn) {
 
     toBuy(pid, pprice, pdesc, pimg, pname, pcat, pdisc, pdi, isMulti, imageString);
 }
+function toCategory(e){
+    document.getElementById("shopMainMenu").style.left="-103%"
+    var catName=e.querySelector("p").innerText;
+    var catNameLower=catName.toLowerCase();
+    document.querySelectorAll(".catDiv").forEach(div => div.classList.remove("catDivActive"));
+    e.classList.add("catDivActive")
+    if(catName=="All"){
+        renderProducts()
+    }else{
+        dbFirestore.collection("Products").where('productCat','==', catName ).get().then((shopItems)=>{
+            var productCard='';
+            if(shopItems.empty){
+                productCard =`
+                <div class="noSuchProduct">
+                    <i class="fa-brands fa-dropbox"></i>
+                    <p>Sorry  we don't have ${catName.toLowerCase()} items yet</p>
+                </div>
+                `
+            }else{
+                shopItems.forEach(shopitem => {
+                    // Extract product data
+                    const data = shopitem.data();
+                    const pname = data.productName;
+                    const pprice = parseInt(data.productPrice);
+                    const ppricel = pprice.toLocaleString();
+                    const pid = data.productDocId;
+                    const pimg = data.productUrl;
+                    const pcat = data.productCat;
+                    const pdesc = data.productDesc;
+                    const pdisc = data.productDiscount;
+                    const isMulti = data.isMulti;
+                    const extraImageUrls = data.extraImageUrls;
+                    const imageString = JSON.stringify(extraImageUrls);
+                    const pdi = parseInt(data.discountPercentage);
+        
+                    // Prepare discounted price
+                    let priceHTML = `<p class="newPrice">Ksh. ${ppricel}</p>`;
+                    if (pdi > 0) {
+                        const rperc = 100 - pdi;
+                        const newPrice = Math.ceil((rperc * pprice) / 100).toLocaleString();
+                        priceHTML = `
+                            <p class="oldPrice">Ksh. ${ppricel}</p>
+                            <p class="newPrice">Ksh. ${newPrice}</p>
+                        `;
+                    }
+        
+                    // Add product card HTML with data-* attributes
+                    productCard += `
+                        <div class="shopProduct" >
+                            <div class="spTop" 
+                                        onclick="handleBuyClick(this)"
+                                        data-id="${pid}"
+                                        data-price="${pprice}"
+                                        data-desc="${encodeURIComponent(pdesc)}"
+                                        data-img="${pimg}"
+                                        data-name="${pname}"
+                                        data-cat="${pcat}"
+                                        data-disc="${pdisc}"
+                                        data-pdi="${pdi}"
+                                        data-multi="${isMulti}"
+                                        data-extra='${encodeURIComponent(imageString)}'                    >
+                                <img width="10px" src="${pimg}" alt="">
+                            </div>
+                            <div class="spBottom">
+                                <h4>${pname}</h4>
+                                <div class="ProdPrices">${priceHTML}</div>
+                                <div class="buyandCart">
+                                    <button 
+                                        class="buyshopBtn" 
+                                        onclick="handleBuyClick(this)"
+                                        data-id="${pid}"
+                                        data-price="${pprice}"
+                                        data-desc="${encodeURIComponent(pdesc)}"
+                                        data-img="${pimg}"
+                                        data-name="${pname}"
+                                        data-cat="${pcat}"
+                                        data-disc="${pdisc}"
+                                        data-pdi="${pdi}"
+                                        data-multi="${isMulti}"
+                                        data-extra='${encodeURIComponent(imageString)}'
+                                    >Buy</button>
+                                  <button 
+                                    class="tocartShopBtn" 
+                                    onclick="handleAddToCartClick(this)"
+                                    data-id="${pid}"
+                                    data-price="${pprice}"
+                                    data-desc="${encodeURIComponent(pdesc)}"
+                                    data-img="${pimg}"
+                                    data-name="${pname}"
+                                    data-cat="${pcat}"
+                                    data-disc="${pdisc}"
+                                    >
+                                    <i class="icofont-cart-alt"></i>
+                                    </button>
+        
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+        document.getElementById("shopProductsWrapper").innerHTML=productCard
+        })
+
+    }
+
+}
 
 function toBuy(pid,pprice,pdesc,pimg,pname,pcat,pdisc,pdi,isMulti,imageString){
     window.history.pushState({ page: "product" }, "", "/shop.html");
