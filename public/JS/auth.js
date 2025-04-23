@@ -168,13 +168,8 @@ function toLogIn(){
               // ..
             });
             }
-          }
-    
-
-          
+          } 
           const db=firebase.firestore()
-
-
           function contWithGoogle() {
               var provider = new firebase.auth.GoogleAuthProvider(); 
             
