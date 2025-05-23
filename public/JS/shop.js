@@ -463,7 +463,7 @@ async function confirmPay(){
         console.log(result)
         if(result.orderStatus.success==true && result.orderStatus.message=="Order processed successfully"){
             localStorage.setItem('refCodePay','')
-            const newURL='https://sunup-collections.web.app'
+            const newURL='https://sunup-collection.com'
             // const newURL='http://localhost:5500/public/index.html'
             window.history.replaceState({}, "", newURL) 
             document.getElementById("fidiShopOffer").style.top='0vh'
