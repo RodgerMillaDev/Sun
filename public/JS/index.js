@@ -35,7 +35,7 @@ window.toHome = function () {
 
     if(scrW<=768){
         document.getElementById("shopMainMenu").style.left="-103%"
-        document.getElementById("fidiShopOffer").style.top = "0vh";
+        document.getElementById("fidiShopOffer").style.top = "0.5vh";
         document.getElementById("catnSearchCont").style.top = "20vh";
         document.getElementById("shopProducts").style.top = "27vh";
         document.getElementById("shopProducts").style.height = "59vh";
@@ -49,9 +49,9 @@ window.toHome = function () {
     }else{
         document.getElementById("shopMainMenu").style.left="-103%"
         document.getElementById("fidiShopOffer").style.top = "0vh";
-        document.getElementById("catnSearchCont").style.top = "35vh";
-        document.getElementById("shopProducts").style.top = "45vh";
-        document.getElementById("shopProducts").style.height = "43vh";
+        document.getElementById("catnSearchCont").style.top = "25vh";
+        document.getElementById("shopProducts").style.top = "35vh";
+        document.getElementById("shopProducts").style.height = "53vh";
         document.getElementById("drawerTitle").innerText = "Home";
         document.getElementById("mobPgLb").innerText = "Home";
         document.getElementById("actDrawerCart").style.right = "-103%";

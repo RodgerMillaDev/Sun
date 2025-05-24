@@ -317,8 +317,8 @@ function toCheckout() {
             document.getElementById("checkRTopDetDisocunt").innerText=localStorage.getItem("appliedPromoCode")
             document.getElementById("checkRTopDetproductCost").innerText=parseInt(deGrTo).toLocaleString()
             document.getElementById("fidiShopOffer").style.top='0vh'
-            document.getElementById("catnSearchCont").style.top='35vh'
-            document.getElementById("shopProducts").style.top='45vh'
+            document.getElementById("catnSearchCont").style.top='25vh'
+            document.getElementById("shopProducts").style.top='35vh'
             document.getElementById("drawerTitle").innerText='Checkout'
             document.getElementById("mobPgLb").innerText='Checkout'
             document.getElementById("actDrawerCart").style.right='-101%'

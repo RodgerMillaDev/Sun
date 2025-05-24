@@ -98,7 +98,7 @@ function renderProducts() {
                         <img width="10px" src="${pimg}" alt="">
                     </div>
                     <div class="spBottom">
-                        <h4>${pname}</h4>
+                        <p>${pname}</p>
                         <div class="ProdPrices">${priceHTML}</div>
                         <div class="buyandCart">
                             <button 
@@ -230,8 +230,8 @@ function toCategory(e){
                                 <img width="10px" src="${pimg}" alt="">
                             </div>
                             <div class="spBottom">
-                                <h4>${pname}</h4>
-                                <div class="ProdPrices">${priceHTML}</div>
+                                <p>${pname}</p>
+                                <div class="ProdPrices"> <h4> ${priceHTML} </h4></div>
                                 <div class="buyandCart">
                                     <button 
                                         class="buyshopBtn" 
