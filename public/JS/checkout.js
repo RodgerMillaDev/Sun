@@ -108,7 +108,7 @@ async function payNow(){
             var county= "Nairobi"
           try {
             // const url= "http://localhost:4455/payNow"
-            const url= "https://official-backend-sunup.onrender.com/payNow"
+            const url= "https://official-backend-sunup-2003.onrender.com/payNow"
             const response = await fetch(url,{
                 method:"POST",
                 headers:{
@@ -151,7 +151,7 @@ async function payNow(){
 
         if(nm,delfon,county,town){
             try {
-                const url= "https://official-backend-sunup.onrender.com/payNow"
+                const url= "https://official-backend-sunup-2003.onrender.com/payNow"
                 // const url= "http://localhost:4455/payNow"
                 const response = await fetch(url,{
                     method:"POST",

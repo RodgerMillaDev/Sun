@@ -4,7 +4,7 @@ async function sendMailtoSun(){
     if(userMail){
         try {
 
-        const url = "https://official-backend-sunup.onrender.com/sendMailToSun";
+        const url = "https://official-backend-sunup-2003.onrender.com/sendMailToSun";
     const response = await fetch(url, {
       method: "POST",
       headers: {

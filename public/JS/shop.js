@@ -449,7 +449,7 @@ async function confirmPay(){
         document.getElementById("confirmPaymentBtn").style.display="none"
         document.getElementById("TrxStatusLoader").style.display="block"
         // const url= "http://localhost:4455/trxnStatus"
-        const url= "https://official-backend-sunup.onrender.com/trxnStatus"
+        const url= "https://official-backend-sunup-2003.onrender.com/trxnStatus"
         const refCode=localStorage.getItem('refCodePay')
         const orderNumber=localStorage.getItem('orderNumber')        
         const response = await fetch(url,{

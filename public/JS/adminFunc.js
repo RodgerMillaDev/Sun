@@ -1,6 +1,6 @@
 async function getSMSBalance(){
     try {
-        const url= "https://official-backend-sunup.onrender.com/smsBalance"
+        const url= "https://official-backend-sunup-2003.onrender.com/smsBalance"
         // const url= "http://localhost:4455/smsBalance"
         const response = await fetch(url,{
             method:"POST",
@@ -165,7 +165,7 @@ function clearOrder(){
 }
 async function sendDelSMS(fon,name){
     try {
-        const url= "https://official-backend-sunup.onrender.com/sendSMSOrder"
+        const url= "https://official-backend-sunup-2003.onrender.com/sendSMSOrder"
         // const url= "http://localhost:4455/sendSMSOrder"
         const response = await fetch(url,{
             method:"POST",
@@ -294,7 +294,7 @@ input.addEventListener("beforeinput", (e) => {
   
     if (text && text.trim()) {
       try {
-        const url = "https://official-backend-sunup.onrender.com/sendEmail";
+        const url = "https://official-backend-sunup-2003.onrender.com/sendEmail";
         // const url = "http://localhost:4455/sendEmail";
         const response = await fetch(url, {
           method: "POST",

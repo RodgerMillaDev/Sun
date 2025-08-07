@@ -272,7 +272,7 @@ function cmpltPurchase(){
 async function strtBackend() {
     try {
         console.log("Rasta got soul...");
-        const url = "https://official-backend-sunup.onrender.com/Alooo";
+        const url = "https://official-backend-sunup-2003.onrender.com/Alooo";
         const response = await fetch(url, {
             method: "GET",
             headers: {
