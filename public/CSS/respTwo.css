@@ -580,7 +580,7 @@
 }
 
 /* small laptops  */
-@media (min-width: 993px) and (max-width: 1024px){
+@media (min-width: 993px) and (max-width: 1440px){
     p{
         font-size: 1.3vw !important;
 

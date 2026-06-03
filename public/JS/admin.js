@@ -100,6 +100,7 @@ async function uploadProduct(e){
             const result = await response.json()
             if(result==="Upload Done"){
                 Swal.fire("Product Uploaded")
+         
                 document.getElementById("ProImageFileInput").value=null;
                 document.getElementById("multiImagesInput").value=null;
                 document.getElementById("UploadProductName").value="";

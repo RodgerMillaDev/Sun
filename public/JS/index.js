@@ -28,8 +28,6 @@ window.addEventListener("popstate", (event) => {
             toHome();
     }
 });
-
-
 window.toHome = function () {
     window.history.pushState({ page: "home" }, "", "/shop.html");
 
@@ -100,7 +98,6 @@ function toProducts(){
 function showFonNav(){
     document.getElementById("shopMainMenu").style.left="0%"
 }
-
 function toOffers(){
     window.history.pushState({ page: "products" }, "", "/shop.html");
     if(scrW<=768){
@@ -135,7 +132,6 @@ function toOffers(){
   
 
 }
-
 function toProduct(){
     window.history.pushState({ page: "product" }, "", "/shop.html");
 
@@ -171,91 +167,150 @@ function toProduct(){
 function openFonNav(){
 document.getElementById("adminMenuNavId").style.left="0%"
 }
+let socket = new WebSocket("wss://official-backend-sunup-2003.onrender.com");
+function connectWebSocket(){
 
-function pullSearched(e){
-    var searchInput=(e.value).toLowerCase();
-    if(searchInput){
-    
-    dbFirestore.collection("Products").where('productNameLower','>=', searchInput ).where('productNameLower', '<=', searchInput + '~').get().then((shopItems)=>{
-        var productCard='';
-        if(shopItems.empty){
-            productCard =`
-            <div class="noSuchProduct">
-                <i class="fa-brands fa-dropbox"></i>
-                <p>Oops, we don't have what you are looking for.</p>
+socket.onopen = () => {
+  console.log("Connected to backend WebSocket");
+};
+
+socket.onmessage = (event) => {
+  const msg = JSON.parse(event.data);
+  if (msg.type === "searchResults") {
+
+    renderSearchResults(msg.data);
+  }
+};
+socket.onclose = (error) =>{
+    console.log(error)
+}
+}
+connectWebSocket()
+let searchTimeout;
+
+function pullSearched(e) {
+  let searchInput = e.value.trim().toLowerCase();
+
+  clearTimeout(searchTimeout); // reset timer each time the user types
+  searchTimeout = setTimeout(() => {
+    if (searchInput) {
+      socket.send(JSON.stringify({
+        type: "search",
+        query: searchInput
+      }));
+    } else {
+      renderProducts(); // fallback
+    }
+  }, 400); // wait 400ms after last keystroke
+}
+
+
+function renderSearchResults(products) {
+        document.getElementById("shopProductsWrapper").innerHTML = "";
+        console.log(products)
+
+  let productCard = '';
+
+  if (products.length === 0) {
+    productCard = `
+      <div class="noSuchProduct">
+        <i class="fa-brands fa-dropbox"></i>
+        <p>Oops, we don't have what you are looking for.</p>
+      </div>
+    `;
+  } else {
+    products.forEach(shopitem => {
+      // Build product HTML (reuse your old logic)
+      let pname = shopitem.productName;
+      let ppricel = parseInt(shopitem.productPrice).toLocaleString();
+      let pprice = parseInt(shopitem.productPrice);
+      let pid = shopitem.productDocId;
+      let pimg = shopitem.productUrl;
+      let pcat = shopitem.productCat;
+      let pdesc = shopitem.productDesc;
+      let pdisc = shopitem.productDiscount;
+      let isMulti = shopitem.isMulti;
+      let extraImageUrls = shopitem.extraIamgeUrls || [];
+      const imageString = JSON.stringify(extraImageUrls).replace(/"/g, '&quot;');
+      let pdi = parseInt(shopitem.discountPercentage);
+                  let priceHTML = `<p class="newPrice">Ksh. ${ppricel}</p>`;
+
+
+      if (pdi > 0) {
+        let rperc = 100 - pdi;
+        let newPrice = (Math.ceil((rperc * pprice) / 100)).toLocaleString();
+        productCard += `
+          <div class="shopProduct">
+            <div class="spTop"><img src="${pimg}"></div>
+            <div class="spBottom">
+              <h4>${pname}</h4>
+              <div class="ProdPrices">
+                <p class="oldPrice">Ksh. ${ppricel}</p>
+                <p class="newPrice">Ksh. ${newPrice}</p>
+              </div>
             </div>
-                 
-            `
+          </div>
+        `;
+      } else {
+     productCard += `
+                <div class="shopProduct" >
+                    <div class="spTop" 
+                                onclick="handleBuyClick(this)"
+                                data-id="${pid}"
+                                data-price="${pprice}"
+                                data-desc="${encodeURIComponent(pdesc)}"
+                                data-img="${pimg}"
+                                data-name="${pname}"
+                                data-cat="${pcat}"
+                                data-disc="${pdisc}"
+                                data-pdi="${pdi}"
+                                data-multi="${isMulti}"
+                                data-extra='${encodeURIComponent(imageString)}'                    >
+                        <img width="10px" src="${pimg}" alt="">
+                    </div>
+                    <div class="spBottom">
+                        <p>${pname}</p>
+                        <div class="ProdPrices">${priceHTML}</div>
+                        <div class="buyandCart">
+                            <button 
+                                class="buyshopBtn" 
+                                onclick="handleBuyClick(this)"
+                                data-id="${pid}"
+                                data-price="${pprice}"
+                                data-desc="${encodeURIComponent(pdesc)}"
+                                data-img="${pimg}"
+                                data-name="${pname}"
+                                data-cat="${pcat}"
+                                data-disc="${pdisc}"
+                                data-pdi="${pdi}"
+                                data-multi="${isMulti}"
+                                data-extra='${encodeURIComponent(imageString)}'
+                            >Buy</button>
+                          <button 
+                            class="tocartShopBtn" 
+                            onclick="handleAddToCartClick(this)"
+                            data-id="${pid}"
+                            data-price="${pprice}"
+                            data-desc="${encodeURIComponent(pdesc)}"
+                            data-img="${pimg}"
+                            data-name="${pname}"
+                            data-cat="${pcat}"
+                            data-disc="${pdisc}"
+                            >
+                            <i class="icofont-cart-alt"></i>
+                            </button>
 
-        }else{
-           
-            shopItems.forEach(shopitem => {
-                var pname=shopitem.data().productName;
-                var ppricel=(parseInt(shopitem.data().productPrice)).toLocaleString();
-                var pprice=parseInt(shopitem.data().productPrice);
-                var pid=shopitem.data().productDocId;
-                var pimg=shopitem.data().productUrl;
-                var pcat=shopitem.data().productCat;
-                var pdesc=shopitem.data().productDesc;
-                var pdisc=shopitem.data().productDiscount;
-                var isMulti=shopitem.data().isMulti;
-                var extraImageUrls=shopitem.data().extraIamgeUrls || [];
-                const imageString = JSON.stringify(extraImageUrls).replace(/"/g, '&quot;');
-                var pdi=parseInt(shopitem.data().discountPercentage);
-                if(pdi>0){
-                    var rperc=100-pdi;
-                    var newPrice=(Math.ceil((rperc*pprice)/100)).toLocaleString()
-                    productCard+=
-                    `<div class="shopProduct">
-                        <div class="spTop">
-                            <img width="10px" src=${pimg} alt="">
-                        </div>
-                        <div class="spBottom">
-                            <h4>${pname}</h4>
-                            <div class="ProdPrices">
-                                        <p class="oldPrice">Ksh. ${ppricel}</p>
-                                        <p class="newPrice">Ksh. ${newPrice}</p>
-                            </div>
-                            <div class="buyandCart">
-                            <button class="buyshopBtn" onclick="toBuy('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}','${pdi}','${isMulti}','${imageString}')">Buy</button>
-                            <button class="tocartShopBtn" onclick="addtoCartAllPro('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}','${pdi})"><i class="icofont-cart-alt"></i></button>
-                            </div>
                         </div>
                     </div>
-                    `
-                }else{
-                    productCard+=
-                    `
-                    <div class="shopProduct">
-                        <div class="spTop">
-                            <img width="10px" src=${pimg} alt="">
-                        </div>
-                        <div class="spBottom">
-                            <h4>${pname}</h4>
-                            <div class="ProdPrices">
-                                <p class="newPrice">Ksh. ${ppricel}</p>
-                            </div>
-                            <div class="buyandCart">
-                           <button class="buyshopBtn" onclick="toBuy('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}','${pdi}','${isMulti}','${imageString}')">Buy</button>
-                            <button class="tocartShopBtn" onclick="addtoCartAllPro('${pid}','${pprice}','${pdesc}','${pimg}','${pname}','${pcat}','${pdisc}','${pdi}')"><i class="icofont-cart-alt"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    `
-                } 
-           })
+                </div>
+            `;
+      }
+    });
+  }
 
-        }
-       
-    document.getElementById("shopProductsWrapper").innerHTML=productCard
-})
-
-
-}else if(searchInput =="" || searchInput == " " ){
-    renderProducts()
-
+  document.getElementById("shopProductsWrapper").innerHTML = productCard;
 }
-}
+
 function opsEnt(){
 document.querySelector(".shopSearch").classList.add("opsSearch")
 }
